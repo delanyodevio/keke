@@ -1,0 +1,49 @@
+.site-foot {
+  padding: get-size("600");
+  background-color: get-color("dark-shade");
+  color: get-color("light");
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+
+    > * {
+      padding-inline-end: get-size("400");
+      padding-block-end: get-size("400");
+    }
+  }
+
+  &__link {
+    color: currentColor;
+  }
+
+  &__contact {
+    p span {
+      color: get-color("quaternary-shade");
+    }
+  }
+
+  p {
+    margin: 0;
+    max-width: 30ch;
+  }
+
+  svg {
+    margin-left: -1.4rem;
+    margin-top: -1.6rem;
+    margin-bottom: -1.6rem;
+  }
+
+  > div {
+    > * {
+      margin-top: get-size("600");
+      margin-bottom: get-size("500");
+    }
+  }
+}

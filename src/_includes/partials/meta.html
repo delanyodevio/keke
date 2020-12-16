@@ -1,0 +1,25 @@
+{% set pageTitle = title + " - " + site.name %} {% if site.name === title %} {%
+set pageTitle = title %} {% endif %} {% set siteTitle = site.name %} {% set
+currentUrl = site.url + page.url %} {% set siteLogo = site.logo %} {% set
+siteLogoAlt = site.caption %} {% if metaTitle %} {% set pageTitle = metaTitle %}
+{% endif %} {% if not metaDesc %} {% set metaDesc = content %} {% endif %}
+
+<title>{{ pageTitle }}</title>
+<link rel="canonical" href="{{ currentUrl }}" />
+
+<meta property="og:site_name" content="{{ siteTitle }}" />
+<meta property="og:title" content="{{ pageTitle }}" />
+<meta property="og:type" content="{{ website }}" />
+<meta property="og:url" content="{{ currentUrl }}" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="og:image" content="{{ siteLogo }}" />
+<meta name="og:twitter:image" content="{{ siteLogo }}" />
+<meta property="og:image:alt" content="{{ siteLogoAlt }}" />
+<meta name="twitter:image:alt" content="{{ siteLogoAlt }}" />
+
+{% if metaDesc %}
+<meta name="description" content="{{ metaDesc }}" />
+<meta name="twitter:description" content="{{ metaDesc }}" />
+<meta property="og:description" content="{{ metaDesc }}" />
+{% endif %}

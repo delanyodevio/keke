@@ -1,0 +1,26 @@
+.intro {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  border: 2px solid get-color("primary");
+  border-radius: 0.25rem;
+
+  &__media {
+    img {
+      width: 100%;
+    }
+  }
+
+  &__content {
+    margin-left: auto;
+    padding: get-size("500");
+
+    h1 span {
+      display: block;
+    }
+
+    p {
+      max-width: 30ch;
+    }
+  }
+}

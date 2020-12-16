@@ -1,0 +1,65 @@
+form {
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 0.15rem solid get-color("dark");
+    border-radius: 0.25rem;
+    caret-color: get-color("quaternary-shade");
+    border: 0.15rem solid get-color("dark");
+    display: block;
+    margin-bottom: get-size("700");
+    background-color: get-color("light-glare");
+  }
+
+  input[type="file"] {
+    opacity: 0;
+    margin-bottom: 0;
+    padding: 0;
+    height: 0;
+    width: 0;
+  }
+
+  input[type="file"] + label {
+    width: max-content;
+    padding: 0.5rem;
+    background-color: get-color("dark");
+    border-radius: 0.3rem;
+    cursor: pointer;
+    margin-top: 0.3rem;
+    display: block;
+  }
+
+  input:focus,
+  textarea:focus {
+    background-color: get-color("secondary-glare");
+    outline: 0;
+  }
+
+  textarea {
+    position: relative;
+  }
+
+  button {
+    appearance: none;
+    width: max-content;
+    cursor: pointer;
+    transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
+    background-color: get-color("tertiary");
+    color: get-color("dark-shade");
+    border: 2px solid;
+    text-transform: uppercase;
+    text-align: center;
+
+    @include apply-utility("font", "sans");
+    @include apply-utility("weight", "bold");
+
+    &:hover,
+    &:active {
+      background-color: get-color("quaternary") !important;
+      color: get-color("dark-shade") !important;
+    }
+  }
+}

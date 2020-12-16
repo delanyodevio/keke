@@ -1,0 +1,24 @@
+.button {
+  border-radius: 0.25rem;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: get-color("tertiary");
+  color: get-color("dark-shade");
+  border: 2px solid;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+
+  @include apply-utility("font", "sans");
+  @include apply-utility("weight", "bold");
+
+  &:hover {
+    background-color: get-color("quaternary") !important;
+    color: get-color("dark-shade") !important;
+  }
+
+  &[data-variant="ghost"] {
+    background: transparent;
+    color: get-color("quaternary-glare");
+  }
+}

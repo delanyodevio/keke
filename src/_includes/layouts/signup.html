@@ -1,0 +1,58 @@
+{% extends 'layouts/base.html' %} {% set pageHeaderTitle = title %} {% set
+pageHeaderSummary = content %} {% set pageCriticalStyles = ['css/account.css']
+%} {% block content %}
+<div class="wrapper">
+  {% include "partials/account.html" %}
+  <article class="account">
+    {% include "partials/page-header.html" %}
+
+    <form action="" class="account-form" id="accountForm">
+      <label for="fullname">Your full name</label>
+      <input
+        type="text"
+        name="fullname"
+        id="fullname"
+        placeholder="Full name here"
+      />
+
+      <label for="username">A new Username</label>
+      <input
+        type="text"
+        name="username"
+        id="username"
+        placeholder="Username here"
+      />
+
+      <label for="email">Your Email Address</label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Email address here"
+      />
+
+      <label for="phone">Your phone number</label>
+      <input
+        type="tel"
+        name="phone"
+        id="phone"
+        placeholder="Phone number here"
+      />
+
+      <label for="password">A new password</label>
+      <div class="manage-password">
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="New password here"
+          class="password"
+        />
+        <span class="show-password"><i class="far fa-eye-slash"></i></span>
+      </div>
+
+      <button type="submit">Create account</button>
+    </form>
+  </article>
+</div>
+{% endblock %}

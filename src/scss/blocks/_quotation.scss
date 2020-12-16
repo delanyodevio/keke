@@ -1,0 +1,55 @@
+.quotations {
+  display: flex;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  align-items: flex-start;
+  padding-bottom: get-size("500");
+  padding-left: get-size("300");
+  padding-right: get-size("500");
+
+  > * {
+    flex-shrink: 0;
+    border: 2px solid get-color("primary");
+    border-radius: 0.25rem;
+    margin-bottom: 0;
+    width: 18rem;
+
+    div {
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .quote {
+      padding: get-size("400");
+
+      blockquote {
+        border-inline-start: 0.5rem solid get-color("quaternary-shade");
+        padding-inline-start: get-size("400");
+        padding-bottom: get-size("400");
+        margin-top: 0;
+        margin-bottom: 0;
+        font-style: italic;
+      }
+
+      figcaption {
+        margin-top: get-size("400");
+        border: 2px solid get-color("dark-shade");
+        border-radius: 0.25rem;
+        width: max-content;
+        padding: 0.3rem get-size("400");
+      }
+    }
+  }
+
+  > * + * {
+    margin-inline-start: get-size("500");
+  }
+
+  @include media-query("md") {
+    > * {
+      width: 30rem;
+    }
+  }
+}

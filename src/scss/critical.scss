@@ -1,0 +1,101 @@
+// First up: config and functions
+@import "config";
+
+// Next: pull in the gorko for design tokens
+@import "../../node_modules/gorko/gorko.scss";
+
+@import "reset";
+
+// Global styles start
+:root {
+  --flow-space: #{get-size("600")};
+}
+
+body {
+  background-color: get-color("light");
+  color: get-color("dark-shade");
+  line-height: 1.5;
+  font-size: get-size("500");
+
+  @include apply-utility("font", "base");
+}
+
+a:not([class]) {
+  color: currentColor;
+  text-decoration-color: get-color("tertiary");
+}
+
+:focus {
+  text-decoration-color: get-color("quaternary-shade");
+}
+
+main {
+  padding: get-size("700") 0;
+}
+
+.wrapper {
+  > article + article {
+    margin-top: get-size("700");
+  }
+}
+
+main:focus {
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 900;
+
+  @include apply-utility("font", "sans");
+  @include apply-utility("leading", "flat");
+}
+
+// High contrast selection to help visually impaired
+// folks read the text easier
+::selection {
+  color: get-color("light");
+  background-color: rgba(get-color("dark-shade"), 0.99);
+}
+
+// scrollbar styles
+::-webkit-scrollbar {
+  height: 1rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  border: 1px solid get-color("dark-glare");
+  border-radius: 0.25rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: get-color("dark");
+  border-radius: 0.25rem;
+}
+
+.site-name {
+  color: get-color("secondary");
+
+  span {
+    color: get-color("primary");
+  }
+}
+
+// Import blocks
+@import "blocks/site-head";
+@import "blocks/site-foot";
+@import "blocks/nav";
+@import "blocks/button";
+@import "blocks/skip-link";
+@import "blocks/page-header";
+@import "blocks/form";
+
+// Import utilities
+@import "utilities/full-bleed";
+@import "utilities/radius";
+@import "utilities/site-wrap";
+@import "utilities/visually-hidden";
+@import "utilities/wrapper";

@@ -1,0 +1,26 @@
+<a href="#main-content" class="[ skip-link ] [ button ]">Skip to content</a>
+<header class="site-head" role="banner">
+  <div class="site-head__inner">
+    <a class="site-head__brand" href="/" aria-label="{{ site.name }} - home">
+      {% include "partials/brand.svg" %}
+    </a>
+    <nav class="[ nav ] [ site_head__nav ] [ font-sans ]" aria-label="Primary">
+      <ul class="nav__list">
+        {% for route in routes.nav %}
+        <li>
+          <a
+            href="{{ route.url }}"
+            {{
+            helpers.getLinkActiveState(route.url,
+            page.url)
+            |
+            safe
+            }}
+            >{{ route.text }}</a
+          >
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
+</header>

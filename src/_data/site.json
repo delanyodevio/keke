@@ -1,0 +1,22 @@
+{
+  "name": "Keke.Money",
+  "url": "https://keke.money",
+  "emails": [
+    {
+      "text": "Support",
+      "url": "support@keke.money"
+    },
+    {
+      "text": "Contact",
+      "url": "contact@keke.money"
+    }
+  ],
+  "phone": "233240489424",
+  "description": "is a service platform that lets you save and lock your money for a predetermined period of time.",
+  "logo": "/images/bg/favicon.svg",
+  "caption": "Logo of Keke.Money",
+  "social": {
+    "twitter": "keke.money",
+    "facebook": "keke.money"
+  }
+}

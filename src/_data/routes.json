@@ -1,0 +1,66 @@
+{
+  "nav": [
+    {
+      "text": "How it works",
+      "url": "/#how-it-works"
+    },
+    {
+      "text": "About us",
+      "url": "/about"
+    },
+    {
+      "text": "Contact",
+      "url": "#contact"
+    },
+    {
+      "text": "Account",
+      "url": "/account/signup"
+    }
+  ],
+
+  "footer": [
+    {
+      "text": "About",
+      "url": "/about"
+    },
+
+    {
+      "text": "How it works",
+      "url": "/#how-it-works"
+    },
+    {
+      "text": "FAGs",
+      "url": "/help/fags"
+    },
+    {
+      "text": "Terms of use",
+      "url": "/policy/terms"
+    },
+    {
+      "text": "Privacy Policy",
+      "url": "/policy/privacy"
+    }
+  ],
+  "user": [
+    {
+      "text": "Home",
+      "url": "#home"
+    },
+    {
+      "text": "Funds",
+      "url": "#funds"
+    },
+    {
+      "text": "Records",
+      "url": "#records"
+    },
+    {
+      "text": "Preferences",
+      "url": "#preferences"
+    },
+    {
+      "text": "Suggestions",
+      "url": "#suggestions"
+    }
+  ]
+}

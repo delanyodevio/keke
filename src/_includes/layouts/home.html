@@ -1,0 +1,77 @@
+{% extends 'layouts/base.html' %} {% set pageCriticalStyles = ['css/home.css']
+%} {% block content %}
+<div class="wrapper">
+  <article class="intro">
+    <div lass="intro__media">
+      <img
+        src="{{ intro.image }}"
+        alt="{{ intro.caption }}"
+        class="[ intro__image ] [ radius ]"
+      />
+    </div>
+
+    <div class="intro__content">
+      <h1 class="text-800 weight-bold">
+        {{ intro.eyebrow }}
+        <span class="weight-normal text-600">{{ intro.main }}</span>
+      </h1>
+
+      <p class="intro__summary">{{ intro.summary }}</p>
+      <a href="{{ intro.buttonUrl }}" class="button">{{ intro.buttonText }}</a>
+    </div>
+  </article>
+
+  <article class="work" id="how-it-works">
+    <div class="work__header">
+      <h2 class="text-800 weight-bold">
+        How it works
+        <span class="weight-normal text-600">in five simple steps</span>
+      </h2>
+      <p>
+        <span class="site-name">Keke<span>.</span>Money</span> {{
+        site.description }} (Think of it as an electronic 'money-box' &dash; You
+        are saving money into your fund, which you can lock the withdrawal for
+        any period of time, then you withdraw when the lock period elapse.)
+      </p>
+    </div>
+
+    <div class="work__content">
+      <ol>
+        <li>
+          <a href="/account/signup">Signup for an account and get verified.</a>
+        </li>
+        <li>Add fund. Eg, Just saving fund.</li>
+        <li>
+          Lock your fund for a predetermined period of time. Minimum lock
+          period:
+          <strong>{{ site_data.minimum_lock_period }}</strong>
+        </li>
+        <li>
+          Keep depositing money into your fund using 'mobile money', anytime.
+          Minimum deposit: <strong>{{ site_data.minimum_deposit }}</strong>
+        </li>
+        <li>
+          Withdraw all (or part of) your savings when the lock period is over.
+          Or relock.
+        </li>
+      </ol>
+
+      <a href="{{ intro.buttonUrl }}" class="button">{{ intro.buttonText }}</a>
+    </div>
+  </article>
+
+  <article class="[ quotations ] [ full-bleed ]">
+    {% for item in quote.items %}
+    <figure aria-label="{{ item.count }}">
+      <div>
+        <img src="{{ item.image }}" alt="{{ item.caption }}" />
+      </div>
+      <div class="quote">
+        <blockquote>{{ item.text }}</blockquote>
+        <figcaption>{{ item.cite }}</figcaption>
+      </div>
+    </figure>
+    {% endfor %}
+  </article>
+</div>
+{% endblock %}

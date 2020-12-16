@@ -1,0 +1,54 @@
+<footer class="[ site-foot ] [ weight-normal text-400 ]" role="contentinfo">
+  <div>
+    {% include "partials/brand.svg" %}
+
+    <div class="site-foot__general">
+      <h3>General</h3>
+
+      <nav aria-label="Tertiary">
+        <ul class="site-foot__list">
+          {% for item in routes.footer %}
+          <li>
+            <a href="{{ item.url }}" class="site-foot__link">{{ item.text }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <div class="site-foot__foot">
+    <div class="site-foot__about">
+      <h3>About Us</h3>
+      <p>
+        <span class="site-name">Keke<span>.</span>Money</span> {{
+        site.description }}
+        <a href="/about" class="site-foot__link">Learn more</a>
+      </p>
+    </div>
+
+    <div class="site-foot__contact" id="contact">
+      <h3>Contact Us</h3>
+      <p>Talk to us or send us note at:</p>
+
+      <p>
+        <span>Phone:</span>
+        <a href="tel:+{{ site.phone }}" class="site-foot__link"
+          >+{{ site.phone }}</a
+        >
+      </p>
+      {% for item in site.emails %}
+      <p>
+        <span> {{ item.text }}:</span>
+        <a href="mailto:{{ item.url }}" class="site-foot__link"
+          >{{ item.url }}</a
+        >
+      </p>
+      {% endfor %}
+    </div>
+
+    <div class="site-foot__copyright">
+      <p>&copy; {{ helpers.currentYear() }} &dash; Keke Money Inc</p>
+    </div>
+  </div>
+</footer>

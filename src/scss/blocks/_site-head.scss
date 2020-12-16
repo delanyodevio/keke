@@ -1,0 +1,23 @@
+.site-head {
+  padding: 0 get-size("500") get-size("500") get-size("500");
+  border-bottom: 0.4rem solid get-color("primary");
+  background-color: get-color("dark-shade");
+  color: get-color("light");
+
+  &__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__brand {
+    flex-shrink: 0;
+    margin-left: -1.4rem;
+  }
+
+  &__nav {
+    padding: get-size("300");
+    padding-bottom: 0;
+  }
+}

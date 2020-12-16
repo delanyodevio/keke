@@ -1,0 +1,36 @@
+.work {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: get-size("500");
+  border: 2px solid get-color("secondary");
+  border-radius: 0.25rem;
+
+  &__header {
+    h2 span {
+      display: block;
+    }
+
+    p {
+      max-width: 30ch;
+      margin-bottom: 0;
+    }
+  }
+
+  &__content {
+    margin-left: auto;
+    margin-block-start: get-size("500");
+
+    ol {
+      margin: 0 0 get-size("500") 0;
+
+      li {
+        max-width: 60ch;
+      }
+
+      li + li {
+        margin-top: get-size("500");
+      }
+    }
+  }
+}

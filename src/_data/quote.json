@@ -1,0 +1,54 @@
+{
+  "items": [
+    {
+      "text": "The habit of savings is itself an education, it fosters every virtue, teaches self-denial, cultivates the sense of order, trains to forethought and broadens the mind.",
+      "cite": "Thornton Taft Munger",
+      "image": "/images/quotes/savings_habit.webp",
+      "caption": "Bees making honey.",
+      "count": "Fifth quote"
+    },
+    {
+      "text": "A man who both spends and saves money is the happiest man, because he has both enjoyments.",
+      "cite": "Samuel Johnson",
+      "image": "/images/quotes/happiest_man.webp",
+      "caption": "An African man feeling happy within.",
+      "count": "First quote"
+    },
+    {
+      "text": "You don't need a specific reason to start saving...because cash is the oxygen of independence.",
+      "cite": "Morgan Housel",
+      "image": "/images/quotes/independence_oxygen.webp",
+      "caption": "Deep blue sky with white clouds.",
+      "count": "Second quote"
+    },
+    {
+      "text": "If you would be wealthy, think of saving as well as getting.",
+      "cite": "Benjamin Franklin",
+      "image": "/images/quotes/saving_and_getting.webp",
+      "caption": "Man counting coins.",
+      "count": "Third quote"
+    },
+    {
+      "text": "The art is not so much in making money, but also in keeping it.",
+      "cite": "African Proverb",
+      "image": "/images/quotes/keeping_money.webp",
+      "caption": "Basketball goalpost.",
+      "count": "Fourth quote"
+    },
+
+    {
+      "text": "Building wealth has little do with your income or investment returns and a lot do with your savings rate.",
+      "cite": "Morgan Housel",
+      "image": "/images/quotes/building_wealth.webp",
+      "caption": "Edge of a Skyscraper building.",
+      "count": "Sixth quote"
+    },
+    {
+      "text": "By sowing, we reap liberty, a golden harvest.",
+      "cite": "Agesilaus",
+      "image": "/images/quotes/sowing_and_reaping.webp",
+      "caption": "Coins in a cup with a seed germinating.",
+      "count": "Seventh quote"
+    }
+  ]
+}
