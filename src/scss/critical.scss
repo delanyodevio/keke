@@ -30,7 +30,7 @@ a:not([class]) {
 }
 
 main {
-  padding: get-size("700") 0;
+  padding: get-size("500") 0 get-size("700") 0;
 }
 
 .wrapper {
@@ -84,6 +84,11 @@ h4 {
   }
 }
 
+.tip {
+  display: block;
+  color: get-color("primary");
+}
+
 // Import blocks
 @import "blocks/site-head";
 @import "blocks/site-foot";
@@ -99,3 +104,10 @@ h4 {
 @import "utilities/site-wrap";
 @import "utilities/visually-hidden";
 @import "utilities/wrapper";
+@import "utilities/disabled";
+@import "utilities/flex-wrap";
+@import "utilities/sticky";
+@import "utilities/block";
+@import "utilities/successMessage";
+@import "utilities/input-container";
+@import "utilities/spinner";

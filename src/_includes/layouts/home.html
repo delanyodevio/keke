@@ -2,13 +2,7 @@
 %} {% block content %}
 <div class="wrapper">
   <article class="intro">
-    <div lass="intro__media">
-      <img
-        src="{{ intro.image }}"
-        alt="{{ intro.caption }}"
-        class="[ intro__image ] [ radius ]"
-      />
-    </div>
+    <img src="{{ intro.image }}" alt="{{ intro.caption }}" class="radius" />
 
     <div class="intro__content">
       <h1 class="text-800 weight-bold">
@@ -60,18 +54,25 @@
     </div>
   </article>
 
-  <article class="[ quotations ] [ full-bleed ]">
-    {% for item in quote.items %}
-    <figure aria-label="{{ item.count }}">
-      <div>
+  <article class="quotes">
+    <h2 class="text-800 weight-bold">
+      Get Inspired
+      <span class="weight-normal text-600"
+        >want to get into the savings habit?</span
+      >
+    </h2>
+
+    <div class="quotations">
+      {% for item in quote.items %}
+      <figure aria-label="{{ item.count }}">
         <img src="{{ item.image }}" alt="{{ item.caption }}" />
-      </div>
-      <div class="quote">
-        <blockquote>{{ item.text }}</blockquote>
-        <figcaption>{{ item.cite }}</figcaption>
-      </div>
-    </figure>
-    {% endfor %}
+        <div class="quote">
+          <blockquote>{{ item.text }}</blockquote>
+          <figcaption>{{ item.cite }}</figcaption>
+        </div>
+      </figure>
+      {% endfor %}
+    </div>
   </article>
 </div>
 {% endblock %}

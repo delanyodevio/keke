@@ -9,7 +9,12 @@ sassProcessor.compiler = require("sass");
 const isProduction = process.env.NODE_ENV === "production";
 
 // An array of outputs that should be sent over to includes
-const criticalStyles = ["critical.scss", "home.scss", "account.scss"];
+const criticalStyles = [
+  "critical.scss",
+  "home.scss",
+  "account.scss",
+  "user.scss",
+];
 
 // Takes the arguments passed by `dest` and determines where the output file goes
 const calculateOutput = ({ history }) => {

@@ -36,6 +36,14 @@ form {
     outline: 0;
   }
 
+  input:valid {
+    border-color: get-color("primary");
+  }
+
+  input:invalid {
+    border-color: currentColor;
+  }
+
   textarea {
     position: relative;
   }
@@ -46,12 +54,14 @@ form {
     cursor: pointer;
     transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
     border-radius: 0.25rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0;
     background-color: get-color("tertiary");
     color: get-color("dark-shade");
     border: 2px solid;
     text-transform: uppercase;
     text-align: center;
+    display: block;
+    width: 100%;
 
     @include apply-utility("font", "sans");
     @include apply-utility("weight", "bold");
@@ -61,5 +71,9 @@ form {
       background-color: get-color("quaternary") !important;
       color: get-color("dark-shade") !important;
     }
+  }
+
+  div + button {
+    margin-top: get-size("700");
   }
 }

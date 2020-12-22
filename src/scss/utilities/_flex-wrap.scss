@@ -1,0 +1,18 @@
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  h2 span {
+    display: block;
+  }
+
+  > :last-child {
+    padding: get-size("500");
+
+    p {
+      max-width: 30ch;
+    }
+  }
+}

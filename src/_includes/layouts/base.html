@@ -1,5 +1,5 @@
-{% set assetHash = global.random() %} {% set webfonts = fonts %} {% set js =
-scripts %}
+{% set assetHash = global.random() %} {% set css = styles %} {% set js = scripts
+%}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,8 +35,8 @@ scripts %}
     />
     {% endfor %} {% endif %}
 
-    <!-- webfonts -->
-    {% if webfonts %} {% for item in webfonts %}
+    <!-- non critical css -->
+    {% if css %} {% for item in css %}
     <link
       rel="stylesheet"
       media="print"
@@ -52,11 +52,22 @@ scripts %}
     {% endfor %} {% endif %}
     <!-- scripts -->
   </head>
-  {% set bodyClass = classify %}
-  <body {% if bodyClass %} class="{{ bodyClass }}" {% endif %}>
+  {% set class = classify %}
+  <body {% if class %} class="{{ class }}" {% endif %}>
     {% include "partials/site-head.html" %}
 
-    <main tabindex="-1" id="main-content">
+    <main
+      tabindex="-1"
+      id="main-content"
+      {%
+      if
+      class
+      %}
+      class="{{ class }}"
+      {%
+      endif
+      %}
+    >
       {% block content %} {% endblock %}
     </main>
 

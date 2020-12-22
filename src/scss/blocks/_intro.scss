@@ -5,10 +5,8 @@
   border: 2px solid get-color("primary");
   border-radius: 0.25rem;
 
-  &__media {
-    img {
-      width: 100%;
-    }
+  img {
+    width: 100%;
   }
 
   &__content {
@@ -21,6 +19,12 @@
 
     p {
       max-width: 30ch;
+    }
+  }
+
+  @include media-query("md") {
+    img {
+      width: 50%;
     }
   }
 }

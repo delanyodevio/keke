@@ -11,21 +11,9 @@
   padding: 0;
   margin: 0;
 
-  li {
-    padding: 0 get-size("600") get-size("300") get-size("600");
-  }
-
   a {
     text-decoration: none;
+    padding: 0 get-size("600") get-size("300") get-size("600");
+    display: block;
   }
-}
-
-.login-page .login,
-.signup-page .signup {
-  border-bottom: 0.3rem solid get-color("quaternary-shade");
-}
-
-.login-page .login a,
-.signup-page .signup a {
-  color: get-color("quaternary-shade");
 }

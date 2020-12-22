@@ -7,7 +7,33 @@
     <nav class="[ nav ] [ site_head__nav ] [ font-sans ]" aria-label="Primary">
       <ul class="nav__list">
         {% for route in routes.nav %}
-        <li>
+        <li
+          {%
+          if
+          route.classify
+          %}
+          class="{{ route.classify }}"
+          {%
+          endif
+          %}
+          {%
+          if
+          route.unique
+          %}
+          id="{{ route.unique }}"
+          {%
+          endif
+          %}
+          {%
+          if
+          route.aria_hidden
+          %}
+          aria-hidden="{{ route.aria_hidden }}"
+          {%
+          endif
+          %}
+        >
+          {% if route.url %}
           <a
             href="{{ route.url }}"
             {{
@@ -18,6 +44,7 @@
             }}
             >{{ route.text }}</a
           >
+          {% endif %}
         </li>
         {% endfor %}
       </ul>

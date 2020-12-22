@@ -1,8 +1,86 @@
-{% extends 'layouts/base.html' %}
+{% extends 'layouts/base.html' %} {% set pageCriticalStyles = ['css/user.css']
+%}
 
 <!-- f -->
 {% block content %}
-<div class="wrapper" id="{{ user }}">
-  <h1>Welcome, {{ user }}</h1>
+<div class="user" id="user" data-user="{{ user }}">
+  {% include "partials/user-header.html" %}
+  <div class="[ user__content ] [ wrapper ]" id="user" data-user="{{ user }}">
+    <h1 id="homeHeadline" class="text-600 weight-bold md:text-700 lg:text-800">
+      Welcome, {{ user }}
+      <span
+        class="[ weight-normal text-300 md:text-400 lg:text-500 ] [ block ]"
+      >
+        Basic info about your account
+      </span>
+    </h1>
+    <h1
+      id="fundHeadline"
+      class="[ text-600 weight-bold md:text-700 lg:text-800 ] [ visually-hidden ]"
+      aria-hidden="true"
+    >
+      Your funds
+      <span
+        class="[ weight-normal text-300 md:text-400 lg:text-500 ] [ block ]"
+      >
+        Information about your funds
+      </span>
+    </h1>
+    <h1
+      id="paymentHeadline"
+      class="[ text-600 weight-bold md:text-700 lg:text-800 ] [ visually-hidden ]"
+      aria-hidden="true"
+    >
+      Payment panel
+      <span
+        class="[ weight-normal text-300 md:text-400 lg:text-500 ] [ block ]"
+      >
+        everything concerning your payments
+      </span>
+    </h1>
+    <h1
+      id="supportHeadline"
+      class="[ text-600 weight-bold md:text-700 lg:text-800 ] [ visually-hidden ]"
+      aria-hidden="true"
+    >
+      Get supports
+      <span
+        class="[ weight-normal text-300 md:text-400 lg:text-500 ] [ block ]"
+      >
+        We are here to help you with all your needs
+      </span>
+    </h1>
+    <h1
+      id="settingHeadline"
+      class="[ text-600 weight-bold md:text-700 lg:text-800 ] [ visually-hidden ]"
+      aria-hidden="true"
+    >
+      Configure your account
+      <span
+        class="[ weight-normal text-300 md:text-400 lg:text-500 ] [ block ]"
+      >
+        you can update your details here.
+      </span>
+    </h1>
+    <article id="front">
+      <p>Home page</p>
+    </article>
+
+    <article id="fund" class="visually-hidden" aria-hidden="true">
+      <p>Funds PAGE</p>
+    </article>
+
+    <article id="payment" class="visually-hidden" aria-hidden="true">
+      <p>Payment PAGE</p>
+    </article>
+
+    <article id="setting" class="visually-hidden" aria-hidden="true">
+      <p>settings PAGE</p>
+    </article>
+
+    <article id="suggestions" class="visually-hidden" aria-hidden="true">
+      <p>support PAGE</p>
+    </article>
+  </div>
 </div>
 {% endblock %}

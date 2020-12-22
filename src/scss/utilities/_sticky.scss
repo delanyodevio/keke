@@ -1,0 +1,8 @@
+.sticky {
+  position: fixed;
+  top: 0;
+}
+
+.sticky + * {
+  padding-top: 3.75rem;
+}

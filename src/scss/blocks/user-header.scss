@@ -1,0 +1,31 @@
+.user-nav {
+  padding: get-size("400") get-size("600") 0 get-size("600");
+  border-bottom: 0.4rem solid get-color("primary");
+  z-index: 9;
+  background-color: get-color("light");
+  position: relative;
+
+  nav {
+    position: sticky;
+    top: 0;
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    li {
+      margin-inline-end: get-size("600");
+      margin-bottom: get-size("400");
+
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.r-pdt {
+  padding-top: 0;
+}

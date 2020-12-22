@@ -2,25 +2,69 @@
 pageHeaderSummary = content %} {% set pageCriticalStyles = ['css/account.css']
 %} {% block content %}
 <div class="wrapper">
-  {% include "partials/account.html" %}
-  <article class="account">
+  <article class="account" id="signupPage">
     {% include "partials/page-header.html" %}
 
-    <form action="" class="account-form" id="accountForm">
+    <!-- // Phone verification form -->
+    <form id="phoneVerificationForm">
+      <label for="phone">
+        First, Enter your phone number for verification.
+        <span class="tip weight-normal text-400">
+          Tip: Example, 024XXXXXXX
+        </span>
+      </label>
+      <input
+        type="tel"
+        name="phone"
+        id="phone"
+        placeholder="Phone number here"
+        required
+        pattern="0[0-9]{9}"
+        minlength="10"
+        maxlength="10"
+        title="Ten digit local phone number beginning with zero(0)"
+        aria-required="true"
+      />
+
+      <button type="submit" id="singInButton">Send the code.</button>
+    </form>
+
+    <!-- // Code verification form -->
+    <form class="visually-hidden" id="phoneCodeForm" aria-hidden="true">
+      <label for="phoneCode">Enter the code sent to your phone number.</label>
+      <input
+        type="text"
+        name="phoneCode"
+        id="phoneCode"
+        pattern="[0-9]{6}"
+        placeholder="Enter the six digit code here."
+        title="Enter a six digit code sent to your phone."
+        required
+        aria-required="true"
+      />
+
+      <button type="submit" id="phoneCodeButton">verify.</button>
+    </form>
+
+    <div class="[ successMessage ] [ visually-hidden ]" aria-hidden="true">
+      <p>
+        Phone number verified successfully. Please scroll down to finish up the
+        signup process.
+      </p>
+    </div>
+
+    <!-- // signup form -->
+    <form class="[ account-form ] [ visually-hidden ]" id="signupForm">
       <label for="fullname">Your full name</label>
       <input
         type="text"
         name="fullname"
+        pattern="[a-zA-Z ]+"
         id="fullname"
         placeholder="Full name here"
-      />
-
-      <label for="username">A new Username</label>
-      <input
-        type="text"
-        name="username"
-        id="username"
-        placeholder="Username here"
+        required
+        title="The name should not contain a number or a special character."
+        aria-required="true"
       />
 
       <label for="email">Your Email Address</label>
@@ -29,30 +73,81 @@ pageHeaderSummary = content %} {% set pageCriticalStyles = ['css/account.css']
         name="email"
         id="email"
         placeholder="Email address here"
+        required
+        aria-required="true"
       />
 
-      <label for="phone">Your phone number</label>
-      <input
-        type="tel"
-        name="phone"
-        id="phone"
-        placeholder="Phone number here"
-      />
-
-      <label for="password">A new password</label>
-      <div class="manage-password">
+      <label for="password">
+        A new password
+        <span class="tip weight-normal text-400">
+          Tip: A least 8 characters long. Must contain a number, a special
+          symbol, an uppercase and lowercase letter.
+        </span>
+      </label>
+      <div class="[ manage-password ] [ input-container ]">
         <input
           type="password"
           name="password"
           id="password"
           placeholder="New password here"
           class="password"
+          required
+          aria-required="true"
+          pattern="(?=^.{8,}$)((?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*$"
+          title="A least 8 characters long. Must contain a number, a special symbol, an uppercase and lowercase letter."
         />
         <span class="show-password"><i class="far fa-eye-slash"></i></span>
       </div>
 
-      <button type="submit">Create account</button>
+      <label for="country">Your country</label>
+      <input
+        type="text"
+        name="country"
+        pattern="[a-zA-Z ]+"
+        id="country"
+        required
+        disabled
+        aria-disabled="true"
+        aria-required="true"
+      />
+
+      <button type="submit" id="signupButton">Create account.</button>
     </form>
   </article>
+
+  <article
+    class="[ flex-wrap ] [ visually-hidden ]"
+    id="successPage"
+    aria-hidden="true"
+  >
+    <h2 class="text-800 weight-bold">
+      Signup Successfully
+      <span class="weight-normal text-600">Now on the waiting list </span>
+    </h2>
+
+    <div>
+      <p>
+        To be able to deliver optimally on the site, we really put our newly
+        signed-up users on a one day waiting list.
+      </p>
+      <p>
+        After 24hrs, we will send a special welcome email. In it you will find
+        instructions on how to login to your portal and start doing savings.
+      </p>
+      <p>
+        In the meantime, let us introduce to you our
+        <a href="https://keke.blog">top notched industry financial blog</a>.
+        Visit
+        <a href="https://keke.blog">
+          <span class="site-name">Keke<span>.</span>blog</span> </a
+        >, for all your financial advices and tips, written by our people.
+      </p>
+      <p>
+        Thanks for <strong>waiting with us.</strong> Tomorrow, please check your
+        mailbox for our message.
+      </p>
+    </div>
+  </article>
 </div>
+
 {% endblock %}

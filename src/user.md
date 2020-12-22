@@ -2,8 +2,18 @@
 layout: "layouts/user.html"
 title: "Keke.Money | convenient and consistent."
 pagination:
-  data: users.usernames
+  data: usernames
   size: 1
   alias: user
-permalink: "account/{{ user }}/"
+permalink: "users/{{ user }}/"
+scripts:
+  - "https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"
+  - "https://www.gstatic.com/firebasejs/8.2.0/firebase-auth.js"
+  - "https://www.gstatic.com/firebasejs/8.2.0/firebase-firestore.js"
+  - "https://www.gstatic.com/firebasejs/8.2.0/firebase-database.js"
+  - "/scripts/firebase.js"
+  - "/scripts/user.js"
+  - "/scripts/ui.js"
+  - "/scripts/sticky.js"
+classify: "r-pdt"
 ---

@@ -1,34 +1,45 @@
-.quotations {
+.quotes {
   display: flex;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  flex-wrap: wrap;
   align-items: flex-start;
-  padding-bottom: get-size("500");
-  padding-left: get-size("300");
-  padding-right: get-size("500");
 
-  > * {
-    flex-shrink: 0;
-    border: 2px solid get-color("primary");
-    border-radius: 0.25rem;
-    margin-bottom: 0;
-    width: 18rem;
+  h2 {
+    margin-bottom: get-size("600");
 
-    div {
+    span {
+      max-width: 20ch;
+      display: block;
+    }
+  }
+
+  .quotations {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    align-items: flex-start;
+    padding-bottom: get-size("500");
+
+    > * {
+      flex-shrink: 0;
+      border: 2px solid get-color("primary");
+      border-radius: 0.25rem;
+      margin-bottom: 0;
+      width: 19rem;
+
       img {
         width: 100%;
-        height: 100%;
+        height: 19rem;
       }
-    }
 
-    .quote {
-      padding: get-size("400");
+      .quote {
+        padding: get-size("400");
+      }
 
       blockquote {
         border-inline-start: 0.5rem solid get-color("quaternary-shade");
         padding-inline-start: get-size("400");
         padding-bottom: get-size("400");
-        margin-top: 0;
+        margin-top: get-size("400");
         margin-bottom: 0;
         font-style: italic;
       }
@@ -41,15 +52,19 @@
         padding: 0.3rem get-size("400");
       }
     }
-  }
 
-  > * + * {
-    margin-inline-start: get-size("500");
-  }
+    > * + * {
+      margin-inline-start: get-size("500");
+    }
 
-  @include media-query("md") {
-    > * {
-      width: 30rem;
+    @include media-query("lg") {
+      overflow-x: hidden;
+      flex-wrap: wrap;
+
+      > * {
+        margin-top: get-size("700");
+        width: 28rem;
+      }
     }
   }
 }

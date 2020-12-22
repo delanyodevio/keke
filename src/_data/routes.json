@@ -1,20 +1,40 @@
 {
   "nav": [
     {
-      "text": "How it works",
+      "text": "How it works.",
       "url": "/#how-it-works"
     },
     {
-      "text": "About us",
+      "text": "About us.",
       "url": "/about"
     },
     {
-      "text": "Contact",
+      "text": "Contact.",
       "url": "#contact"
     },
     {
-      "text": "Account",
-      "url": "/account/signup"
+      "text": "Signup.",
+      "url": "/signup",
+      "unique": "signupUrl"
+    },
+    {
+      "text": "Login.",
+      "url": "/login",
+      "unique": "loginUrl"
+    },
+    {
+      "text": "Account.",
+      "url": "/users",
+      "unique": "accountUrl",
+      "classify": "visually-hidden",
+      "aria_hidden": "true"
+    },
+    {
+      "text": "Logout.",
+      "url": "/",
+      "unique": "logoutUrl",
+      "classify": "visually-hidden",
+      "aria_hidden": "true"
     }
   ],
 
@@ -44,23 +64,30 @@
   "user": [
     {
       "text": "Home",
-      "url": "#home"
+      "url": "#home",
+      "unique": "accountHome"
     },
     {
       "text": "Funds",
-      "url": "#funds"
+      "url": "#funds",
+      "unique": "fundsUrl"
     },
     {
-      "text": "Records",
-      "url": "#records"
+      "text": "Payments",
+      "url": "#payments",
+      "unique": "paymentsUrl",
+      "classify": "visually-hidden",
+      "aria-hidden": "true"
     },
     {
-      "text": "Preferences",
-      "url": "#preferences"
+      "text": "Supports",
+      "url": "#supports",
+      "unique": "suggestionsUrl"
     },
     {
-      "text": "Suggestions",
-      "url": "#suggestions"
+      "text": "Settings",
+      "url": "#settings",
+      "unique": "settingsUrl"
     }
   ]
 }

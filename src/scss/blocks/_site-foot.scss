@@ -40,10 +40,15 @@
     margin-bottom: -1.6rem;
   }
 
-  > div {
-    > * {
-      margin-top: get-size("600");
-      margin-bottom: get-size("500");
-    }
+  &__about,
+  &__contact,
+  &__general {
+    margin-top: get-size("600");
+  }
+
+  &__about,
+  &__contact,
+  &__general {
+    margin-bottom: get-size("500");
   }
 }

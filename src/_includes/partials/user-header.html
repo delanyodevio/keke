@@ -1,0 +1,47 @@
+<div class="[ user-nav ] [ font-sans ]" id="stickyHeader">
+  <nav class="" aria-label="Secondary">
+    <ul class="user-nav__list">
+      {% for route in routes.user %}
+      <li
+        {%
+        if
+        route.classify
+        %}
+        class="{{ route.classify }}"
+        {%
+        endif
+        %}
+        {%
+        if
+        route.unique
+        %}
+        id="{{ route.unique }}"
+        {%
+        endif
+        %}
+        {%
+        if
+        route.aria_hidden
+        %}
+        aria-hidden="{{ route.aria_hidden }}"
+        {%
+        endif
+        %}
+      >
+        {% if route.url %}
+        <a
+          href="/users/{{ user }}/{{ route.url }}"
+          {{
+          helpers.getLinkActiveState(route.url,
+          page.url)
+          |
+          safe
+          }}
+          >{{ route.text }}</a
+        >
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
+</div>
