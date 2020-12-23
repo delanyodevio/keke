@@ -20,8 +20,7 @@ window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier("singInButton", {
 phoneVerificationForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  singInButton.style.backgroundColor = "#f0eeea";
-  singInButton.innerHTML = '<div class="spinner"><div></div><div></div></div>';
+  singInButton.innerHTML = "Loading...";
 
   let phoneNumber = phoneVerificationForm.phone.value; // eg, 024xxxxxxx
   let unique = phoneNumber.startsWith("0") ? phoneNumber.slice(1) : phoneNumber; // 024xxxxxxx -> 24xxxxxxx
@@ -53,7 +52,7 @@ phoneVerificationForm.addEventListener("submit", function (event) {
       phoneCodeForm.removeAttribute("aria-hidden");
     })
     .catch(function (ex) {
-      console.log(ex);
+      setTimeout(renderErrorMessage(phoneCodeForm, ex), 10000);
     });
 });
 
@@ -61,9 +60,7 @@ phoneVerificationForm.addEventListener("submit", function (event) {
 phoneCodeForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  phoneCodeButton.style.backgroundColor = "#f0eeea";
-  phoneCodeButton.innerHTML =
-    '<div class="spinner"><div></div><div></div></div>';
+  phoneCodeButton.innerHTML = "Loading...";
 
   let code = phoneCodeForm.phoneCode.value;
   let successMessage = document.querySelector(".successMessage");
@@ -91,8 +88,7 @@ phoneCodeForm.addEventListener("submit", function (event) {
 signup.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  signupButton.style.backgroundColor = "#f0eeea";
-  signupButton.innerHTML = '<div class="spinner"><div></div><div></div></div>';
+  signupButton.innerHTML = "Loading...";
 
   let fullname = makeSafeText(signup.fullname.value);
   let mail = signup.email.value;
@@ -109,30 +105,27 @@ signup.addEventListener("submit", function (event) {
     phone: phone,
   };
 
-  auth
-    .createUserWithEmailAndPassword(mail, password)
-    .then(function (user) {
-      let ref = store.collection("users").doc(unique);
+  auth.createUserWithEmailAndPassword(mail, password).then(function (user) {
+    let ref = store.collection("users").doc(unique);
 
-      ref.set(data).then(function () {
-        console.log("Document successfully written!");
+    ref.set(data).then(function () {
+      let ref = db.ref("usernames/" + "items");
 
-        let ref = db.ref("usernames/");
+      let listRef = ref.push();
 
-        ref.set({ items: [unique] }).then(function () {
-          console.log(user);
-          console.log(data);
-
-          signup.reset();
-          signupModal.classList.add("visually-hidden");
-          successModal.classList.remove("visually-hidden");
-        });
+      listRef.set(unique).then(function () {
+        signup.reset();
+        signupModal.classList.add("visually-hidden");
+        successModal.classList.remove("visually-hidden");
       });
-    })
-    .catch((ex) => {
-      console.log(ex.message);
     });
+  });
 });
+
+// error message
+function renderErrorMessage(el, ex) {
+  el.innerHTML = `<div class="errorMessage"><p>${ex}</p></div>`;
+}
 
 // make a safe text
 function makeSafeText(str) {
