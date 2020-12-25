@@ -1,0 +1,46 @@
+{% extends 'layouts/base.html' %} {% set pageHeaderTitle = title %} {% set
+pageHeaderSummary = content %} {% set pageCriticalStyles = ['css/account.css']
+%} {% block content %}
+<div class="wrapper">
+  <article class="account">
+    {% include "partials/page-header.html" %}
+
+    <form class="login-form" id="loginForm">
+      <div class="[ errorMessage ] [ visually-hidden ]" id="phoneError"></div>
+
+      <label for="email">Enter your email to login with a secure link</label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Email address here"
+        required
+        aria-required="true"
+      />
+
+      <button type="submit">Send me link</button>
+    </form>
+
+    <!-- // Code verification form -->
+    <form class="visually-hidden" id="emailCodeForm" aria-hidden="true">
+      <div class="[ errorMessage ] [ visually-hidden ]" id="codeError"></div>
+
+      <label for="emailCode">
+        Follow the link sent to your email or enter the code sent to your email.
+      </label>
+      <input
+        type="text"
+        name="emailCode"
+        id="emailCode"
+        pattern="[0-9]{6}"
+        placeholder="Enter the six digit code here."
+        title="Enter a six digit code sent to your email."
+        required
+        aria-required="true"
+      />
+
+      <button type="submit" id="emailCodeButton">verify.</button>
+    </form>
+  </article>
+</div>
+{% endblock %}

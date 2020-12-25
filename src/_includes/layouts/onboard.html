@@ -1,0 +1,151 @@
+{% extends 'layouts/base.html' %} {% set pageHeaderTitle = title %} {% set
+pageHeaderSummary = content %} {% set pageCriticalStyles = ['css/account.css']
+%} {% block content %}
+<div class="wrapper">
+  <article class="account" id="signupPage">
+    {% include "partials/page-header.html" %}
+
+    <div class="[ errorMessage ] [ visually-hidden ]" id="errorMessage"></div>
+
+    <!-- // signup form -->
+    <form class="[ account-form ] [ visually-hidden ]" id="onboardForm">
+      <label for="fullname">Your full name</label>
+      <input
+        type="text"
+        name="fullname"
+        pattern="[a-zA-Z ]+"
+        id="fullname"
+        placeholder="Full name here"
+        required
+        title="The name should not contain a number or a special character."
+        aria-required="true"
+      />
+
+      <label for="phone">
+        Enter your phone number
+        <span class="tip weight-normal text-400">
+          Tip: Example, 024XXXXXXX
+        </span>
+      </label>
+      <input
+        type="tel"
+        name="phone"
+        id="phone"
+        placeholder="Phone number here"
+        required
+        pattern="0[0-9]{9}"
+        minlength="10"
+        maxlength="10"
+        title="Ten digit local phone number beginning with zero(0)"
+        aria-required="true"
+      />
+
+      <div class="divider"></div>
+
+      <label for="email">Enter your email address for a secure link. </label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Email address here"
+        disabled
+        aria-disabled="true"
+      />
+
+      <label for="country">Your country</label>
+      <input
+        type="text"
+        name="country"
+        pattern="[a-zA-Z ]+"
+        id="country"
+        required
+        disabled
+        aria-disabled="true"
+        aria-required="true"
+      />
+
+      <button type="submit" id="signupButton">create account</button>
+    </form>
+
+    <div class="visually-hidden" id="loginReturnMessage" aria-hidden="true">
+      <p>
+        The email address already exist please
+        <a href="/login"> go here and login </a>
+      </p>
+    </div>
+  </article>
+
+  <article class="visually-hidden" id="successPage" aria-hidden="true">
+    <h2 class="text-800 weight-bold">
+      Signup Successfully
+      <span class="weight-normal text-600">Now on the waiting list </span>
+    </h2>
+
+    <div>
+      <p>
+        To be able to deliver optimally on the site, we really put our newly
+        signed-up users on a one day waiting list.
+      </p>
+      <p>
+        After 24hrs, we will send a special welcome email. In it you will find
+        instructions on how to login to your portal and start doing savings.
+      </p>
+      <p>
+        In the meantime, let us introduce to you our
+        <a href="https://keke.blog">top notched industry financial blog</a>.
+        Visit
+        <a href="https://keke.blog">
+          <span class="site-name">Keke<span>.</span>blog</span> </a
+        >, for all your financial advices and tips, written by our people.
+      </p>
+      <p>
+        Thanks for <strong>waiting with us.</strong> Tomorrow, please check your
+        mailbox for our message.
+      </p>
+    </div>
+  </article>
+</div>
+{% endblock %}
+
+<!-- 
+
+           <label for="password">
+            A new password
+            <span class="[ tip ] [ weight-normal text-400 ]">
+              Tip: A least 8 characters long. Must contain a number, a special
+              symbol, an uppercase and lowercase letter.
+            </span>
+          </label>
+          <div class="[ manage-password ] [ input-container ]">
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="New password here"
+              class="password"
+              required
+              aria-required="true"
+              pattern="(?=^.{8,}$)((?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*$"
+              title="A least 8 characters long. Must contain a number, a special symbol, an uppercase and lowercase letter."
+            />
+            <span class="show-password">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+                />
+              </svg>
+            </span>
+          </div>
+    
+          
+    
+           
+     -->

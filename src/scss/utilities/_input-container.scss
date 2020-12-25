@@ -11,6 +11,13 @@
     border-top-right-radius: 0.25rem;
     border-left: none;
     background-color: get-color("light-glare");
+
+    svg {
+      padding: 0;
+      margin: 0;
+      height: 1.58rem;
+      width: 1.58rem;
+    }
   }
 
   input {
