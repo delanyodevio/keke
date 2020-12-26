@@ -1,6 +1,6 @@
 ---
 layout: "layouts/signup.html"
-title: "Create Account"
+title: "Welcome!"
 permalink: "/signup/"
 scripts:
   - "https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"
@@ -8,5 +8,6 @@ scripts:
   - "/scripts/signup.js"
 ---
 
-Create a user account and get started. Are you already a user?
-[Login here](/login)
+We are excited to have you. Next we will guide you through setting up your user account.
+
+Are you already a user? [Please login here](/login)

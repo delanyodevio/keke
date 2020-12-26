@@ -3,11 +3,22 @@
 
 <!-- f -->
 {% block content %}
-<div class="user" id="user" data-user="{{ user }}">
+<div class="wrapper" id="loadingPage">
+  <article class="[ centered ] [ text-800 weight-bold ]">
+    <p>Loading...</p>
+  </article>
+</div>
+
+<div
+  class="[ user ] [ visually-hidden ]"
+  id="user"
+  data-userId="{{ user }}"
+  aria-hidden="true"
+>
   {% include "partials/user-header.html" %}
   <div class="[ user__content ] [ wrapper ]" id="user" data-user="{{ user }}">
     <h1 id="homeHeadline" class="text-600 weight-bold md:text-700 lg:text-800">
-      Welcome, {{ user }}
+      Welcome, <span id="displayName"></span>
       <span
         class="[ weight-normal text-300 md:text-400 lg:text-500 ] [ block ]"
       >

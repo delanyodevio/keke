@@ -23,13 +23,6 @@
       "unique": "loginUrl"
     },
     {
-      "text": "Account.",
-      "url": "/users",
-      "unique": "accountUrl",
-      "classify": "visually-hidden",
-      "aria_hidden": "true"
-    },
-    {
       "text": "Logout.",
       "url": "/",
       "unique": "logoutUrl",

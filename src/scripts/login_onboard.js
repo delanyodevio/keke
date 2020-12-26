@@ -1,10 +1,10 @@
-const onboardForm = document.getElementById("onboardForm");
+const emailVerified = document.getElementById("emailVerified");
+const loginReturnButton = document.getElementById("loginReturnButton");
+const newUser = document.getElementById("newUser");
 const successModal = document.getElementById("successPage");
-const signupModal = document.getElementById("signupPage");
+const onboardForm = document.getElementById("onboardForm");
 const errorMessage = document.getElementById("errorMessage");
 const phoneNumberInput = document.getElementById("phone");
-const signupButton = document.getElementById("signupButton");
-const loginReturnButton = document.getElementById("loginReturnButton");
 
 // Confirm the link is a sign-in with email link.
 if (auth.isSignInWithEmailLink(window.location.href)) {
@@ -24,20 +24,22 @@ if (auth.isSignInWithEmailLink(window.location.href)) {
         window.localStorage.setItem("userId", result.user.uid);
         window.localStorage.setItem("userEmail", result.user.email);
 
-        onboardForm.classList.remove("visually-hidden");
-        onboardForm.removeAttribute("aria-hidden");
+        newUser.classList.remove("visually-hidden");
+        newUser.removeAttribute("aria-hidden");
 
         let emailInput = document.getElementById("email");
         emailInput.value = result.user.email;
+
+        emailVerified.classList.add("visually-hidden");
+        emailVerified.setAttribute("aria-hidden", "true");
       } else {
-        let loginReturnMessage = document.getElementById("loginReturnMessage");
-        loginReturnMessage.classList.remove("visually-hidden");
-        loginReturnMessage.removeAttribute("aria-hidden");
+        emailVerified.classList.remove("visually-hidden");
+        emailVerified.removeAttribute("aria-hidden");
 
         window.localStorage.setItem("userId", result.user.uid);
 
-        onboardForm.classList.add("visually-hidden");
-        onboardForm.setAttribute("aria-hidden", "true");
+        newUser.classList.add("visually-hidden");
+        newUser.setAttribute("aria-hidden", "true");
       }
     })
     .catch(function (error) {
@@ -67,6 +69,8 @@ phoneNumberInput.addEventListener("input", function () {
 
 onboardForm.addEventListener("submit", function (event) {
   event.preventDefault();
+
+  let signupButton = document.getElementById("signupButton");
 
   signupButton.innerHTML = "Loading...";
 

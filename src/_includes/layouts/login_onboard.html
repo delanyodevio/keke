@@ -2,17 +2,26 @@
 pageHeaderSummary = content %} {% set pageCriticalStyles = ['css/account.css']
 %} {% block content %}
 <div class="wrapper">
-  <article>
-    <div class="[ errorMessage ] [ visually-hidden ]" id="errorMessage"></div>
+  <article>{% include "partials/page-header.html" %}</article>
+  <article id="emailVerified" class="visually-hidden" aria-hidden="true">
+    <div class="successMessage" id="successMessage" aria-hidden="true">
+      <p>
+        Email successfully verified! Welcome back. Please click on the link to
+        continue.
+      </p>
+    </div>
+
+    <a class="button" id="loginReturnButton" href="/login">please login</a>
   </article>
 
-  <article class="account" id="signupPage">
-    <div id="pageHeader">{% include "partials/page-header.html" %}</div>
-
+  <article
+    class="[ account ] [ visually-hidden ]"
+    id="newUser"
+    aria-hidden="true"
+  >
     <div class="[ errorMessage ] [ visually-hidden ]" id="errorMessage"></div>
-
     <!-- // signup form -->
-    <form class="[ account-form ] [ visually-hidden ]" id="onboardForm">
+    <form class="account-form" id="onboardForm">
       <label for="fullname">Your full name</label>
       <input
         type="text"
@@ -70,13 +79,6 @@ pageHeaderSummary = content %} {% set pageCriticalStyles = ['css/account.css']
 
       <button type="submit" id="signupButton">create account</button>
     </form>
-
-    <div class="visually-hidden" id="loginReturnMessage" aria-hidden="true">
-      <p>
-        The email address already exist
-        <a class="button" id="loginReturnButton" href="/login">please login</a>
-      </p>
-    </div>
   </article>
 
   {% include "partials/success_signup.html" %}

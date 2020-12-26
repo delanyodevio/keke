@@ -5,50 +5,35 @@ pageHeaderSummary = content %} {% set pageCriticalStyles = ['css/account.css']
   <article class="account">
     {% include "partials/page-header.html" %}
 
+    <div
+      class="[ successMessage ] [ visually-hidden ]"
+      id="successMessage"
+      aria-hidden="true"
+    >
+      <p>
+        Success. A message was sent to your email account with a link, click on
+        the link and open it in this browser to continue.
+      </p>
+    </div>
+
     <form class="login-form" id="loginForm">
-      <div class="[ errorMessage ] [ visually-hidden ]" id="phoneError"></div>
+      <div
+        class="[ errorMessage ] [ visually-hidden ]"
+        id="errorMessage"
+        aria-hidden="true"
+      ></div>
 
-      <label for="phone">
-        Enter your phone to login.
-        <span class="tip weight-normal text-400">
-          Tip: Example, 024XXXXXXX
-        </span>
-      </label>
+      <label for="email">Enter your email address for a secure link.</label>
       <input
-        type="tel"
-        name="phone"
-        id="phone"
-        placeholder="Phone number here"
-        required
-        pattern="0[0-9]{9}"
-        minlength="10"
-        maxlength="10"
-        title="Ten digit local phone number beginning with zero(0)"
-        aria-required="true"
-      />
-
-      <button type="submit">Send me code</button>
-    </form>
-
-    <div id="recaptcha-container" class="recaptcha"></div>
-
-    <!-- // Code verification form -->
-    <form class="visually-hidden" id="phoneCodeForm" aria-hidden="true">
-      <div class="[ errorMessage ] [ visually-hidden ]" id="codeError"></div>
-
-      <label for="phoneCode">Enter the code sent to your phone number.</label>
-      <input
-        type="text"
-        name="phoneCode"
-        id="phoneCode"
-        pattern="[0-9]{6}"
-        placeholder="Enter the six digit code here."
-        title="Enter a six digit code sent to your phone."
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Email address here"
         required
         aria-required="true"
       />
 
-      <button type="submit" id="phoneCodeButton">verify.</button>
+      <button type="submit" id="loginButton">Send me secure link.</button>
     </form>
   </article>
 </div>
