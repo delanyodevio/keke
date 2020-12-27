@@ -10,9 +10,9 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    id="svg10"
-   width="300"
-   height="95"
-   viewBox="0 0 300 95"
+   width="150"
+   height="85"
+   viewBox="0 0 150 85"
    sodipodi:docname="shade.svg"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
   <metadata
@@ -54,8 +54,8 @@
      inkscape:label="Image"
      id="g18">
     <image
-       width="300"
-       height="95"
+       width="150"
+       height="85"
        preserveAspectRatio="none"
        style="image-rendering:optimizeQuality"
        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAB/wAAAIrCAYAAADiNOFaAAAPK3pUWHRSYXcgcHJvZmlsZSB0eXBl

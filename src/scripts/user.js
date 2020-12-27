@@ -9,8 +9,7 @@ const userId = user.dataset.userId;
 
 window.addEventListener("DOMContentLoaded", function () {
   setTimeout(function () {
-    centered.style.margin = "0";
-    loadingPage.classList.add("visually-hidden");
+    loadingPage.classList.add("disabled");
     loadingPage.setAttribute("aria-hidden", "true");
 
     user.classList.remove("visually-hidden");

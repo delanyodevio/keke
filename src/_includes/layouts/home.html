@@ -1,17 +1,19 @@
 {% extends 'layouts/base.html' %} {% set pageCriticalStyles = ['css/home.css']
 %} {% block content %}
 <div class="wrapper">
-  <article class="intro">
+  <article class="[ intro ][ full-bleed ]">
     <img src="{{ intro.image }}" alt="{{ intro.caption }}" class="radius" />
-
-    <div class="intro__content">
-      <h1 class="text-800 weight-bold">
-        {{ intro.eyebrow }}
-        <span class="weight-normal text-600">{{ intro.main }}</span>
-      </h1>
-
-      <p class="intro__summary">{{ intro.summary }}</p>
-      <a href="{{ intro.buttonUrl }}" class="button">{{ intro.buttonText }}</a>
+    <div class="container">
+      <div class="intro__content">
+        <h1 class="text-800 weight-bold">
+          {{ intro.eyebrow }}
+          <span class="weight-normal text-600">{{ intro.main }}</span>
+        </h1>
+        <p class="intro__summary">{{ intro.summary }}</p>
+        <a href="{{ intro.buttonUrl }}" class="button"
+          >{{ intro.buttonText }}</a
+        >
+      </div>
     </div>
   </article>
 
