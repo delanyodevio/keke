@@ -3,8 +3,8 @@ pageHeaderSummary = content %} {% set pageCriticalStyles = ['css/account.css']
 %} {% block content %}
 <div class="wrapper">
   <article>{% include "partials/page-header.html" %}</article>
-  <article id="emailVerified" class="visually-hidden" aria-hidden="true">
-    <div class="successMessage" id="successMessage" aria-hidden="true">
+  <article id="emailVerified" class="disabled">
+    <div class="successMessage" id="successMessage">
       <p>
         Email successfully verified! Welcome back. Please click on the link to
         continue.
@@ -14,12 +14,8 @@ pageHeaderSummary = content %} {% set pageCriticalStyles = ['css/account.css']
     <a class="button" id="loginReturnButton" href="/login">please login</a>
   </article>
 
-  <article
-    class="[ account ] [ visually-hidden ]"
-    id="newUser"
-    aria-hidden="true"
-  >
-    <div class="[ errorMessage ] [ visually-hidden ]" id="errorMessage"></div>
+  <article class="[ account ] [ disabled ]" id="newUser">
+    <div class="[ errorMessage ] [ disabled ]" id="errorMessage"></div>
     <!-- // signup form -->
     <form class="account-form" id="onboardForm">
       <label for="fullname">Your full name</label>

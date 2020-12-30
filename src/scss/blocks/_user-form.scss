@@ -1,0 +1,27 @@
+.user-form {
+  margin-top: get-size("500");
+  padding: get-size("400");
+  border: 0.2rem solid get-color("primary-glare");
+  border-radius: 0.25rem;
+
+  input {
+    margin-bottom: get-size("500");
+    padding: 0.3rem;
+  }
+
+  .buttonContainer {
+    display: flex;
+    align-items: start;
+
+    button {
+      margin-left: 0.5rem;
+    }
+  }
+
+  button,
+  .button {
+    padding: 0.3rem 0.5rem;
+    cursor: pointer;
+    text-align: center;
+  }
+}

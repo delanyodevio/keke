@@ -24,26 +24,22 @@ if (auth.isSignInWithEmailLink(window.location.href)) {
         window.localStorage.setItem("userId", result.user.uid);
         window.localStorage.setItem("userEmail", result.user.email);
 
-        newUser.classList.remove("visually-hidden");
-        newUser.removeAttribute("aria-hidden");
+        newUser.classList.remove("disabled");
 
         let emailInput = document.getElementById("email");
         emailInput.value = result.user.email;
 
-        emailVerified.classList.add("visually-hidden");
-        emailVerified.setAttribute("aria-hidden", "true");
+        emailVerified.classList.add("disabled");
       } else {
-        emailVerified.classList.remove("visually-hidden");
-        emailVerified.removeAttribute("aria-hidden");
+        emailVerified.classList.remove("disabled");
 
         window.localStorage.setItem("userId", result.user.uid);
 
-        newUser.classList.add("visually-hidden");
-        newUser.setAttribute("aria-hidden", "true");
+        newUser.classList.add("disabled");
       }
     })
     .catch(function (error) {
-      errorMessage.classList.remove("visually-hidden");
+      errorMessage.classList.remove("disabled");
       errorMessage.innerHTML = `<p>${error.message}</p>`;
     });
 }
@@ -98,8 +94,8 @@ onboardForm.addEventListener("submit", function (event) {
 
       listRef.set(username).then(function () {
         onboardForm.reset();
-        signupModal.classList.add("visually-hidden");
-        successModal.classList.remove("visually-hidden");
+        signupModal.classList.add("disabled");
+        successModal.classList.remove("disabled");
 
         window.localStorage.removeItem("userId");
         window.localStorage.removeItem("userEmail");
@@ -107,7 +103,7 @@ onboardForm.addEventListener("submit", function (event) {
       });
     })
     .catch(function (ex) {
-      errorMessage.classList.remove("visually-hidden");
+      errorMessage.classList.remove("disabled");
       errorMessage.innerHTML = `<p>${ex.message}</p>`;
     });
 });

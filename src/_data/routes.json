@@ -26,7 +26,7 @@
       "text": "Logout.",
       "url": "/",
       "unique": "logoutUrl",
-      "classify": "visually-hidden",
+      "classify": "disabled",
       "aria_hidden": "true"
     }
   ],
@@ -56,11 +56,6 @@
   ],
   "user": [
     {
-      "text": "Home",
-      "url": "#home",
-      "unique": "accountHome"
-    },
-    {
       "text": "Funds",
       "url": "#funds",
       "unique": "fundsUrl"
@@ -69,8 +64,7 @@
       "text": "Payments",
       "url": "#payments",
       "unique": "paymentsUrl",
-      "classify": "visually-hidden",
-      "aria-hidden": "true"
+      "classify": "disabled"
     },
     {
       "text": "Supports",

@@ -1,56 +1,34 @@
-const homeUrl = document.querySelector("#accountHome");
 const fundUrl = document.querySelector("#fundsUrl");
 const paymentUrl = document.querySelector("#paymentsUrl");
 const settingUrl = document.querySelector("#settingsUrl");
 const suggestionUrl = document.querySelector("#suggestionsUrl");
 
-const homeId = document.querySelector("#front");
 const fundId = document.querySelector("#fund");
 const paymentId = document.querySelector("#payment");
 const settingId = document.querySelector("#setting");
 const suggestionId = document.querySelector("#suggestions");
 
-const homeHeadline = document.querySelector("#homeHeadline");
 const fundHeadline = document.querySelector("#fundHeadline");
 const paymentHeadline = document.querySelector("#paymentHeadline");
 const supportHeadline = document.querySelector("#supportHeadline");
 const settingHeadline = document.querySelector("#settingHeadline");
 
 function visuallyHideElement(element) {
-  element.classList.add("visually-hidden");
-  element.setAttribute("aria-hidden", "true");
+  element.classList.add("disabled");
 }
 
 function visuallyShowElement(element) {
-  element.classList.remove("visually-hidden");
-  element.removeAttribute("aria-hidden");
+  element.classList.remove("disabled");
 }
-
-homeUrl.addEventListener("click", function () {
-  visuallyShowElement(homeId);
-  visuallyShowElement(homeHeadline);
-
-  visuallyHideElement(settingId);
-  visuallyHideElement(fundId);
-  visuallyHideElement(paymentId);
-  visuallyHideElement(suggestionId);
-
-  visuallyHideElement(fundHeadline);
-  visuallyHideElement(paymentHeadline);
-  visuallyHideElement(supportHeadline);
-  visuallyHideElement(settingHeadline);
-});
 
 fundUrl.addEventListener("click", function () {
   visuallyShowElement(fundId);
   visuallyShowElement(fundHeadline);
 
   visuallyHideElement(settingId);
-  visuallyHideElement(homeId);
   visuallyHideElement(paymentId);
   visuallyHideElement(suggestionId);
 
-  visuallyHideElement(homeHeadline);
   visuallyHideElement(paymentHeadline);
   visuallyHideElement(supportHeadline);
   visuallyHideElement(settingHeadline);
@@ -62,11 +40,9 @@ paymentUrl.addEventListener("click", function () {
 
   visuallyHideElement(fundId);
   visuallyHideElement(settingId);
-  visuallyHideElement(homeId);
   visuallyHideElement(suggestionId);
 
   visuallyHideElement(fundHeadline);
-  visuallyHideElement(homeHeadline);
   visuallyHideElement(supportHeadline);
   visuallyHideElement(settingHeadline);
 });
@@ -78,11 +54,9 @@ suggestionUrl.addEventListener("click", function () {
   visuallyHideElement(settingId);
   visuallyHideElement(fundId);
   visuallyHideElement(paymentId);
-  visuallyHideElement(homeId);
 
   visuallyHideElement(fundHeadline);
   visuallyHideElement(paymentHeadline);
-  visuallyHideElement(homeHeadline);
   visuallyHideElement(settingHeadline);
 });
 
@@ -90,13 +64,76 @@ settingUrl.addEventListener("click", function () {
   visuallyShowElement(settingId);
   visuallyShowElement(settingHeadline);
 
-  visuallyHideElement(homeId);
   visuallyHideElement(fundId);
   visuallyHideElement(paymentId);
   visuallyHideElement(suggestionId);
 
-  visuallyHideElement(homeHeadline);
   visuallyHideElement(fundHeadline);
   visuallyHideElement(paymentHeadline);
   visuallyHideElement(supportHeadline);
+});
+
+// Opens the fund form
+let addFundLink = document.getElementById("addFundLink");
+let cancelFundButton = document.getElementById("cancelFundButton");
+
+addFundLink.addEventListener("click", function () {
+  cancelFundButton.innerHTML = "Cancel";
+
+  createFundForm.classList.remove("disabled");
+});
+
+// Cancels the add fun operation
+cancelFundButton.addEventListener("click", function (event) {
+  event.stopPropagation();
+
+  cancelFundButton.innerHTML = "Cancelling...";
+  createFundForm.reset();
+  window.localStorage.removeItem("endingDate");
+
+  setTimeout(function () {
+    createFundForm.classList.add("disabled");
+  }, 4000);
+});
+
+/**
+ * Listen to lockYears input field, takes the value
+ * and determines the ending date
+ * Eg, lockYears = 5
+ * endingYear = lockYears + today.getFullYear().
+ * Then populates the values into the input field.
+ */
+let endsAtInput = document.getElementById("endsAt");
+let createdAtInput = document.getElementById("createdAt");
+let lockYearsInput = document.getElementById("lockYears");
+
+lockYearsInput.addEventListener("input", function () {
+  let today = new Date(Date.now());
+  let year = today.getFullYear();
+  let month = today.getMonth() + 1;
+  let day = today.getDate();
+  let lockYears = lockYearsInput.value;
+  let endYear = parseInt(lockYears) + parseInt(year);
+
+  createdAtInput.value = `Today, ${day}/${month}/${year}`;
+
+  if (!isNaN(endYear)) {
+    endsAtInput.value = `${day}/${month}/${endYear}`;
+    window.localStorage.setItem("endingDate", `${endYear}, ${month}, ${day}`);
+  } else if (endYear === parseInt(year)) {
+    endsAtInput.value = `Toady, ${day}/${month}/${year}`;
+  } else {
+    endsAtInput.value = `Toady, ${day}/${month}/${year}`;
+  }
+});
+
+let loadingPage = document.getElementById("loadingPage");
+let userPage = document.getElementById("userPage");
+
+window.addEventListener("DOMContentLoaded", function () {
+  setTimeout(function () {
+    loadingPage.classList.add("disabled");
+
+    userPage.classList.remove("disabled");
+  }, 7000);
 });

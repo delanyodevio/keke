@@ -35,15 +35,12 @@ signup.addEventListener("submit", function (event) {
     .then(function () {
       window.localStorage.setItem("emailForSignIn", email);
 
-      successMessage.removeAttribute("aria-hidden");
-      successMessage.classList.remove("visually-hidden");
+      successMessage.classList.remove("disabled");
 
-      signup.classList.add("visually-hidden");
-      signup.setAttribute("aria-hidden", "true");
+      signup.classList.add("disabled");
     })
     .catch(function (error) {
       errorMessage.innerHTML = `<p>${error.message}</p>`;
-      errorMessage.classList.remove("visually-hidden");
-      errorMessage.removeAttribute("aria-hidden");
+      errorMessage.classList.remove("disabled");
     });
 });

@@ -24,24 +24,21 @@ if (auth.isSignInWithEmailLink(window.location.href)) {
         window.localStorage.setItem("userId", result.user.uid);
         window.localStorage.setItem("userEmail", result.user.email);
 
-        onboardForm.classList.remove("visually-hidden");
-        onboardForm.removeAttribute("aria-hidden");
+        onboardForm.classList.remove("disabled");
 
         let emailInput = document.getElementById("email");
         emailInput.value = result.user.email;
       } else {
         let loginReturnMessage = document.getElementById("loginReturnMessage");
-        loginReturnMessage.classList.remove("visually-hidden");
-        loginReturnMessage.removeAttribute("aria-hidden");
+        loginReturnMessage.classList.remove("disabled");
 
         window.localStorage.setItem("userId", result.user.uid);
 
-        onboardForm.classList.add("visually-hidden");
-        onboardForm.setAttribute("aria-hidden", "true");
+        onboardForm.classList.add("disabled");
       }
     })
     .catch(function (error) {
-      errorMessage.classList.remove("visually-hidden");
+      errorMessage.classList.remove("disabled");
       errorMessage.innerHTML = `<p>${error.message}</p>`;
     });
 }
@@ -94,8 +91,8 @@ onboardForm.addEventListener("submit", function (event) {
 
       listRef.set(username).then(function () {
         onboardForm.reset();
-        signupModal.classList.add("visually-hidden");
-        successModal.classList.remove("visually-hidden");
+        signupModal.classList.add("disabled");
+        successModal.classList.remove("disabled");
 
         window.localStorage.removeItem("userId");
         window.localStorage.removeItem("userEmail");
@@ -103,7 +100,7 @@ onboardForm.addEventListener("submit", function (event) {
       });
     })
     .catch(function (ex) {
-      errorMessage.classList.remove("visually-hidden");
+      errorMessage.classList.remove("disabled");
       errorMessage.innerHTML = `<p>${ex.message}</p>`;
     });
 });

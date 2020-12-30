@@ -9,89 +9,142 @@
   </article>
 </div>
 
-<div
-  class="[ user ] [ visually-hidden ]"
-  id="user"
-  data-userId="{{ user }}"
-  aria-hidden="true"
->
+<div class="user disabled" id="userPage">
   {% include "partials/user-header.html" %}
-  <div class="[ user__content ] [ wrapper ]" id="user" data-user="{{ user }}">
-    <h1 id="homeHeadline" class="text-600 weight-bold md:text-700 lg:text-800">
-      Welcome, <span id="displayName"></span>
-      <span
-        class="[ weight-normal text-300 md:text-400 lg:text-500 ] [ block ]"
-      >
-        Basic info about your account
-      </span>
-    </h1>
-    <h1
-      id="fundHeadline"
-      class="[ text-600 weight-bold md:text-700 lg:text-800 ] [ visually-hidden ]"
-      aria-hidden="true"
-    >
-      Your funds
-      <span
-        class="[ weight-normal text-300 md:text-400 lg:text-500 ] [ block ]"
-      >
-        Information about your funds
-      </span>
-    </h1>
-    <h1
-      id="paymentHeadline"
-      class="[ text-600 weight-bold md:text-700 lg:text-800 ] [ visually-hidden ]"
-      aria-hidden="true"
-    >
-      Payment panel
-      <span
-        class="[ weight-normal text-300 md:text-400 lg:text-500 ] [ block ]"
-      >
-        everything concerning your payments
-      </span>
-    </h1>
-    <h1
-      id="supportHeadline"
-      class="[ text-600 weight-bold md:text-700 lg:text-800 ] [ visually-hidden ]"
-      aria-hidden="true"
-    >
-      Get supports
-      <span
-        class="[ weight-normal text-300 md:text-400 lg:text-500 ] [ block ]"
-      >
-        We are here to help you with all your needs
-      </span>
-    </h1>
-    <h1
-      id="settingHeadline"
-      class="[ text-600 weight-bold md:text-700 lg:text-800 ] [ visually-hidden ]"
-      aria-hidden="true"
-    >
-      Configure your account
-      <span
-        class="[ weight-normal text-300 md:text-400 lg:text-500 ] [ block ]"
-      >
-        you can update your details here.
-      </span>
-    </h1>
-    <article id="front">
-      <p>Home page</p>
-    </article>
 
-    <article id="fund" class="visually-hidden" aria-hidden="true">
-      <p>Funds PAGE</p>
-    </article>
+  <div class="wrapper margin-top">
+    <!-- Headings -->
+    <div>
+      <h1 id="fundHeadline" class="text-600">Welcome Back!</h1>
 
-    <article id="payment" class="visually-hidden" aria-hidden="true">
-      <p>Payment PAGE</p>
-    </article>
+      <h1 id="paymentHeadline" class="disabled text-600">Payment panel</h1>
 
-    <article id="setting" class="visually-hidden" aria-hidden="true">
-      <p>settings PAGE</p>
-    </article>
+      <h1 id="supportHeadline" class="disabled text-600">Get supports</h1>
 
-    <article id="suggestions" class="visually-hidden" aria-hidden="true">
-      <p>support PAGE</p>
-    </article>
+      <h1 id="settingHeadline" class="disabled text-600">
+        Configure your account
+      </h1>
+    </div>
+
+    <!-- User content -->
+    <div class="margin-top">
+      <article id="fund">
+        <div>
+          <h2 class="text-500">Personal info</h2>
+          <ul id="personalInfo" class="personalInfo"></ul>
+        </div>
+
+        <div>
+          <h2 class="text-500">Successor Info</h2>
+          <div class="successorInfo">
+            <p class="[ successorNotice ][ disabled ]">
+              You have not designated a successor yet. Please go to settings an
+              add a successor.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-500">Funds Info</h2>
+          <div id="fundsInfo" class="funds-info"></div>
+        </div>
+
+        <a href="#createFundForm" id="addFundLink" class="button margin-top">
+          Create New
+        </a>
+
+        <div class="successMessage disabled" id="addFundMessage">
+          <p>
+            Success! <span class="fund-name"></span> has been created. You can
+            start saving into it.
+          </p>
+        </div>
+        <form id="createFundForm" class="[ disabled ][ user-form ]">
+          <label for="fundName">Fund name</label>
+          <input
+            type="text"
+            name="fundName"
+            id="fundName"
+            required
+            pattern="[a-zA-Z ]+"
+            placeholder="Fund name here."
+            title="The name should not contain a number or a special character."
+            aria-required="true"
+          />
+
+          <label id="lockYearsMessage" for="lockYears">
+            Lock Year(s).
+            <span class="tip weight-normal text-400">
+              Number of year(s) to lock your fund. Minimum of one year 20 years
+              max.
+            </span>
+          </label>
+          <input
+            type="number"
+            name="lockYears"
+            id="lockYears"
+            min="1"
+            max="20"
+            title="Number of year(s) to lock your fund. Minimum of one year, 20 years max."
+            pattern="[0-9]"
+          />
+
+          <label for="fundPhone">
+            Deposit phone number
+            <span class="tip weight-normal text-400">
+              Example, 024XXXXXXX
+            </span>
+          </label>
+          <input
+            type="tel"
+            name="fundPhone"
+            id="fundPhone"
+            pattern="0[0-9]{9}"
+            maxlength="10"
+            minlength="10"
+            placeholder="phone number here."
+            required
+            title="Ten digit local phone number beginning with zero(0)"
+          />
+
+          <label for="createdAt">Date created</label>
+          <input
+            type="text"
+            name="createdAt"
+            id="createdAt"
+            disabled
+            aria-disabled="true"
+          />
+
+          <label for="endsAt">Ending Date</label>
+          <input
+            type="text"
+            name="endsAt"
+            id="endsAt"
+            disabled
+            value=""
+            aria-disabled="true"
+          />
+
+          <div class="buttonContainer">
+            <div class="button" id="cancelFundButton" role="button">Cancel</div>
+            <button id="createFundButton">Create</button>
+          </div>
+        </form>
+      </article>
+
+      <article id="payment" class="disabled">
+        <p>Payment PAGE</p>
+      </article>
+
+      <article id="setting" class="disabled">
+        <p>settings PAGE</p>
+      </article>
+
+      <article id="suggestions" class="disabled">
+        <p>support PAGE</p>
+      </article>
+    </div>
   </div>
 </div>
 {% endblock %}

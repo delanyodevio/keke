@@ -3,16 +3,16 @@ pageHeaderSummary = content %} {% set pageCriticalStyles = ['css/account.css']
 %} {% block content %}
 <div class="wrapper">
   <article>
-    <div class="[ errorMessage ] [ visually-hidden ]" id="errorMessage"></div>
+    <div class="[ errorMessage ] [ disabled ]" id="errorMessage"></div>
   </article>
 
   <article class="account" id="signupPage">
     <div id="pageHeader">{% include "partials/page-header.html" %}</div>
 
-    <div class="[ errorMessage ] [ visually-hidden ]" id="errorMessage"></div>
+    <div class="[ errorMessage ] [ disabled ]" id="errorMessage"></div>
 
     <!-- // signup form -->
-    <form class="[ account-form ] [ visually-hidden ]" id="onboardForm">
+    <form class="[ account-form ] [ disabled ]" id="onboardForm">
       <label for="fullname">Your full name</label>
       <input
         type="text"
@@ -38,8 +38,6 @@ pageHeaderSummary = content %} {% set pageCriticalStyles = ['css/account.css']
         placeholder="Phone number here"
         required
         pattern="0[0-9]{9}"
-        minlength="10"
-        maxlength="10"
         title="Ten digit local phone number beginning with zero(0)"
         aria-required="true"
       />
@@ -71,7 +69,7 @@ pageHeaderSummary = content %} {% set pageCriticalStyles = ['css/account.css']
       <button type="submit" id="signupButton">create account</button>
     </form>
 
-    <div class="visually-hidden" id="loginReturnMessage" aria-hidden="true">
+    <div class="disabled" id="loginReturnMessage" aria-hidden="true">
       <p>
         The email address already exist
         <a class="button" id="loginReturnButton" href="/login">please login</a>

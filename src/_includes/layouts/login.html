@@ -5,11 +5,7 @@ pageHeaderSummary = content %} {% set pageCriticalStyles = ['css/account.css']
   <article class="account">
     {% include "partials/page-header.html" %}
 
-    <div
-      class="[ successMessage ] [ visually-hidden ]"
-      id="successMessage"
-      aria-hidden="true"
-    >
+    <div class="[ successMessage ] [ disabled ]" id="successMessage">
       <p>
         Success. A message was sent to your email account with a link, click on
         the link and open it in this browser to continue.
@@ -17,11 +13,7 @@ pageHeaderSummary = content %} {% set pageCriticalStyles = ['css/account.css']
     </div>
 
     <form class="login-form" id="loginForm">
-      <div
-        class="[ errorMessage ] [ visually-hidden ]"
-        id="errorMessage"
-        aria-hidden="true"
-      ></div>
+      <div class="[ errorMessage ] [ disabled ]" id="errorMessage"></div>
 
       <label for="email">Enter your email address for a secure link.</label>
       <input
