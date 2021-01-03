@@ -5,14 +5,14 @@
 {% block content %}
 <div class="wrapper" id="loadingPage">
   <article class="[ centered ] [ text-800 weight-bold ]">
-    <p>Loading...</p>
+    <p>Working...</p>
   </article>
 </div>
 
 <div class="user disabled" id="userPage">
   {% include "partials/user-header.html" %}
 
-  <div class="wrapper margin-top">
+  <div class="wrapper margin-top-500">
     <!-- Headings -->
     <div>
       <h1 id="fundHeadline" class="text-600">Welcome Back!</h1>
@@ -27,38 +27,63 @@
     </div>
 
     <!-- User content -->
-    <div class="margin-top">
+    <div>
+      <!-- Fund Modal -->
       <article id="fund">
-        <div>
-          <h2 class="text-500">Personal info</h2>
-          <ul id="personalInfo" class="personalInfo"></ul>
-        </div>
-
-        <div>
-          <h2 class="text-500">Successor Info</h2>
-          <div class="successorInfo">
-            <p class="[ successorNotice ][ disabled ]">
-              You have not designated a successor yet. Please go to settings an
-              add a successor.
-            </p>
+        <!-- rendered funds  -->
+        <div class="funds-info section">
+          <h2 class="text-500">Funds</h2>
+          <div id="fundsInfo">
+            <!-- No fund created....else display info -->
+            <div class="[ message ] [ disabled ]" id="noFundCreated">
+              <p>
+                You have not created a fund yet. Take the add new button to get
+                started.
+              </p>
+            </div>
           </div>
         </div>
 
-        <div>
-          <h2 class="text-500">Funds Info</h2>
-          <div id="fundsInfo" class="funds-info"></div>
+        <!-- Action Buttons -->
+        <div class="fundBtnContainer">
+          <a href="#createFundForm" id="addFundLink" class="button text-400">
+            Add New
+          </a>
+
+          <a href="#recordsTable" class="button text-400" id="viewRecordLink">
+            View records
+          </a>
+
+          <a href="#depositForm" id="depositLink" class="button text-400"
+            >Deposit</a
+          >
+          <a href="#cashoutForm" class="button text-400" id="cashoutLink"
+            >cashout</a
+          >
         </div>
 
-        <a href="#createFundForm" id="addFundLink" class="button margin-top">
-          Create New
-        </a>
+        <!-- User account info -->
+        <div class="account-info">
+          <!-- Personal -->
+          <div class="section">
+            <h2 class="text-500">Personal</h2>
+            <ul id="personalInfo" class="personalInfo"></ul>
+          </div>
 
-        <div class="successMessage disabled" id="addFundMessage">
-          <p>
-            Success! <span class="fund-name"></span> has been created. You can
-            start saving into it.
-          </p>
+          <!-- successor -->
+          <div class="section">
+            <h2 class="text-500">Successor</h2>
+            <div class="successorInfo" id="successorInfo">
+              <div class="[ message ][ disabled ]" id="successorNotice">
+                <p>
+                  You have not designated a successor yet. Please go to settings
+                  an add a successor.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
+
         <form id="createFundForm" class="[ disabled ][ user-form ]">
           <label for="fundName">Fund name</label>
           <input
@@ -127,20 +152,117 @@
           />
 
           <div class="buttonContainer">
-            <div class="button" id="cancelFundButton" role="button">Cancel</div>
-            <button id="createFundButton">Create</button>
+            <div class="button text-400" id="cancelFundButton" role="button">
+              Cancel
+            </div>
+            <button id="createFundButton" class="text-400">Create</button>
           </div>
         </form>
+
+        <div class="successMessage disabled" id="addFundMessage">
+          <p>
+            Success! <span class="fund-name"></span> has been created. You can
+            start saving into it.
+          </p>
+        </div>
       </article>
 
+      <!-- Payment Modal -->
       <article id="payment" class="disabled">
         <p>Payment PAGE</p>
       </article>
 
-      <article id="setting" class="disabled">
-        <p>settings PAGE</p>
+      <!-- Setting Modal -->
+      <article id="setting" class="disabled flex">
+        <div>
+          <h3>Personal settings</h3>
+          <form id="personalForm" class="user-form">
+            <label for="personalName">Full name</label>
+            <input type="text" name="personalName" id="personalName" />
+
+            <label for="personalPhone">Phone number</label>
+            <input type="text" name="personalPhone" id="personalPhone" />
+
+            <label for="personalEmail">Email address</label>
+            <input type="email" name="personalEmail" id="personalEmail" />
+
+            <label for="personalCountry">Email address</label>
+            <input
+              type="email"
+              name="personalCountry"
+              id="personalCountry"
+              disabled
+              aria-disabled="true"
+            />
+
+            <button id="personalFormBtn">Update</button>
+
+            <div
+              class="[ message ][ disabled margin-top-400 ]"
+              id="personalUpdate"
+            >
+              <p>Successfully updated</p>
+            </div>
+          </form>
+        </div>
+
+        <div class="margin-top-600">
+          <h3>Successor settings</h3>
+          <div class="message margin-top-300">
+            <p>
+              By clicking "Update" bellow, I acknowledge that am authorizing
+              <span class="site-name">Keke<span>.</span>Money</span> to contact
+              the said successor in the event of death. I understand that this
+              appointment of a successor does not override legally binding
+              next-of-kin rules or estate laws of any relevant jurisdiction, and
+              does not create a binding will.
+            </p>
+          </div>
+
+          <form id="successorForm" class="user-form">
+            <label for="successorName">Successor name</label>
+            <input
+              type="text"
+              name="successorName"
+              id="successorName"
+              pattern="[a-zA-Z ]+"
+            />
+
+            <label for="successorPhone">Phone number</label>
+            <input
+              type="text"
+              name="successorPhone"
+              id="successorPhone"
+              pattern="0[0-9]{9}"
+            />
+
+            <label for="successorEmail">Email address</label>
+            <input type="email" name="successorEmail" id="successorEmail" />
+
+            <label for="successorRelation">
+              Relation
+              <span class="tip">Eg: Sister, Wife, etc</span>
+            </label>
+            <input
+              type="text"
+              name="successorRelation"
+              id="successorRelation"
+              pattern="[a-zA-Z ]+"
+            />
+
+            <button id="successorFormBtn">Update</button>
+
+            <div
+              class="[ message ][ disabled margin-top-400 ]"
+              id="successorUpdate"
+            >
+              <p>Successfully updated</p>
+            </div>
+          </form>
+        </div>
       </article>
 
+      <!-- Support modal -->
       <article id="suggestions" class="disabled">
         <p>support PAGE</p>
       </article>

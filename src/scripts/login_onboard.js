@@ -68,7 +68,7 @@ onboardForm.addEventListener("submit", function (event) {
 
   let signupButton = document.getElementById("signupButton");
 
-  signupButton.innerHTML = "Loading...";
+  signupButton.innerHTML = "working...";
 
   let fullname = makeSafeText(onboardForm.fullname.value);
   let username = window.localStorage.getItem("userId");

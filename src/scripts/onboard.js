@@ -65,7 +65,7 @@ phoneNumberInput.addEventListener("input", function () {
 onboardForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  signupButton.innerHTML = "Loading...";
+  signupButton.innerHTML = "working...";
 
   let fullname = makeSafeText(onboardForm.fullname.value);
   let username = window.localStorage.getItem("userId");

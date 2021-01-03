@@ -28,7 +28,7 @@ login.addEventListener("submit", function (event) {
 
   let email = login.email.value;
 
-  loginButton.innerHTML = "Loading...";
+  loginButton.innerHTML = "working...";
 
   auth
     .sendSignInLinkToEmail(email, actionCodeSettings)

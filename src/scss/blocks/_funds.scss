@@ -1,0 +1,8 @@
+.funds-info > div,
+.account-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  align-content: space-between;
+}

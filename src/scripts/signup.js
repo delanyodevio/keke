@@ -28,7 +28,7 @@ signup.addEventListener("submit", function (event) {
 
   let email = signup.email.value;
 
-  signupButton.innerHTML = "Loading...";
+  signupButton.innerHTML = "working...";
 
   auth
     .sendSignInLinkToEmail(email, actionCodeSettings)

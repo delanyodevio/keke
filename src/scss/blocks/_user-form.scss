@@ -12,16 +12,23 @@
   .buttonContainer {
     display: flex;
     align-items: start;
-
-    button {
-      margin-left: 0.5rem;
-    }
   }
 
   button,
   .button {
-    padding: 0.3rem 0.5rem;
     cursor: pointer;
-    text-align: center;
+    margin-right: get-size("500");
+  }
+}
+
+.fundBtnContainer {
+  display: flex;
+  align-items: start;
+  flex-wrap: wrap;
+
+  .button {
+    cursor: pointer;
+    margin-right: get-size("500");
+    margin-top: get-size("500");
   }
 }

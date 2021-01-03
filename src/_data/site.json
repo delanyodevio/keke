@@ -12,11 +12,8 @@
     }
   ],
   "phone": "233240489424",
-  "description": "is a service platform that lets you save and lock your money for a predetermined period of time.",
+  "description": "is a service platform that helps you create sustainable saving funds so that you can be consistent.",
   "logo": "/images/bg/favicon.svg",
   "caption": "Logo of Keke.Money",
-  "social": {
-    "twitter": "keke.money",
-    "facebook": "keke.money"
-  }
+  "social": { "twitter": "keke.money" }
 }

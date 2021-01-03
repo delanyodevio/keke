@@ -1,9 +1,11 @@
 const signupUrl = document.getElementById("signupUrl");
 const loginUrl = document.getElementById("loginUrl");
 const logoutUrl = document.getElementById("logoutUrl");
+const fundsInfo = document.getElementById("fundsInfo");
 
 const createFundForm = document.getElementById("createFundForm");
-const fundsInfo = document.getElementById("fundsInfo");
+const personalForm = document.getElementById("personalForm");
+const successorForm = document.getElementById("successorForm");
 
 auth.onAuthStateChanged(function (user) {
   if (user) {
@@ -17,18 +19,33 @@ auth.onAuthStateChanged(function (user) {
     // fetches and listens to a user.uid document in the users collection
     ref.onSnapshot(function (doc) {
       renderPersonalInfo(doc);
+
+      fundsCollection.onSnapshot(function (snap) {
+        renderFundInfo(snap);
+      });
+
+      let account = doc.data();
+
+      personalForm.personalName.value = account.name;
+      personalForm.personalEmail.value = account.email;
+      personalForm.personalPhone.value = account.phone;
+      personalForm.personalCountry.value = account.country;
+
+      if (account.successor != null) {
+        let successor = account.successor;
+        successorForm.successorName.value = successor.name;
+        successorForm.successorEmail = successor.email;
+        successorForm.successorPhone = successor.phone;
+        successorForm.successorRelation = successor.relation;
+      }
     });
 
-    fundsCollection.onSnapshot(function (snap) {
-      renderFundInfo(snap);
-    });
-
-    // creates a funds sub-collection
+    // creates/updates a funds sub-collection
     createFundForm.addEventListener("submit", function (event) {
       event.preventDefault();
 
       let createFundButton = document.getElementById("createFundButton");
-      createFundButton.innerHTML = "Creating...";
+      createFundButton.innerHTML = "working...";
 
       let name = createFundForm.fundName.value;
       let unique = name.replace(/\s+/g, "");
@@ -44,7 +61,6 @@ auth.onAuthStateChanged(function (user) {
         amount: 0,
         years: createFundForm.lockYears.value,
         phone: phone,
-        records: [],
         created: firebase.firestore.Timestamp.fromDate(new Date(Date.now())),
         ends: firebase.firestore.Timestamp.fromDate(new Date(endingDate)),
       };
@@ -65,7 +81,7 @@ auth.onAuthStateChanged(function (user) {
 
           setTimeout(function () {
             addFundMessage.classList.add("disabled");
-          }, 10000);
+          }, 5000);
 
           window.localStorage.removeItem("endingDate");
           createFundForm.reset();
@@ -81,6 +97,58 @@ auth.onAuthStateChanged(function (user) {
           }, 10000);
         });
     });
+
+    // Updates a user
+    personalForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      let personalFormBtn = document.getElementById("personalFormBtn");
+      personalFormBtn.innerHTML = "working...";
+
+      let name = personalForm.personalName.value;
+      let phone = personalForm.personalPhone.value;
+      let email = personalForm.personalEmail.value;
+
+      let data = { name: name, phone: phone, email: email };
+
+      ref.set(data, { merge: true }).then(function () {
+        personalFormBtn.innerHTML = "update";
+
+        let personalUpdate = document.getElementById("personalUpdate");
+        personalUpdate.classList.remove("disabled");
+
+        setTimeout(function () {
+          personalUpdate.classList.add("disabled");
+        }, 5000);
+      });
+    });
+
+    // adds/updates a successor
+    successorForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      let successorFormBtn = document.getElementById("successorFormBtn");
+      successorFormBtn.innerHTML = "working...";
+
+      let name = successorForm.successorName.value;
+      let email = successorForm.successorEmail.value;
+      let phone = successorForm.successorPhone.value;
+      let relation = successorForm.successorRelation.value;
+
+      let data = { name: name, email: email, phone: phone, relation: relation };
+
+      ref.set({ successor: data }, { merge: true }).then(function () {
+        let successorUpdate = document.getElementById("successorUpdate");
+
+        successorFormBtn.innerHTML = "update";
+
+        successorUpdate.classList.remove("disabled");
+
+        setTimeout(function () {
+          successorUpdate.classList.add("disabled");
+        }, 5000);
+      });
+    });
   } else {
     signupUrl.classList.remove("disabled");
     loginUrl.classList.remove("disabled");
@@ -90,28 +158,37 @@ auth.onAuthStateChanged(function (user) {
   }
 });
 
-// Render user basic info
+// Render user account info
 function renderPersonalInfo(doc) {
   let personalInfo = document.getElementById("personalInfo");
   let successorInfo = document.getElementById("successorInfo");
-  let successorNotice = document.querySelector(".successorNotice");
+  let successorNotice = document.getElementById("successorNotice");
+
+  let user = doc.data();
+
+  let countryName = user.country.replace(/\s+/g, "").toLowerCase();
+  let countryRef = store.collection("countries").doc(countryName);
+
+  countryRef.get().then(function (country) {
+    window.localStorage.setItem("currency", country.data().currency);
+  });
 
   personalInfo.innerHTML = `
-    <li>Name: <span>${doc.data().name}</span></li>
-    <li>Contact: <span>${doc.data().phone}</span></li>
-    <li>Email: <span>${doc.data().email}</span></li>
-    <li>Country: <span>${doc.data().country}</span></li>
+    <li>${user.name}</li>
+    <li>${user.phone}</li>
+    <li>${user.email}</li>
+    <li>${user.country}</li>
     `;
 
-  if (doc.data().successor == null) {
+  if (user.successor == null) {
     successorNotice.classList.remove("disabled");
   } else {
-    successorInfo.innerHTML += `
-      <ul>
-      <li><span>Name:</span> ${doc.data().successor.name}</li>
-      <li><span>Relation:</span> ${doc.data().successor.relation}</li>
-      <li><span>Contact:</span> ${doc.data().successor.phone}</li>
-      <li><span>Email:</span> ${doc.data().successor.email}</li>
+    successorInfo.innerHTML = `
+      <ul class="successor">
+        <li>${user.successor.name}</li>
+        <li>${user.successor.relation}</li>
+        <li>${user.successor.phone}</li>
+        <li>${user.successor.email}</li>
       </ul>
       `;
 
@@ -121,44 +198,48 @@ function renderPersonalInfo(doc) {
 
 // Render user funds
 function renderFundInfo(snapshot) {
+  let noFundCreated = document.getElementById("noFundCreated");
   let html = "";
+  let currency = window.localStorage.getItem("currency");
 
-  snapshot.forEach(function (doc) {
-    let fund = doc.data();
+  if (snapshot != null) {
+    noFundCreated.classList.add("disabled");
 
-    let lockClass = fund.lock ? "locked" : "unlocked";
-    let WithdrawMessage = fund.lock ? "locked" : "Withdraw";
+    snapshot.forEach(function (doc) {
+      let fund = doc.data();
 
-    let dateCreated = fund.created.toDate();
-    let createdYear = dateCreated.getFullYear();
-    let createdMonth = dateCreated.getMonth();
-    let createdDay = dateCreated.getDate();
+      let lockClass = fund.lock ? "locked" : "unlocked";
+      let lockMessage = fund.lock ? "Fund locked" : "Fund Unlocked";
 
-    let dateEnded = fund.ends.toDate();
-    let endYear = dateEnded.getFullYear();
-    let endMonth = dateEnded.getMonth();
-    let endDay = dateEnded.getDate();
+      let dateCreated = fund.created.toDate();
+      let createdYear = dateCreated.getFullYear();
+      let createdMonth = dateCreated.getMonth();
+      let createdDay = dateCreated.getDate();
 
-    let ul = `
-      <ul class="eachFund">
-        <li><h3 class="text-400 weight-normal"></span>${fund.name.toUpperCase()}</h3></li>
-        <li><span>Amount: </span>${fund.amount}</li>
-        <li><span>Locking: </span>${fund.years} year(s)</li>
-        <li><span>Date Created: </span>${createdDay}/${createdMonth}/${createdYear}</li>
-        <li><span>Ending date: </span>${endDay}/${endMonth}/${endYear}</li>
-        <li><span>Phone: </span>${fund.phone}</li>
-      </ul>
-      <a href="${doc.id}" class="button">View records</a>
-      <a href="${doc.id}deposit" class="button">Deposit</a>
-      <a href="${
-        doc.id
-      }cashout" class="[ ${lockClass} ][ button ]">${WithdrawMessage}</a>
-      `;
+      let dateEnded = fund.ends.toDate();
+      let endYear = dateEnded.getFullYear();
+      let endMonth = dateEnded.getMonth();
+      let endDay = dateEnded.getDate();
 
-    html += ul;
-  });
+      let ul = `
+        <ul class="eachFund">
+          <li class="heading">${fund.name.toUpperCase()}</li>
+          <li>${currency} ${fund.amount}</li>
+          <li>${fund.years}year(s)</li>
+          <li>Created on, ${createdDay}/${createdMonth}/${createdYear}</li>
+          <li>Ending at, ${endDay}/${endMonth}/${endYear}</li>
+          <li>${fund.phone}</li>
+          <li  class="${lockClass}">${lockMessage}</li>
+        </ul>
+        `;
 
-  fundsInfo.innerHTML = html;
+      html += ul;
+    });
+
+    fundsInfo.innerHTML = html;
+  } else {
+    noFundCreated.classList.remove("disabled");
+  }
 }
 
 // logging out

@@ -11,3 +11,13 @@
     }
   }
 }
+
+.message {
+  padding: get-size("400");
+  border: 2px dashed get-color("primary");
+
+  p {
+    margin: 0;
+    max-width: 40ch;
+  }
+}

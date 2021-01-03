@@ -87,13 +87,13 @@ addFundLink.addEventListener("click", function () {
 cancelFundButton.addEventListener("click", function (event) {
   event.stopPropagation();
 
-  cancelFundButton.innerHTML = "Cancelling...";
+  cancelFundButton.innerHTML = "working...";
   createFundForm.reset();
   window.localStorage.removeItem("endingDate");
 
   setTimeout(function () {
     createFundForm.classList.add("disabled");
-  }, 4000);
+  }, 3000);
 });
 
 /**
@@ -120,13 +120,15 @@ lockYearsInput.addEventListener("input", function () {
   if (!isNaN(endYear)) {
     endsAtInput.value = `${day}/${month}/${endYear}`;
     window.localStorage.setItem("endingDate", `${endYear}, ${month}, ${day}`);
-  } else if (endYear === parseInt(year)) {
+  } else if (endYear == parseInt(year)) {
     endsAtInput.value = `Toady, ${day}/${month}/${year}`;
   } else {
     endsAtInput.value = `Toady, ${day}/${month}/${year}`;
   }
 });
 
+// Toggles between the loading... interface and the content
+// rendering interface.
 let loadingPage = document.getElementById("loadingPage");
 let userPage = document.getElementById("userPage");
 
@@ -135,5 +137,5 @@ window.addEventListener("DOMContentLoaded", function () {
     loadingPage.classList.add("disabled");
 
     userPage.classList.remove("disabled");
-  }, 7000);
+  }, 5000);
 });

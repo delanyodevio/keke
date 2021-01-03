@@ -1,7 +1,7 @@
 .button {
   border-radius: 0.25rem;
   display: inline-block;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.8rem;
   background-color: get-color("tertiary");
   color: get-color("dark-shade");
   border: 2px solid;
@@ -20,5 +20,13 @@
   &[data-variant="ghost"] {
     background: transparent;
     color: get-color("quaternary-glare");
+  }
+
+  span {
+    color: get-color("light");
+    background-color: get-color("primary");
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.25rem;
+    margin-bottom: 0.5rem;
   }
 }
