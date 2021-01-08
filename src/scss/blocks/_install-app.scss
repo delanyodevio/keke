@@ -1,0 +1,17 @@
+.installAppFlow {
+  font-weight: normal;
+  font-size: get-size("400");
+  padding: get-size("400");
+  border: 0.15rem dashed get-color("primary");
+  margin-bottom: get-size("500");
+
+  h1 {
+    font-size: get-size("500");
+  }
+
+  .buttonContainer {
+    > :last-child {
+      margin-left: get-size("400");
+    }
+  }
+}

@@ -5,7 +5,7 @@
 {% block content %}
 <div class="wrapper" id="loadingPage">
   <article class="[ centered ] [ text-800 weight-bold ]">
-    <p>Working...</p>
+    <p>WORKING...</p>
   </article>
 </div>
 
@@ -13,9 +13,25 @@
   {% include "partials/user-header.html" %}
 
   <div class="wrapper margin-top-500">
+    <!-- Installing app flow -->
+    <div class="installAppFlow" id="installAppFlow">
+      <h1>
+        Install <span class="site-name">Keke<span>.</span>Money</span> on your
+        device as app.
+      </h1>
+      <p>
+        Installing uses almost no storage and provide a quick easy way to return
+        to this place.
+      </p>
+      <div class="buttonContainer">
+        <button class="button" id="notNowBtn">Not Now</button>
+        <button class="button" id="installBtnPrime">Install app</button>
+      </div>
+    </div>
+
     <!-- Headings -->
     <div>
-      <h1 id="fundHeadline" class="text-600">Welcome Back!</h1>
+      <h1 id="fundHeadline" class="text-600">Welcome.</h1>
 
       <h1 id="paymentHeadline" class="disabled text-600">Payment panel</h1>
 
@@ -33,15 +49,7 @@
         <!-- rendered funds  -->
         <div class="funds-info section">
           <h2 class="text-500">Funds</h2>
-          <div id="fundsInfo">
-            <!-- No fund created....else display info -->
-            <div class="[ message ] [ disabled ]" id="noFundCreated">
-              <p>
-                You have not created a fund yet. Take the add new button to get
-                started.
-              </p>
-            </div>
-          </div>
+          <div id="fundsInfo"></div>
         </div>
 
         <!-- Action Buttons -->
@@ -50,7 +58,7 @@
             Add New
           </a>
 
-          <a href="#recordsTable" class="button text-400" id="viewRecordLink">
+          <a href="#records" class="button text-400" id="viewRecordLink">
             View records
           </a>
 
@@ -63,7 +71,7 @@
         </div>
 
         <!-- User account info -->
-        <div class="account-info">
+        <div class="[ account-info ][ margin-top-600 ]">
           <!-- Personal -->
           <div class="section">
             <h2 class="text-500">Personal</h2>
@@ -84,6 +92,7 @@
           </div>
         </div>
 
+        <!-- Create Fund form -->
         <form id="createFundForm" class="[ disabled ][ user-form ]">
           <label for="fundName">Fund name</label>
           <input
@@ -157,13 +166,153 @@
             </div>
             <button id="createFundButton" class="text-400">Create</button>
           </div>
+
+          <div class="message margin-top-400 disabled" id="addFundSuccess">
+            Fund successfully created. Please click
+            <a href="/" id="addFundDone">Finish</a>
+            to continue. Take the deposit button to start depositing.
+          </div>
         </form>
 
-        <div class="successMessage disabled" id="addFundMessage">
-          <p>
-            Success! <span class="fund-name"></span> has been created. You can
-            start saving into it.
-          </p>
+        <!-- Withdrawal/Cashout form -->
+        <form id="cashoutForm" class="[ user-form ][ disabled ]">
+          <h3 class="margin-bottom-400">Cashout Form</h3>
+          <div class="[ payment-method ] [ margin-bottom-400 ]">
+            <p>Pick a payment method.</p>
+
+            <label for="cashoutMTN">
+              <img src="/images/platforms/mtngh.webp" />
+              <span class="radio__input">
+                <input type="radio" name="cashoutMethod" id="cashoutMTN" />
+                <span class="radio__control"></span>
+              </span>
+            </label>
+
+            <label for="cashoutVodafone">
+              <img src="/images/platforms/vodafonegh.webp" />
+              <span class="radio__input">
+                <input type="radio" name="cashoutMethod" id="cashoutVodafone" />
+                <span class="radio__control"></span>
+              </span>
+            </label>
+
+            <label for="cashoutTigo">
+              <img src="/images/platforms/airteltigo.webp" />
+              <span class="radio__input">
+                <input type="radio" name="cashoutMethod" id="cashoutTigo" />
+                <span class="radio__control"></span>
+              </span>
+            </label>
+          </div>
+
+          <label for="cashoutFund">Enter the fund name</label>
+          <input type="text" name="cashoutFund" id="cashoutFund" required />
+
+          <label for="cashoutAmount">Enter amount</label>
+          <input type="text" name="cashoutAmount" id="cashoutAmount" required />
+
+          <label for="cashoutPhone">Phone number</label>
+          <input
+            type="text"
+            name="cashoutPhone"
+            id="cashoutPhone"
+            disabled
+            aria-disabled="true"
+          />
+
+          <div class="buttonContainer">
+            <div class="button text-400" id="cancelCashout" role="button">
+              cancel
+            </div>
+            <button id="cashoutBtn" class="text-400">Deposit</button>
+          </div>
+
+          <div class="message margin-top-500" id="cashoutSuccess">
+            Successfully done. Please click
+            <a href="/" id="cashoutDone">Finish</a>
+            to continue.
+          </div>
+
+          <div
+            class="errorMessage margin-top-500 margin-bottom-0"
+            id="cashoutError"
+          >
+            Error doing cashout. Amount specified is greater than the total
+            amount in the found, or the locking year is still active. Please
+            make sure you specified the right amount and the locking year is
+            due.
+          </div>
+        </form>
+
+        <!-- Deposit form -->
+        <form id="depositForm" class="[ user-form ][ disabled ]">
+          <h3 class="margin-bottom-400">Deposit Form</h3>
+          <div class="[ payment-method ] [ margin-bottom-400 ]">
+            <p>Pick a payment method.</p>
+
+            <label for="depositMTN">
+              <img src="/images/platforms/mtngh.webp" />
+              <span class="radio__input">
+                <input type="radio" name="depositMethod" id="depositMTN" />
+                <span class="radio__control"></span>
+              </span>
+            </label>
+
+            <label for="depositVodafone">
+              <img src="/images/platforms/vodafonegh.webp" />
+              <span class="radio__input">
+                <input type="radio" name="depositMethod" id="depositVodafone" />
+                <span class="radio__control"></span>
+              </span>
+            </label>
+
+            <label for="depositTigo">
+              <img src="/images/platforms/airteltigo.webp" />
+              <span class="radio__input">
+                <input type="radio" name="depositMethod" id="depositTigo" />
+                <span class="radio__control"></span>
+              </span>
+            </label>
+          </div>
+
+          <label for="depositFund">Enter the fund name</label>
+          <input type="text" name="depositFund" id="depositFund" required />
+
+          <label for="depositAmount">Enter amount</label>
+          <input type="text" name="depositAmount" id="depositAmount" required />
+
+          <label for="depositPhone">Phone number</label>
+          <input
+            type="text"
+            name="depositPhone"
+            id="depositPhone"
+            disabled
+            aria-disabled="true"
+          />
+
+          <div class="buttonContainer">
+            <div class="button text-400" id="cancelDeposit" role="button">
+              cancel
+            </div>
+            <button id="depositBtn" class="text-400">Deposit</button>
+          </div>
+
+          <div class="message margin-top-400" id="depositSuccess">
+            Successfully done. Please click
+            <a href="/" id="depositDone">Finish</a>
+            to continue.
+          </div>
+        </form>
+
+        <!-- Records -->
+        <div class="[ records ][ disabled margin-top-600 ]" id="records">
+          <h3>Deposit/withdrawal records.</h3>
+
+          <div class="recordsTable" id="recordsTable"></div>
+
+          <div class="button margin-top-400" id="closeRecords" role="button">
+            Close
+          </div>
         </div>
       </article>
 
@@ -173,92 +322,94 @@
       </article>
 
       <!-- Setting Modal -->
-      <article id="setting" class="disabled flex">
-        <div>
-          <h3>Personal settings</h3>
-          <form id="personalForm" class="user-form">
-            <label for="personalName">Full name</label>
-            <input type="text" name="personalName" id="personalName" />
+      <article id="setting" class="disabled margin-top-600">
+        <div class="setting-modal">
+          <div>
+            <h3>Personal settings</h3>
+            <form id="personalForm" class="user-form">
+              <label for="personalName">Full name</label>
+              <input type="text" name="personalName" id="personalName" />
 
-            <label for="personalPhone">Phone number</label>
-            <input type="text" name="personalPhone" id="personalPhone" />
+              <label for="personalPhone">Phone number</label>
+              <input type="text" name="personalPhone" id="personalPhone" />
 
-            <label for="personalEmail">Email address</label>
-            <input type="email" name="personalEmail" id="personalEmail" />
+              <label for="personalEmail">Email address</label>
+              <input type="email" name="personalEmail" id="personalEmail" />
 
-            <label for="personalCountry">Email address</label>
-            <input
-              type="email"
-              name="personalCountry"
-              id="personalCountry"
-              disabled
-              aria-disabled="true"
-            />
+              <label for="personalCountry">Email address</label>
+              <input
+                type="email"
+                name="personalCountry"
+                id="personalCountry"
+                disabled
+                aria-disabled="true"
+              />
 
-            <button id="personalFormBtn">Update</button>
+              <button id="personalFormBtn">Update</button>
 
-            <div
-              class="[ message ][ disabled margin-top-400 ]"
-              id="personalUpdate"
-            >
-              <p>Successfully updated</p>
-            </div>
-          </form>
-        </div>
-
-        <div class="margin-top-600">
-          <h3>Successor settings</h3>
-          <div class="message margin-top-300">
-            <p>
-              By clicking "Update" bellow, I acknowledge that am authorizing
-              <span class="site-name">Keke<span>.</span>Money</span> to contact
-              the said successor in the event of death. I understand that this
-              appointment of a successor does not override legally binding
-              next-of-kin rules or estate laws of any relevant jurisdiction, and
-              does not create a binding will.
-            </p>
+              <div
+                class="[ message ][ disabled margin-top-400 ]"
+                id="personalUpdate"
+              >
+                <p>Successfully updated</p>
+              </div>
+            </form>
           </div>
 
-          <form id="successorForm" class="user-form">
-            <label for="successorName">Successor name</label>
-            <input
-              type="text"
-              name="successorName"
-              id="successorName"
-              pattern="[a-zA-Z ]+"
-            />
-
-            <label for="successorPhone">Phone number</label>
-            <input
-              type="text"
-              name="successorPhone"
-              id="successorPhone"
-              pattern="0[0-9]{9}"
-            />
-
-            <label for="successorEmail">Email address</label>
-            <input type="email" name="successorEmail" id="successorEmail" />
-
-            <label for="successorRelation">
-              Relation
-              <span class="tip">Eg: Sister, Wife, etc</span>
-            </label>
-            <input
-              type="text"
-              name="successorRelation"
-              id="successorRelation"
-              pattern="[a-zA-Z ]+"
-            />
-
-            <button id="successorFormBtn">Update</button>
-
-            <div
-              class="[ message ][ disabled margin-top-400 ]"
-              id="successorUpdate"
-            >
-              <p>Successfully updated</p>
+          <div class="margin-top-600">
+            <h3>Successor settings</h3>
+            <div class="message margin-top-300">
+              <p>
+                By clicking "Update" bellow, I acknowledge that am authorizing
+                <span class="site-name">Keke<span>.</span>Money</span> to
+                contact the said successor in the event of death. I understand
+                that this appointment of a successor does not override legally
+                binding next-of-kin rules or estate laws of any relevant
+                jurisdiction, and does not create a binding will.
+              </p>
             </div>
-          </form>
+
+            <form id="successorForm" class="user-form">
+              <label for="successorName">Successor name</label>
+              <input
+                type="text"
+                name="successorName"
+                id="successorName"
+                pattern="[a-zA-Z ]+"
+              />
+
+              <label for="successorPhone">Phone number</label>
+              <input
+                type="text"
+                name="successorPhone"
+                id="successorPhone"
+                pattern="0[0-9]{9}"
+              />
+
+              <label for="successorEmail">Email address</label>
+              <input type="email" name="successorEmail" id="successorEmail" />
+
+              <label for="successorRelation">
+                Relation
+                <span class="tip">Eg: Sister, Wife, etc</span>
+              </label>
+              <input
+                type="text"
+                name="successorRelation"
+                id="successorRelation"
+                pattern="[a-zA-Z ]+"
+              />
+
+              <button id="successorFormBtn">Update</button>
+
+              <div
+                class="[ message ][ disabled margin-top-400 ]"
+                id="successorUpdate"
+              >
+                <p>Successfully updated</p>
+              </div>
+            </form>
+          </div>
         </div>
       </article>
 

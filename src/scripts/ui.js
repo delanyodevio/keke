@@ -74,12 +74,13 @@ settingUrl.addEventListener("click", function () {
 });
 
 // Opens the fund form
-let addFundLink = document.getElementById("addFundLink");
 let cancelFundButton = document.getElementById("cancelFundButton");
+let addFundLink = document.getElementById("addFundLink");
 
 addFundLink.addEventListener("click", function () {
-  cancelFundButton.innerHTML = "Cancel";
-
+  cancelFundButton.innerHTML = "cancel";
+  let addFundSuccess = document.getElementById("addFundSuccess");
+  addFundSuccess.classList.add("disabled");
   createFundForm.classList.remove("disabled");
 });
 
@@ -96,6 +97,54 @@ cancelFundButton.addEventListener("click", function (event) {
   }, 3000);
 });
 
+const depositLink = document.getElementById("depositLink");
+let cancelDeposit = document.getElementById("cancelDeposit");
+
+depositLink.addEventListener("click", function () {
+  cancelDeposit.innerHTML = "cancel";
+  let depositSuccess = document.getElementById("depositSuccess");
+  depositSuccess.classList.add("disabled");
+  depositForm.classList.remove("disabled");
+});
+
+cancelDeposit.addEventListener("click", function (event) {
+  event.stopPropagation();
+
+  cancelDeposit.innerHTML = "working...";
+  depositForm.reset();
+
+  setTimeout(function () {
+    depositForm.classList.add("disabled");
+  }, 3000);
+});
+
+let cashoutLink = document.getElementById("cashoutLink");
+let cancelCashout = document.getElementById("cancelCashout");
+
+cashoutLink.addEventListener("click", function () {
+  cancelCashout.innerHTML = "cancel";
+  let cashoutSuccess = document.getElementById("cashoutSuccess");
+  let cashoutError = document.getElementById("cashoutError");
+  let cashoutBtn = document.getElementById("cashoutBtn");
+  let cashoutLock = document.getElementById("cashoutLock");
+
+  cashoutBtn.innerHTML = "cashout";
+  cashoutSuccess.classList.add("disabled");
+  cashoutError.classList.add("disabled");
+  cashoutForm.classList.remove("disabled");
+});
+
+cancelCashout.addEventListener("click", function (event) {
+  event.stopPropagation();
+
+  cancelCashout.innerHTML = "working...";
+  cashoutForm.reset();
+
+  setTimeout(function () {
+    cashoutForm.classList.add("disabled");
+  }, 3000);
+});
+
 /**
  * Listen to lockYears input field, takes the value
  * and determines the ending date
@@ -106,7 +155,6 @@ cancelFundButton.addEventListener("click", function (event) {
 let endsAtInput = document.getElementById("endsAt");
 let createdAtInput = document.getElementById("createdAt");
 let lockYearsInput = document.getElementById("lockYears");
-
 lockYearsInput.addEventListener("input", function () {
   let today = new Date(Date.now());
   let year = today.getFullYear();
@@ -131,11 +179,10 @@ lockYearsInput.addEventListener("input", function () {
 // rendering interface.
 let loadingPage = document.getElementById("loadingPage");
 let userPage = document.getElementById("userPage");
-
 window.addEventListener("DOMContentLoaded", function () {
   setTimeout(function () {
     loadingPage.classList.add("disabled");
 
     userPage.classList.remove("disabled");
-  }, 5000);
+  }, 10000);
 });

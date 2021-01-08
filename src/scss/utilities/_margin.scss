@@ -18,6 +18,10 @@
   margin-top: get-size("700");
 }
 
+.margin-top-0 {
+  margin-top: 0;
+}
+
 .margin-bottom-300 {
   margin-top: get-size("300");
 }
@@ -36,4 +40,8 @@
 
 .margin-bottom-700 {
   margin-bottom: et-size("700");
+}
+
+.margin-bottom-0 {
+  margin-bottom: 0;
 }

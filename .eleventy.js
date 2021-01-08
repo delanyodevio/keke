@@ -3,6 +3,8 @@ module.exports = (config) => {
   config.addPassthroughCopy("./src/images");
   config.addPassthroughCopy("./src/scripts");
   config.addPassthroughCopy("./src/fonts");
+  config.addPassthroughCopy("./src/manifest.json");
+  config.addPassthroughCopy("./src/sw.js");
 
   // Tell 11ty to use the .eleventyignore and ignore our .gitignore files
   config.setUseGitIgnore(false);

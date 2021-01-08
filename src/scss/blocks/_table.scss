@@ -1,0 +1,11 @@
+table {
+  border: 0.1rem solid get-color("dark-glare");
+  border-collapse: collapse;
+
+  th,
+  td {
+    border: 0.1rem solid get-color("dark-glare");
+    padding: get-size("300");
+    text-align: center;
+  }
+}

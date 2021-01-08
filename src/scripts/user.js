@@ -4,14 +4,21 @@ const logoutUrl = document.getElementById("logoutUrl");
 const fundsInfo = document.getElementById("fundsInfo");
 
 const createFundForm = document.getElementById("createFundForm");
+const depositForm = document.getElementById("depositForm");
+const cashoutForm = document.getElementById("cashoutForm");
 const personalForm = document.getElementById("personalForm");
 const successorForm = document.getElementById("successorForm");
+
+const viewRecordLink = document.getElementById("viewRecordLink");
 
 auth.onAuthStateChanged(function (user) {
   if (user) {
     signupUrl.classList.add("disabled");
     loginUrl.classList.add("disabled");
     logoutUrl.classList.remove("disabled");
+
+    // To enable offline data support
+    store.enablePersistence();
 
     let ref = store.collection("users").doc(user.uid);
     let fundsCollection = ref.collection("funds");
@@ -40,16 +47,16 @@ auth.onAuthStateChanged(function (user) {
       }
     });
 
-    // creates/updates a funds sub-collection
+    // creates a funds sub-collection
     createFundForm.addEventListener("submit", function (event) {
       event.preventDefault();
 
       let createFundButton = document.getElementById("createFundButton");
       createFundButton.innerHTML = "working...";
 
-      let name = createFundForm.fundName.value;
-      let unique = name.replace(/\s+/g, "");
-      let phone = createFundForm.fundPhone.value;
+      let name = createFundForm.fundName.value.trim().toUpperCase();
+      let unique = name.replace(/\s+/g, "").toLowerCase();
+      let phone = createFundForm.fundPhone.value.trim();
 
       let fundRef = ref.collection("funds").doc(unique);
 
@@ -58,47 +65,26 @@ auth.onAuthStateChanged(function (user) {
       let fund = {
         name: name,
         lock: true,
-        amount: 0,
+        total: 0,
         years: createFundForm.lockYears.value,
         phone: phone,
         created: firebase.firestore.Timestamp.fromDate(new Date(Date.now())),
         ends: firebase.firestore.Timestamp.fromDate(new Date(endingDate)),
       };
 
-      fundRef
-        .set(fund, { merge: true })
-        .then(function () {
-          let addFundMessage = document.getElementById("addFundMessage");
-          let successFund = document.querySelector(".fund-name");
+      fundRef.set(fund, { merge: true }).then(function () {
+        window.localStorage.setItem(`${unique}`, phone);
+        createFundButton.innerHTML = "create";
 
-          createFundForm.classList.add("disabled");
-          createFundButton.innerHTML = "Create";
+        let addFundSuccess = document.getElementById("addFundSuccess");
+        addFundSuccess.classList.remove("disabled");
 
-          successFund.innerHTML = name.toUpperCase();
-          addFundMessage.classList.remove("errorMessage");
-          addFundMessage.classList.add("successMessage");
-          addFundMessage.classList.remove("disabled");
-
-          setTimeout(function () {
-            addFundMessage.classList.add("disabled");
-          }, 5000);
-
-          window.localStorage.removeItem("endingDate");
-          createFundForm.reset();
-        })
-        .catch(function () {
-          addFundMessage.innerHTML = "<p>Error creating fund</p>";
-          addFundMessage.classList.remove("successMessage");
-          addFundMessage.classList.add("errorMessage");
-          addFundMessage.classList.remove("disabled");
-
-          setTimeout(function () {
-            addFundMessage.classList.add("disabled");
-          }, 10000);
-        });
+        window.localStorage.removeItem("endingDate");
+        createFundForm.reset();
+      });
     });
 
-    // Updates a user
+    // Updates a user document
     personalForm.addEventListener("submit", function (event) {
       event.preventDefault();
 
@@ -123,7 +109,7 @@ auth.onAuthStateChanged(function (user) {
       });
     });
 
-    // adds/updates a successor
+    // adds a successor to a user document
     successorForm.addEventListener("submit", function (event) {
       event.preventDefault();
 
@@ -148,6 +134,142 @@ auth.onAuthStateChanged(function (user) {
           successorUpdate.classList.add("disabled");
         }, 5000);
       });
+    });
+
+    // Deposit into the user fund
+    depositForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      let depositBtn = document.getElementById("depositBtn");
+      depositBtn.innerHTML = "working...";
+
+      let method = depositForm.depositMethod.value;
+      let unique = depositForm.depositFund.value
+        .replace(/\s+/g, "")
+        .trim()
+        .toLowerCase();
+      let phone = window.localStorage.getItem(unique);
+      let amount = parseInt(depositForm.depositAmount.value);
+
+      let data = {
+        type: "Deposit",
+        when: firebase.firestore.Timestamp.fromDate(new Date(Date.now())),
+        amount: amount,
+      };
+
+      let depositRef = ref.collection("funds").doc(unique);
+
+      depositRef
+        .update({
+          records: firebase.firestore.FieldValue.arrayUnion(data),
+          total: firebase.firestore.FieldValue.increment(amount),
+        })
+        .then(function () {
+          depositForm.reset();
+          depositBtn.innerHTML = "deposit";
+
+          let depositSuccess = document.getElementById("depositSuccess");
+          depositSuccess.classList.remove("disabled");
+        });
+    });
+
+    // Withdraw/Cashout from the user fund
+    cashoutForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      let cashoutBtn = document.getElementById("cashoutBtn");
+      cashoutBtn.innerHTML = "working...";
+
+      let method = cashoutForm.cashoutMethod.value;
+      let unique = cashoutForm.cashoutFund.value
+        .replace(/\s+/g, "")
+        .trim()
+        .toLowerCase();
+      let phone = window.localStorage.getItem(unique);
+      let amount = parseInt(cashoutForm.cashoutAmount.value);
+      let decrement = -amount;
+
+      let data = {
+        type: "Cashout",
+        when: firebase.firestore.Timestamp.fromDate(new Date(Date.now())),
+        amount: amount,
+      };
+
+      let cashoutRef = ref.collection("funds").doc(unique);
+
+      cashoutRef.get().then(function (doc) {
+        if (amount > doc.data().total || doc.data().lock) {
+          let cashoutError = document.getElementById("cashoutError");
+          cashoutError.classList.remove("disabled");
+
+          cashoutBtn.innerHTML = "cashout";
+          cashoutForm.cashoutAmount.value = "";
+
+          setTimeout(function () {
+            cashoutError.classList.add("disabled");
+          }, 15000);
+        } else {
+          cashoutError.classList.add("disabled");
+
+          cashoutRef
+            .update({
+              records: firebase.firestore.FieldValue.arrayUnion(data),
+              total: firebase.firestore.FieldValue.increment(decrement),
+            })
+            .then(function () {
+              cashoutForm.reset();
+              cashoutBtn.innerHTML = "cashout";
+
+              let cashoutSuccess = document.getElementById("cashoutSuccess");
+              cashoutSuccess.classList.remove("disabled");
+            });
+        }
+      });
+    });
+
+    let recordsTable = document.getElementById("recordsTable");
+
+    fundsCollection.get().then(function (snapshot) {
+      let table = "";
+      snapshot.forEach(function (doc) {
+        let records = doc.data().records;
+
+        let tableData = "";
+        records.forEach(function (record) {
+          let when = record.when.toDate();
+          let day = when.getDate();
+          let month = when.getMonth() + 1;
+          let year = when.getFullYear();
+          let td = `
+            <tr>
+              <td>${record.type}</td>
+              <td>${record.amount}</td>
+              <td>${day}/${month}/${year}</td>
+            </tr>
+            `;
+
+          tableData += td;
+        });
+
+        let renderedRecords = `
+          <table class="margin-top-500">
+          <caption>Records of ${doc.data().name}</caption>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${tableData}
+            </tbody>
+          </table>
+          `;
+
+        table += renderedRecords;
+      });
+      recordsTable.innerHTML = table;
     });
   } else {
     signupUrl.classList.remove("disabled");
@@ -198,49 +320,90 @@ function renderPersonalInfo(doc) {
 
 // Render user funds
 function renderFundInfo(snapshot) {
-  let noFundCreated = document.getElementById("noFundCreated");
   let html = "";
   let currency = window.localStorage.getItem("currency");
 
-  if (snapshot != null) {
-    noFundCreated.classList.add("disabled");
+  snapshot.forEach(function (doc) {
+    let fund = doc.data();
 
-    snapshot.forEach(function (doc) {
-      let fund = doc.data();
+    let lockClass = fund.lock ? "locked" : "unlocked";
+    let lockMessage = fund.lock
+      ? `Cashout locked for ${fund.years} year(s)`
+      : "Cashout Unlocked";
 
-      let lockClass = fund.lock ? "locked" : "unlocked";
-      let lockMessage = fund.lock ? "Fund locked" : "Fund Unlocked";
+    let dateCreated = fund.created.toDate();
+    let createdYear = dateCreated.getFullYear();
+    let createdMonth = dateCreated.getMonth() + 1;
+    let createdDay = dateCreated.getDate();
 
-      let dateCreated = fund.created.toDate();
-      let createdYear = dateCreated.getFullYear();
-      let createdMonth = dateCreated.getMonth();
-      let createdDay = dateCreated.getDate();
+    let dateEnded = fund.ends.toDate();
+    let endYear = dateEnded.getFullYear();
+    let endMonth = dateEnded.getMonth() + 1;
+    let endDay = dateEnded.getDate();
 
-      let dateEnded = fund.ends.toDate();
-      let endYear = dateEnded.getFullYear();
-      let endMonth = dateEnded.getMonth();
-      let endDay = dateEnded.getDate();
+    let ul = `
+      <ul class="eachFund">
+        <li class="heading">${fund.name}</li>
+        <li>${currency} ${fund.total}</li>
+        <li>Start, ${createdDay}/${createdMonth}/${createdYear}</li>
+        <li>End, ${endDay}/${endMonth}/${endYear}</li>
+        <li>${fund.phone}</li>
+        <li  class="${lockClass}">${lockMessage}</li>
+      </ul>
+      `;
 
-      let ul = `
-        <ul class="eachFund">
-          <li class="heading">${fund.name.toUpperCase()}</li>
-          <li>${currency} ${fund.amount}</li>
-          <li>${fund.years}year(s)</li>
-          <li>Created on, ${createdDay}/${createdMonth}/${createdYear}</li>
-          <li>Ending at, ${endDay}/${endMonth}/${endYear}</li>
-          <li>${fund.phone}</li>
-          <li  class="${lockClass}">${lockMessage}</li>
-        </ul>
-        `;
+    html += ul;
+  });
 
-      html += ul;
-    });
-
-    fundsInfo.innerHTML = html;
-  } else {
-    noFundCreated.classList.remove("disabled");
-  }
+  fundsInfo.innerHTML = html;
 }
+
+let depositFund = document.getElementById("depositFund");
+let depositPhone = document.getElementById("depositPhone");
+pickPhoneNumber(depositFund, depositPhone);
+
+let cashoutPhone = document.getElementById("cashoutPhone");
+let cashoutFund = document.getElementById("cashoutFund");
+pickPhoneNumber(cashoutFund, cashoutPhone);
+
+// Output the phone number when the found name is typed
+function pickPhoneNumber(inputElement, outputElement) {
+  inputElement.addEventListener("input", function () {
+    let name = inputElement.value.replace(/\s+/g, "").trim().toLowerCase();
+    let phone = window.localStorage.getItem(name);
+
+    outputElement.value = phone;
+  });
+}
+
+let addFundDone = document.getElementById("addFundDone");
+reloadPage(addFundDone, createFundForm);
+
+let depositDone = document.getElementById("depositDone");
+reloadPage(depositDone, depositForm);
+
+let cashoutDone = document.getElementById("cashoutDone");
+reloadPage(cashoutDone, cashoutForm);
+
+// Function to reload the current page when a link is click.
+function reloadPage(element, form) {
+  element.addEventListener("click", function (event) {
+    event.preventDefault();
+    document.location.reload();
+    form.classList.add("disabled");
+  });
+}
+
+let records = document.getElementById("records");
+viewRecordLink.addEventListener("click", function () {
+  records.classList.remove("disabled");
+});
+
+let closeRecords = document.getElementById("closeRecords");
+closeRecords.addEventListener("click", function (event) {
+  event.stopPropagation();
+  records.classList.add("disabled");
+});
 
 // logging out
 logoutUrl.addEventListener("click", function (event) {
