@@ -1,6 +1,6 @@
 ---
 layout: "layouts/signup.html"
-title: "Welcome!"
+title: "Signup"
 permalink: "/signup/"
 scripts:
   - "https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"
@@ -8,6 +8,6 @@ scripts:
   - "/scripts/signup.js"
 ---
 
-We are excited to have you. Next we will guide you through setting up your user account.
+Welcome. We are excited to have you. Next we will guide you through setting up your user account.
 
 Are you already a user? [Please login here](/login)

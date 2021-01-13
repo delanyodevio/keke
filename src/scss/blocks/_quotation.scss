@@ -1,10 +1,11 @@
-.quotes {
+.quote-container {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
 
   h2 {
-    margin-bottom: get-size("600");
+    margin-bottom: get-size("500");
+    margin-right: get-size("700");
 
     span {
       max-width: 20ch;
@@ -14,29 +15,26 @@
 
   .quotations {
     display: flex;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    align-items: flex-start;
-    padding-bottom: get-size("500");
+    flex-wrap: wrap;
+    justify-content: space-between;
 
-    > * {
-      flex-shrink: 0;
-      border: 2px solid get-color("primary");
-      border-radius: 0.25rem;
-      margin-bottom: 0;
-      width: 19rem;
+    figure + figure {
+      margin-top: get-size("700");
+    }
+
+    figure {
+      width: 20rem;
 
       img {
         width: 100%;
-        height: 19rem;
       }
 
       .quote {
-        padding: get-size("400");
+        padding-top: get-size("400");
       }
 
       blockquote {
-        border-inline-start: 0.5rem solid get-color("quaternary-shade");
+        border-inline-start: 0.3rem solid get-color("quaternary-shade");
         padding-inline-start: get-size("400");
         padding-bottom: get-size("400");
         margin-top: get-size("400");
@@ -52,18 +50,13 @@
         padding: 0.3rem get-size("400");
       }
     }
+  }
 
-    > * + * {
-      margin-inline-start: get-size("500");
-    }
-
-    @include media-query("lg") {
-      overflow-x: hidden;
-      flex-wrap: wrap;
-
-      > * {
-        margin-top: get-size("700");
-        width: 28rem;
+  @include media-query("lg") {
+    .quotations {
+      figure + figure {
+        margin-top: 0;
+        margin-left: get-size("700");
       }
     }
   }

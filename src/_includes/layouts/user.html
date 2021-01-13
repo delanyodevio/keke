@@ -14,7 +14,8 @@
 
   <div class="wrapper margin-top-500">
     <!-- Installing app flow -->
-    <div class="installAppFlow" id="installAppFlow">
+    <!-- 
+      <div class="installAppFlow" id="installAppFlow">
       <h1>
         Install <span class="site-name">Keke<span>.</span>Money</span> on your
         device as app.
@@ -24,10 +25,11 @@
         to this place.
       </p>
       <div class="buttonContainer">
-        <button class="button" id="notNowBtn">Not Now</button>
+        <div class="button" id="dismissBtn" role="button">Not now</div>
         <button class="button" id="installBtnPrime">Install app</button>
       </div>
     </div>
+     -->
 
     <!-- Headings -->
     <div>
@@ -45,41 +47,36 @@
     <!-- User content -->
     <div>
       <!-- Fund Modal -->
-      <article id="fund">
-        <!-- rendered funds  -->
-        <div class="funds-info section">
-          <h2 class="text-500">Funds</h2>
-          <div id="fundsInfo"></div>
-        </div>
+      <article id="fund" class="fundModal">
+        <div>
+          <!-- Action Buttons -->
+          <div class="fundBtnContainer">
+            <a href="#createFundForm" id="addFundLink" class="button text-300">
+              New fund
+            </a>
 
-        <!-- Action Buttons -->
-        <div class="fundBtnContainer">
-          <a href="#createFundForm" id="addFundLink" class="button text-400">
-            Add New
-          </a>
-
-          <a href="#records" class="button text-400" id="viewRecordLink">
-            View records
-          </a>
-
-          <a href="#depositForm" id="depositLink" class="button text-400"
-            >Deposit</a
-          >
-          <a href="#cashoutForm" class="button text-400" id="cashoutLink"
-            >cashout</a
-          >
-        </div>
-
-        <!-- User account info -->
-        <div class="[ account-info ][ margin-top-600 ]">
-          <!-- Personal -->
-          <div class="section">
-            <h2 class="text-500">Personal</h2>
-            <ul id="personalInfo" class="personalInfo"></ul>
+            <a href="#depositForm" id="depositLink" class="button text-300">
+              Deposit
+            </a>
+            <a href="#cashoutForm" class="button text-300" id="cashoutLink">
+              cashout
+            </a>
           </div>
 
-          <!-- successor -->
-          <div class="section">
+          <!-- rendered funds  -->
+          <div class="funds-info section">
+            <h2 class="text-500">Funds</h2>
+            <div id="fundsInfo"></div>
+          </div>
+        </div>
+
+        <div>
+          <!-- User account info -->
+          <div class="[ account-info section ][ margin-top-600 ]">
+            <!-- Personal -->
+            <div id="personalInfo" class="personalInfo"></div>
+
+            <!-- successor -->
             <h2 class="text-500">Successor</h2>
             <div class="successorInfo" id="successorInfo">
               <div class="[ message ][ disabled ]" id="successorNotice">
@@ -90,229 +87,251 @@
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Create Fund form -->
-        <form id="createFundForm" class="[ disabled ][ user-form ]">
-          <label for="fundName">Fund name</label>
-          <input
-            type="text"
-            name="fundName"
-            id="fundName"
-            required
-            pattern="[a-zA-Z ]+"
-            placeholder="Fund name here."
-            title="The name should not contain a number or a special character."
-            aria-required="true"
-          />
+          <!-- Create Fund form -->
+          <form id="createFundForm" class="[ disabled ][ user-form ]">
+            <label for="fundName">Fund name</label>
+            <input
+              type="text"
+              name="fundName"
+              id="fundName"
+              required
+              pattern="[a-zA-Z ]+"
+              placeholder="Fund name here."
+              title="The name should not contain a number or a special character."
+              aria-required="true"
+            />
 
-          <label id="lockYearsMessage" for="lockYears">
-            Lock Year(s).
-            <span class="tip weight-normal text-400">
-              Number of year(s) to lock your fund. Minimum of one year 20 years
-              max.
-            </span>
-          </label>
-          <input
-            type="number"
-            name="lockYears"
-            id="lockYears"
-            min="1"
-            max="20"
-            title="Number of year(s) to lock your fund. Minimum of one year, 20 years max."
-            pattern="[0-9]"
-          />
+            <label id="lockYearsMessage" for="lockYears">
+              Lock Year(s).
+              <span class="tip weight-normal text-400">
+                Number of year(s) to lock your fund. Minimum of one year 20
+                years max.
+              </span>
+            </label>
+            <input
+              type="number"
+              name="lockYears"
+              id="lockYears"
+              min="1"
+              max="20"
+              title="Number of year(s) to lock your fund. Minimum of one year, 20 years max."
+              pattern="[0-9]"
+            />
 
-          <label for="fundPhone">
-            Deposit phone number
-            <span class="tip weight-normal text-400">
-              Example, 024XXXXXXX
-            </span>
-          </label>
-          <input
-            type="tel"
-            name="fundPhone"
-            id="fundPhone"
-            pattern="0[0-9]{9}"
-            maxlength="10"
-            minlength="10"
-            placeholder="phone number here."
-            required
-            title="Ten digit local phone number beginning with zero(0)"
-          />
+            <label for="fundPhone">
+              Deposit phone number
+              <span class="tip weight-normal text-400">
+                Example, 024XXXXXXX
+              </span>
+            </label>
+            <input
+              type="tel"
+              name="fundPhone"
+              id="fundPhone"
+              pattern="0[0-9]{9}"
+              maxlength="10"
+              minlength="10"
+              placeholder="phone number here."
+              required
+              title="Ten digit local phone number beginning with zero(0)"
+            />
 
-          <label for="createdAt">Date created</label>
-          <input
-            type="text"
-            name="createdAt"
-            id="createdAt"
-            disabled
-            aria-disabled="true"
-          />
+            <label for="createdAt">Date created</label>
+            <input
+              type="text"
+              name="createdAt"
+              id="createdAt"
+              disabled
+              aria-disabled="true"
+            />
 
-          <label for="endsAt">Ending Date</label>
-          <input
-            type="text"
-            name="endsAt"
-            id="endsAt"
-            disabled
-            value=""
-            aria-disabled="true"
-          />
+            <label for="endsAt">Ending Date</label>
+            <input
+              type="text"
+              name="endsAt"
+              id="endsAt"
+              disabled
+              value=""
+              aria-disabled="true"
+            />
 
-          <div class="buttonContainer">
-            <div class="button text-400" id="cancelFundButton" role="button">
-              Cancel
+            <label for="description">
+              Description
+              <span class="tip weight-normal text-400">
+                A short description to help keep track of what the fund is meant
+                for
+              </span>
+            </label>
+            <textarea
+              name="description"
+              id="description"
+              cols="30"
+              rows="6"
+              maxlength="200"
+            ></textarea>
+
+            <div class="buttonContainer">
+              <div class="button text-400" id="cancelFundButton" role="button">
+                Cancel
+              </div>
+              <button id="createFundButton" class="text-400">Create</button>
             </div>
-            <button id="createFundButton" class="text-400">Create</button>
-          </div>
 
-          <div class="message margin-top-400 disabled" id="addFundSuccess">
-            Fund successfully created. Please click
-            <a href="/" id="addFundDone">Finish</a>
-            to continue. Take the deposit button to start depositing.
-          </div>
-        </form>
-
-        <!-- Withdrawal/Cashout form -->
-        <form id="cashoutForm" class="[ user-form ][ disabled ]">
-          <h3 class="margin-bottom-400">Cashout Form</h3>
-          <div class="[ payment-method ] [ margin-bottom-400 ]">
-            <p>Pick a payment method.</p>
-
-            <label for="cashoutMTN">
-              <img src="/images/platforms/mtngh.webp" />
-              <span class="radio__input">
-                <input type="radio" name="cashoutMethod" id="cashoutMTN" />
-                <span class="radio__control"></span>
-              </span>
-            </label>
-
-            <label for="cashoutVodafone">
-              <img src="/images/platforms/vodafonegh.webp" />
-              <span class="radio__input">
-                <input type="radio" name="cashoutMethod" id="cashoutVodafone" />
-                <span class="radio__control"></span>
-              </span>
-            </label>
-
-            <label for="cashoutTigo">
-              <img src="/images/platforms/airteltigo.webp" />
-              <span class="radio__input">
-                <input type="radio" name="cashoutMethod" id="cashoutTigo" />
-                <span class="radio__control"></span>
-              </span>
-            </label>
-          </div>
-
-          <label for="cashoutFund">Enter the fund name</label>
-          <input type="text" name="cashoutFund" id="cashoutFund" required />
-
-          <label for="cashoutAmount">Enter amount</label>
-          <input type="text" name="cashoutAmount" id="cashoutAmount" required />
-
-          <label for="cashoutPhone">Phone number</label>
-          <input
-            type="text"
-            name="cashoutPhone"
-            id="cashoutPhone"
-            disabled
-            aria-disabled="true"
-          />
-
-          <div class="buttonContainer">
-            <div class="button text-400" id="cancelCashout" role="button">
-              cancel
+            <div class="message margin-top-400 disabled" id="addFundSuccess">
+              Fund successfully created. Please click
+              <a href="/" id="addFundDone">Finish</a>
+              to continue. Take the deposit button to start depositing.
             </div>
-            <button id="cashoutBtn" class="text-400">Deposit</button>
-          </div>
+          </form>
 
-          <div class="message margin-top-500" id="cashoutSuccess">
-            Successfully done. Please click
-            <a href="/" id="cashoutDone">Finish</a>
-            to continue.
-          </div>
+          <!-- cashout form -->
+          <form id="cashoutForm" class="[ user-form ][ disabled ]">
+            <h3 class="margin-bottom-400">Cashout Form</h3>
+            <div class="[ payment-method ] [ margin-bottom-400 ]">
+              <p>Pick a payment method.</p>
 
-          <div
-            class="errorMessage margin-top-500 margin-bottom-0"
-            id="cashoutError"
-          >
-            Error doing cashout. Amount specified is greater than the total
-            amount in the found, or the locking year is still active. Please
-            make sure you specified the right amount and the locking year is
-            due.
-          </div>
-        </form>
+              <label for="cashoutMTN">
+                <img src="/images/platforms/mtngh.webp" />
+                <span class="radio__input">
+                  <input type="radio" name="cashoutMethod" id="cashoutMTN" />
+                  <span class="radio__control"></span>
+                </span>
+              </label>
 
-        <!-- Deposit form -->
-        <form id="depositForm" class="[ user-form ][ disabled ]">
-          <h3 class="margin-bottom-400">Deposit Form</h3>
-          <div class="[ payment-method ] [ margin-bottom-400 ]">
-            <p>Pick a payment method.</p>
+              <label for="cashoutVodafone">
+                <img src="/images/platforms/vodafonegh.webp" />
+                <span class="radio__input">
+                  <input
+                    type="radio"
+                    name="cashoutMethod"
+                    id="cashoutVodafone"
+                  />
+                  <span class="radio__control"></span>
+                </span>
+              </label>
 
-            <label for="depositMTN">
-              <img src="/images/platforms/mtngh.webp" />
-              <span class="radio__input">
-                <input type="radio" name="depositMethod" id="depositMTN" />
-                <span class="radio__control"></span>
-              </span>
-            </label>
-
-            <label for="depositVodafone">
-              <img src="/images/platforms/vodafonegh.webp" />
-              <span class="radio__input">
-                <input type="radio" name="depositMethod" id="depositVodafone" />
-                <span class="radio__control"></span>
-              </span>
-            </label>
-
-            <label for="depositTigo">
-              <img src="/images/platforms/airteltigo.webp" />
-              <span class="radio__input">
-                <input type="radio" name="depositMethod" id="depositTigo" />
-                <span class="radio__control"></span>
-              </span>
-            </label>
-          </div>
-
-          <label for="depositFund">Enter the fund name</label>
-          <input type="text" name="depositFund" id="depositFund" required />
-
-          <label for="depositAmount">Enter amount</label>
-          <input type="text" name="depositAmount" id="depositAmount" required />
-
-          <label for="depositPhone">Phone number</label>
-          <input
-            type="text"
-            name="depositPhone"
-            id="depositPhone"
-            disabled
-            aria-disabled="true"
-          />
-
-          <div class="buttonContainer">
-            <div class="button text-400" id="cancelDeposit" role="button">
-              cancel
+              <label for="cashoutTigo">
+                <img src="/images/platforms/airteltigo.webp" />
+                <span class="radio__input">
+                  <input type="radio" name="cashoutMethod" id="cashoutTigo" />
+                  <span class="radio__control"></span>
+                </span>
+              </label>
             </div>
-            <button id="depositBtn" class="text-400">Deposit</button>
-          </div>
 
-          <div class="message margin-top-400" id="depositSuccess">
-            Successfully done. Please click
-            <a href="/" id="depositDone">Finish</a>
-            to continue.
-          </div>
-        </form>
+            <label for="cashoutFund">Enter the fund name</label>
+            <input type="text" name="cashoutFund" id="cashoutFund" required />
 
-        <!-- Records -->
-        <div class="[ records ][ disabled margin-top-600 ]" id="records">
-          <h3>Deposit/withdrawal records.</h3>
+            <label for="cashoutAmount">Enter amount</label>
+            <input
+              type="text"
+              name="cashoutAmount"
+              id="cashoutAmount"
+              required
+            />
 
-          <div class="recordsTable" id="recordsTable"></div>
+            <label for="cashoutPhone">Phone number</label>
+            <input
+              type="text"
+              name="cashoutPhone"
+              id="cashoutPhone"
+              disabled
+              aria-disabled="true"
+            />
 
-          <div class="button margin-top-400" id="closeRecords" role="button">
-            Close
-          </div>
+            <div class="buttonContainer">
+              <div class="button text-400" id="cancelCashout" role="button">
+                cancel
+              </div>
+              <button id="cashoutBtn" class="text-400">Deposit</button>
+            </div>
+
+            <div class="message margin-top-500" id="cashoutSuccess">
+              Successfully done. Please click
+              <a href="/" id="cashoutDone">Finish</a>
+              to continue.
+            </div>
+
+            <div
+              class="errorMessage margin-top-500 margin-bottom-0"
+              id="cashoutError"
+            >
+              Error doing cashout. Amount specified is greater than the total
+              amount in the found, or the locking year is still active. Please
+              make sure you specified the right amount and the locking year is
+              due.
+            </div>
+          </form>
+
+          <!-- Deposit form -->
+          <form id="depositForm" class="[ user-form ][ disabled ]">
+            <h3 class="margin-bottom-400">Deposit Form</h3>
+            <div class="[ payment-method ] [ margin-bottom-400 ]">
+              <p>Pick a payment method.</p>
+
+              <label for="depositMTN">
+                <img src="/images/platforms/mtngh.webp" />
+                <span class="radio__input">
+                  <input type="radio" name="depositMethod" id="depositMTN" />
+                  <span class="radio__control"></span>
+                </span>
+              </label>
+
+              <label for="depositVodafone">
+                <img src="/images/platforms/vodafonegh.webp" />
+                <span class="radio__input">
+                  <input
+                    type="radio"
+                    name="depositMethod"
+                    id="depositVodafone"
+                  />
+                  <span class="radio__control"></span>
+                </span>
+              </label>
+
+              <label for="depositTigo">
+                <img src="/images/platforms/airteltigo.webp" />
+                <span class="radio__input">
+                  <input type="radio" name="depositMethod" id="depositTigo" />
+                  <span class="radio__control"></span>
+                </span>
+              </label>
+            </div>
+
+            <label for="depositFund">Enter the fund name</label>
+            <input type="text" name="depositFund" id="depositFund" required />
+
+            <label for="depositAmount">Enter amount</label>
+            <input
+              type="text"
+              name="depositAmount"
+              id="depositAmount"
+              required
+            />
+
+            <label for="depositPhone">Phone number</label>
+            <input
+              type="text"
+              name="depositPhone"
+              id="depositPhone"
+              disabled
+              aria-disabled="true"
+            />
+
+            <div class="buttonContainer">
+              <div class="button text-400" id="cancelDeposit" role="button">
+                cancel
+              </div>
+              <button id="depositBtn" class="text-400">Deposit</button>
+            </div>
+
+            <div class="message margin-top-400" id="depositSuccess">
+              Successfully done. Please click
+              <a href="/" id="depositDone">Finish</a>
+              to continue.
+            </div>
+          </form>
         </div>
       </article>
 

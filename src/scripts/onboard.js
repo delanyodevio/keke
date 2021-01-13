@@ -99,9 +99,14 @@ onboardForm.addEventListener("submit", function (event) {
         window.localStorage.removeItem("emailForSignIn");
       });
     })
-    .catch(function (ex) {
+    .catch(function () {
+      signupButton.innerHTML = "try again";
       errorMessage.classList.remove("disabled");
-      errorMessage.innerHTML = `<p>${ex.message}</p>`;
+      errorMessage.innerHTML = `<p>Error processing your form. Please try again.</p>`;
+
+      setTimeout(() => {
+        errorMessage.classList.add("disabled");
+      }, 5000);
     });
 });
 

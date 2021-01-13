@@ -40,8 +40,13 @@ login.addEventListener("submit", function (event) {
       login.classList.add("disabled");
       login.setAttribute("aria-hidden", "true");
     })
-    .catch(function (error) {
-      errorMessage.innerHTML = `<p>${error.message}</p>`;
+    .catch(function () {
+      loginButton.innerHTML = "try again";
       errorMessage.classList.remove("disabled");
+      errorMessage.innerHTML = `<p>Error processing your form. Please try again.</p>`;
+
+      setTimeout(() => {
+        errorMessage.classList.add("disabled");
+      }, 5000);
     });
 });

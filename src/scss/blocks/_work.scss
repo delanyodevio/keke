@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   align-items: flex-start;
   padding: get-size("500");
-  border: 2px solid get-color("secondary");
+  border: 2px solid get-color("primary");
   border-radius: 0.25rem;
 
   &__header {
@@ -12,7 +12,7 @@
     }
 
     p {
-      max-width: 30ch;
+      max-width: 25ch;
       margin-bottom: 0;
     }
   }
@@ -25,7 +25,7 @@
       margin: 0 0 get-size("500") 0;
 
       li {
-        max-width: 45ch;
+        max-width: 30ch;
       }
 
       li + li {

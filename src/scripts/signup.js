@@ -39,8 +39,13 @@ signup.addEventListener("submit", function (event) {
 
       signup.classList.add("disabled");
     })
-    .catch(function (error) {
-      errorMessage.innerHTML = `<p>${error.message}</p>`;
+    .catch(function () {
+      signupButton.innerHTML = "try again";
       errorMessage.classList.remove("disabled");
+      errorMessage.innerHTML = `<p>Error processing your form. Please try again.</p>`;
+
+      setTimeout(() => {
+        errorMessage.classList.add("disabled");
+      }, 5000);
     });
 });

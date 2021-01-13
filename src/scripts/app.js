@@ -1,17 +1,17 @@
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/sw.js").then(function () {
-    console.log("service worker registered");
-  });
+  navigator.serviceWorker.register("/sw.js").then(function () {});
 }
 
-const installBtn = document.getElementById("installBtn");
-const installAppFlow = document.getElementById("installAppFlow");
-const notNowBtn = document.getElementById("notNowBtn");
-const installBtnPrime = document.getElementById("installBtnPrime");
+/**
+ * let installBtn = document.getElementById("installBtn");
+let installAppFlow = document.getElementById("installAppFlow");
+let dismissBtn = document.getElementById("dismissBtn");
+let installBtnPrime = document.getElementById("installBtnPrime");
 
 let deferredPrompt;
 
-notNowBtn.addEventListener("click", function () {
+dismissBtn.addEventListener("click", function (event) {
+  event.stopPropagation();
   installAppFlow.classList.add("disabled");
   installBtn.classList.remove("disabled");
 });
@@ -30,7 +30,8 @@ showInstallPromotion(installBtn);
 showInstallPromotion(installBtnPrime);
 
 function showInstallPromotion(element) {
-  element.addEventListener("click", function () {
+  element.addEventListener("click", function (event) {
+    event.stopPropagation();
     deferredPrompt.prompt();
     deferredPrompt.userChoice.then((choiceResult) => {
       if (choiceResult.outcome === "accepted") {
@@ -43,3 +44,5 @@ function showInstallPromotion(element) {
     });
   });
 }
+
+ */

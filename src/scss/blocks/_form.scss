@@ -9,7 +9,7 @@ form {
     border: 0.15rem solid get-color("dark");
     display: block;
     margin-bottom: get-size("700");
-    background-color: get-color("light-glare");
+    background-color: get-color("light");
   }
 
   input[type="file"] {
@@ -32,7 +32,7 @@ form {
 
   input:focus,
   textarea:focus {
-    background-color: get-color("secondary-glare");
+    background-color: get-color("light-glare");
     outline: 0;
   }
 
@@ -52,12 +52,11 @@ form {
     appearance: none;
     width: max-content;
     cursor: pointer;
-    transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
     border-radius: 0.25rem;
     padding: 0.5rem 0;
-    background-color: get-color("tertiary");
-    color: get-color("dark-shade");
-    border: 2px solid;
+    background-color: get-color("primary");
+    color: get-color("light-glare");
+    border: 2px solid get-color("dark-shade");
     text-transform: uppercase;
     text-align: center;
     display: block;

@@ -1,4 +1,4 @@
-const emailVerified = document.getElementById("emailVerified");
+const existingUser = document.getElementById("existingUser");
 const loginReturnButton = document.getElementById("loginReturnButton");
 const newUser = document.getElementById("newUser");
 const successModal = document.getElementById("successPage");
@@ -29,18 +29,18 @@ if (auth.isSignInWithEmailLink(window.location.href)) {
         let emailInput = document.getElementById("email");
         emailInput.value = result.user.email;
 
-        emailVerified.classList.add("disabled");
+        existingUser.classList.add("disabled");
       } else {
-        emailVerified.classList.remove("disabled");
+        existingUser.classList.remove("disabled");
 
         window.localStorage.setItem("userId", result.user.uid);
 
         newUser.classList.add("disabled");
       }
     })
-    .catch(function (error) {
+    .catch(function () {
       errorMessage.classList.remove("disabled");
-      errorMessage.innerHTML = `<p>${error.message}</p>`;
+      errorMessage.innerHTML = `<p>Error handling authentication. <a href="/login">Please try again</a></p>`;
     });
 }
 
@@ -94,7 +94,7 @@ onboardForm.addEventListener("submit", function (event) {
 
       listRef.set(username).then(function () {
         onboardForm.reset();
-        signupModal.classList.add("disabled");
+        newUser.classList.add("disabled");
         successModal.classList.remove("disabled");
 
         window.localStorage.removeItem("userId");
@@ -102,9 +102,14 @@ onboardForm.addEventListener("submit", function (event) {
         window.localStorage.removeItem("emailForSignIn");
       });
     })
-    .catch(function (ex) {
+    .catch(function () {
+      signupButton.innerHTML = "try again";
       errorMessage.classList.remove("disabled");
-      errorMessage.innerHTML = `<p>${ex.message}</p>`;
+      errorMessage.innerHTML = `<p>Error processing your form. Please try again.</p>`;
+
+      setTimeout(() => {
+        errorMessage.classList.add("disabled");
+      }, 5000);
     });
 });
 

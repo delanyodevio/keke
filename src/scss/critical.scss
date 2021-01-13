@@ -30,12 +30,12 @@ a:not([class]) {
 }
 
 main {
-  padding: get-size("500") 0;
+  padding: get-size("700") 0;
 }
 
 .wrapper {
   > article + article {
-    margin-top: get-size("700");
+    margin-top: 3.5rem;
   }
 }
 
@@ -77,11 +77,7 @@ h4 {
 }
 
 .site-name {
-  color: get-color("secondary");
-
-  span {
-    color: get-color("primary");
-  }
+  color: get-color("primary");
 }
 
 .tip {
@@ -112,6 +108,5 @@ h4 {
 @import "utilities/successMessage";
 @import "utilities/input-container";
 @import "utilities/errorMessage";
-@import "utilities/recaptcha";
 @import "utilities/centered";
 @import "utilities/margin";

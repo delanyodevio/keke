@@ -2,19 +2,23 @@
 pageHeaderSummary = content %} {% set pageCriticalStyles = ['css/account.css']
 %} {% block content %}
 <div class="wrapper">
-  <article>{% include "partials/page-header.html" %}</article>
-  <article id="emailVerified" class="disabled">
-    <div class="successMessage" id="successMessage">
-      <p>
-        Email successfully verified! Welcome back. Please click on the link to
-        continue.
-      </p>
-    </div>
-
-    <a class="button" id="loginReturnButton" href="/login">please login</a>
-  </article>
+  <div class="disabled" id="existingUser">
+    <article>{% include "partials/page-header.html" %}</article>
+    <article class="successMessage" id="successMessage">
+      <p>Email successfully verified. Please click on the link to continue.</p>
+      <a class="button" id="loginReturnButton" href="/login">please login</a>
+    </article>
+  </div>
 
   <article class="[ account ] [ disabled ]" id="newUser">
+    <h1 class="text-800 weight-bold" data-highlight="primary">
+      <span class="site-name">Keke<span>.</span>Money: </span>
+      Welcome
+      <span class="[ page-header__summary ] [ weight-normal text-600 ]">
+        please fill the form and continue to signup.
+      </span>
+    </h1>
+
     <div class="[ errorMessage ] [ disabled ]" id="errorMessage"></div>
     <!-- // signup form -->
     <form class="account-form" id="onboardForm">

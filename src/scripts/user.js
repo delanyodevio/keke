@@ -9,8 +9,6 @@ const cashoutForm = document.getElementById("cashoutForm");
 const personalForm = document.getElementById("personalForm");
 const successorForm = document.getElementById("successorForm");
 
-const viewRecordLink = document.getElementById("viewRecordLink");
-
 auth.onAuthStateChanged(function (user) {
   if (user) {
     signupUrl.classList.add("disabled");
@@ -66,7 +64,8 @@ auth.onAuthStateChanged(function (user) {
         name: name,
         lock: true,
         total: 0,
-        years: createFundForm.lockYears.value,
+        description: createFundForm.description.value.trim(),
+        years: createFundForm.lockYears.value.trim(),
         phone: phone,
         created: firebase.firestore.Timestamp.fromDate(new Date(Date.now())),
         ends: firebase.firestore.Timestamp.fromDate(new Date(endingDate)),
@@ -173,7 +172,7 @@ auth.onAuthStateChanged(function (user) {
         });
     });
 
-    // Withdraw/Cashout from the user fund
+    // Cashout from the user fund
     cashoutForm.addEventListener("submit", function (event) {
       event.preventDefault();
 
@@ -226,51 +225,6 @@ auth.onAuthStateChanged(function (user) {
         }
       });
     });
-
-    let recordsTable = document.getElementById("recordsTable");
-
-    fundsCollection.get().then(function (snapshot) {
-      let table = "";
-      snapshot.forEach(function (doc) {
-        let records = doc.data().records;
-
-        let tableData = "";
-        records.forEach(function (record) {
-          let when = record.when.toDate();
-          let day = when.getDate();
-          let month = when.getMonth() + 1;
-          let year = when.getFullYear();
-          let td = `
-            <tr>
-              <td>${record.type}</td>
-              <td>${record.amount}</td>
-              <td>${day}/${month}/${year}</td>
-            </tr>
-            `;
-
-          tableData += td;
-        });
-
-        let renderedRecords = `
-          <table class="margin-top-500">
-          <caption>Records of ${doc.data().name}</caption>
-            <thead>
-              <tr>
-                <th>Type</th>
-                <th>Amount</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${tableData}
-            </tbody>
-          </table>
-          `;
-
-        table += renderedRecords;
-      });
-      recordsTable.innerHTML = table;
-    });
   } else {
     signupUrl.classList.remove("disabled");
     loginUrl.classList.remove("disabled");
@@ -296,22 +250,24 @@ function renderPersonalInfo(doc) {
   });
 
   personalInfo.innerHTML = `
-    <li>${user.name}</li>
-    <li>${user.phone}</li>
-    <li>${user.email}</li>
-    <li>${user.country}</li>
+    <h2 class="text-500">${user.name}</h2>
+    <div>
+      <span>${user.phone}</span>
+      <span>${user.email}</span>
+      <span>${user.country}</span>
+    </div>
     `;
 
-  if (user.successor == null) {
+  if (user.successor == undefined) {
     successorNotice.classList.remove("disabled");
   } else {
     successorInfo.innerHTML = `
-      <ul class="successor">
-        <li>${user.successor.name}</li>
-        <li>${user.successor.relation}</li>
-        <li>${user.successor.phone}</li>
-        <li>${user.successor.email}</li>
-      </ul>
+      <div class="successor">
+        <span>${user.successor.name}</span>
+        <span>${user.successor.relation}</span>
+        <span>${user.successor.phone}</span>
+        <span>${user.successor.email}</span>
+      </div>
       `;
 
     successorNotice.classList.add("disabled");
@@ -325,34 +281,73 @@ function renderFundInfo(snapshot) {
 
   snapshot.forEach(function (doc) {
     let fund = doc.data();
-
-    let lockClass = fund.lock ? "locked" : "unlocked";
-    let lockMessage = fund.lock
-      ? `Cashout locked for ${fund.years} year(s)`
-      : "Cashout Unlocked";
+    let records = doc.data().records;
 
     let dateCreated = fund.created.toDate();
-    let createdYear = dateCreated.getFullYear();
-    let createdMonth = dateCreated.getMonth() + 1;
-    let createdDay = dateCreated.getDate();
+    let startYear = dateCreated.getFullYear();
+    let startMonth = dateCreated.toLocalString("default", { month: "short" });
+    let startDay = dateCreated.getDate();
 
     let dateEnded = fund.ends.toDate();
     let endYear = dateEnded.getFullYear();
-    let endMonth = dateEnded.getMonth() + 1;
+    let endMonth = dateEnded.toLocalString("default", { month: "short" });
     let endDay = dateEnded.getDate();
 
-    let ul = `
-      <ul class="eachFund">
-        <li class="heading">${fund.name}</li>
-        <li>${currency} ${fund.total}</li>
-        <li>Start, ${createdDay}/${createdMonth}/${createdYear}</li>
-        <li>End, ${endDay}/${endMonth}/${endYear}</li>
-        <li>${fund.phone}</li>
-        <li  class="${lockClass}">${lockMessage}</li>
-      </ul>
-      `;
+    let lockClass = fund.lock ? "locked" : "unlocked";
+    let lockMessage = fund.lock ? "Locked" : "Unlocked";
+    let recordState =
+      records === undefined
+        ? ""
+        : `<a href="#${doc.id}records">View Activities</a>`;
 
-    html += ul;
+    let tableData = "";
+    records.forEach(function (record) {
+      let when = record.when.toDate();
+      let day = when.getDate();
+      let month = when.toLocalString("default", { month: "short" });
+      let year = when.getFullYear();
+      let td = `
+            <tr>
+              <td>${day} ${month} ${year}</td>
+              <td>${record.type.toUpperCase()}</td>
+              <td>${record.amount}</td>
+            </tr>
+            `;
+
+      tableData += td;
+    });
+
+    let div = `
+      <div class="eachFund">
+        <span class="total">${currency} ${fund.total}</span>
+        <div class="details">
+          <span class="name">${fund.name}</span>
+          <span class="phone">${fund.phone}</span>
+          <span class="${lockClass}">${lockMessage}</span>
+        </div>
+        <div class="date">
+          <span>Created, ${startDay} ${startMonth} ${startYear}</span>
+          <span>Ending, ${endDay} ${endMonth} ${endYear}</span>
+          <span class="${lockClass}">${lockMessage}</span>
+        </div>
+        <p>${fund.description}</p>
+        ${recordState}
+        
+        <table class="margin-top-500" id="${doc.id}records">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${tableData}
+          </tbody>
+        </table>
+      </div>
+      `;
+    html += div;
   });
 
   fundsInfo.innerHTML = html;
@@ -393,17 +388,6 @@ function reloadPage(element, form) {
     form.classList.add("disabled");
   });
 }
-
-let records = document.getElementById("records");
-viewRecordLink.addEventListener("click", function () {
-  records.classList.remove("disabled");
-});
-
-let closeRecords = document.getElementById("closeRecords");
-closeRecords.addEventListener("click", function (event) {
-  event.stopPropagation();
-  records.classList.add("disabled");
-});
 
 // logging out
 logoutUrl.addEventListener("click", function (event) {

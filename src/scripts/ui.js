@@ -158,20 +158,23 @@ let lockYearsInput = document.getElementById("lockYears");
 lockYearsInput.addEventListener("input", function () {
   let today = new Date(Date.now());
   let year = today.getFullYear();
-  let month = today.getMonth() + 1;
+  let month = today.toLocalString("default", { month: "short" });
   let day = today.getDate();
   let lockYears = lockYearsInput.value;
   let endYear = parseInt(lockYears) + parseInt(year);
 
-  createdAtInput.value = `Today, ${day}/${month}/${year}`;
+  createdAtInput.value = `Today, ${day} ${month} ${year}`;
 
   if (!isNaN(endYear)) {
-    endsAtInput.value = `${day}/${month}/${endYear}`;
-    window.localStorage.setItem("endingDate", `${endYear}, ${month}, ${day}`);
+    endsAtInput.value = `${day} ${month} ${endYear}`;
+    window.localStorage.setItem(
+      "endingDate",
+      `${endYear}, ${today.getMonth()}, ${day}`
+    );
   } else if (endYear == parseInt(year)) {
-    endsAtInput.value = `Toady, ${day}/${month}/${year}`;
+    endsAtInput.value = `Toady, ${day} ${month} ${year}`;
   } else {
-    endsAtInput.value = `Toady, ${day}/${month}/${year}`;
+    endsAtInput.value = `Toady, ${day} ${month} ${year}`;
   }
 });
 

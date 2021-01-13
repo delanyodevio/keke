@@ -8,6 +8,6 @@ scripts:
   - "/scripts/login.js"
 ---
 
-Login to your portal, please enter your email for a secure login link.
+To login, please enter your email for a secure login link.
 
 Are you a new user? You can [sign up here](/signup)

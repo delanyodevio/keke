@@ -1,9 +1,7 @@
 ---
 layout: "layouts/home.html"
-title: "Keke.Money | convenient, sustainable and consistent."
+title: "Keke.Money | More happiness tomorrow."
 intro:
-  eyebrow: "Now, saving money is"
-  main: "Convenient, Sustainable & Consistent"
-  buttonText: "check it out."
+  buttonText: "start for free."
   buttonUrl: "/signup"
 ---

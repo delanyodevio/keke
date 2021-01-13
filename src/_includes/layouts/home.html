@@ -4,35 +4,161 @@
   <article class="intro">
     <div class="intro__content">
       <h1 class="text-800 weight-bold">
-        {{ intro.eyebrow }}
-        <span class="weight-normal text-600">{{ intro.main }}</span>
+        Save in a way that <br />
+        suits you with,
+        <span class="weight-normal text-600">more happiness tomorrow.</span>
       </h1>
-      <p class="intro__summary">
-        Imagine how good you'd be at doing something if you'd done it without
-        interruption, delay and disturbance.
-      </p>
-      <p>
-        At <span class="site-name">Keke<span>.</span>Money</span>, you prolly
-        don't need that paperwork thing getting into your way. We help you to
-        conveniently create <strong>sustainable saving funds</strong> so that
-        you can be consistent.
-      </p>
+      <ul class="intro__list">
+        <li>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+          <span>Create multiple saving funds in seconds.</span>
+        </li>
+        <li>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+          <span>
+            Save for the things that matter with custom defined funds.
+          </span>
+        </li>
+        <li>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+          <span>Stay in control and easily manage your funds.</span>
+        </li>
+        <li>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+          <span>
+            Grow your savings with ({{ site_data.interest }} + 1)% annual
+            equivalent interest.
+          </span>
+        </li>
+        <li>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+          <span>
+            Stay consistent on your savings with self defined locking.
+          </span>
+        </li>
+        <li>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+          <span>
+            Get a free <strong>micro fund</strong> as a checking account for
+            your day to day spending activities.
+          </span>
+        </li>
+
+        <li>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+          <span>Get free financial insights and do more with your money.</span>
+        </li>
+      </ul>
       <a href="{{ intro.buttonUrl }}" class="button">
         {{ intro.buttonText }}
-        <span class="text-300 weight-normal">it's easy.</span>
       </a>
     </div>
 
-    <figure>
-      <img
-        src="/images/bg/personal_goal.webp"
-        alt="Your biggest personal goal made easy."
-        class="radius"
-      />
-      <figcaption class="text-400 weight-normal">
-        Your biggest personal goal sorted, you're now consistent.
-      </figcaption>
-    </figure>
+    <div class="intro__images">
+      <figure>
+        <img
+          src="/images/bg/personal_goal.webp"
+          alt=" Saving is hard, so we made it simpler."
+        />
+        <figcaption class="text-400 weight-normal">
+          Saving is hard, so we made it simpler.
+        </figcaption>
+      </figure>
+
+      <figure>
+        <img
+          src="/images/bg/saving-lady.webp"
+          alt="Your biggest personal goal made easy."
+        />
+        <figcaption class="text-400 weight-normal">
+          Your saving can still do compounding magics for you.
+        </figcaption>
+      </figure>
+    </div>
   </article>
 
   <article class="work" id="how-it-works">
@@ -42,45 +168,41 @@
         <span class="weight-normal text-600">in 4 simple steps</span>
       </h2>
       <p>
-        <span class="site-name">Keke<span>.</span>Money</span>
-        {{site.description }}
+        <span class="site-name">Keke.Money</span> is a platform that helps you
+        save and manage your money in a way that suits you.
       </p>
     </div>
 
     <div class="work__content">
       <ol>
-        <li>
-          Be creative and name your fund. It's your way. Eg Kitchen Susu Fund,
-          etc.
-        </li>
-        <li>Put at least a year withdrawal lock period on the fund.</li>
+        <li>Give a custom name to your fund as you wish.</li>
+        <li>Easily lock your fund to help you stay consistent.</li>
         <li>
           Start depositing money into your fund just as you do with Susubox.
         </li>
-        <li>You Withdraw or relock when the lock period elapsed.</li>
+        <li>Cashout anytime when the fund is unlocked.</li>
       </ol>
-
-      <p>Stay convenient. Be consistent. Let your fund become sustainable.</p>
 
       <a href="{{ intro.buttonUrl }}" class="button">
         {{ intro.buttonText }}
-        <span class="text-300 weight-normal">it's easy.</span>
       </a>
     </div>
   </article>
 
-  <article class="quotes">
+  <article class="quote-container">
     <h2 class="text-800 weight-bold">
       Get Inspired
-      <span class="weight-normal text-600"
-        >want to get into the savings habit?</span
-      >
+      <span class="weight-normal text-600">
+        Life's spicy with rich words.
+      </span>
     </h2>
 
     <div class="quotations">
-      {% for item in quote.items %}
+      {% set quoteItems = global.arrayRandom(quote.items, 2) %}
+      <!-- for loop -->
+      {% for item in quoteItems %}
       <figure aria-label="{{ item.count }}">
-        <img src="{{ item.image }}" alt="{{ item.caption }}" />
+        <img src="{{ item.image }}" alt="{{ item.caption }}" class="radius" />
         <div class="quote">
           <blockquote>{{ item.text }}</blockquote>
           <figcaption>{{ item.cite }}</figcaption>
