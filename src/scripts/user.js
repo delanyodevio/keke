@@ -9,6 +9,9 @@ const cashoutForm = document.getElementById("cashoutForm");
 const personalForm = document.getElementById("personalForm");
 const successorForm = document.getElementById("successorForm");
 
+let userModal = document.getElementById("userPage");
+let userId = userModal.dataset.user;
+
 auth.onAuthStateChanged(function (user) {
   if (user) {
     signupUrl.classList.add("disabled");
@@ -72,7 +75,6 @@ auth.onAuthStateChanged(function (user) {
       };
 
       fundRef.set(fund, { merge: true }).then(function () {
-        window.localStorage.setItem(`${unique}`, phone);
         createFundButton.innerHTML = "create";
 
         let addFundSuccess = document.getElementById("addFundSuccess");
@@ -250,7 +252,7 @@ function renderPersonalInfo(doc) {
   });
 
   personalInfo.innerHTML = `
-    <h2 class="text-500">${user.name}</h2>
+    <h2 class="text-5q  100">${user.name}</h2>
     <div>
       <span>${user.phone}</span>
       <span>${user.email}</span>
@@ -276,82 +278,102 @@ function renderPersonalInfo(doc) {
 
 // Render user funds
 function renderFundInfo(snapshot) {
-  let html = "";
   let currency = window.localStorage.getItem("currency");
 
   snapshot.forEach(function (doc) {
     let fund = doc.data();
-    let records = doc.data().records;
 
     let dateCreated = fund.created.toDate();
     let startYear = dateCreated.getFullYear();
-    let startMonth = dateCreated.toLocalString("default", { month: "short" });
+    let startMonth = dateCreated.toLocaleString("default", { month: "short" });
     let startDay = dateCreated.getDate();
 
     let dateEnded = fund.ends.toDate();
     let endYear = dateEnded.getFullYear();
-    let endMonth = dateEnded.toLocalString("default", { month: "short" });
+    let endMonth = dateEnded.toLocaleString("default", { month: "short" });
     let endDay = dateEnded.getDate();
 
     let lockClass = fund.lock ? "locked" : "unlocked";
     let lockMessage = fund.lock ? "Locked" : "Unlocked";
-    let recordState =
-      records === undefined
-        ? ""
-        : `<a href="#${doc.id}records">View Activities</a>`;
 
     let tableData = "";
-    records.forEach(function (record) {
-      let when = record.when.toDate();
-      let day = when.getDate();
-      let month = when.toLocalString("default", { month: "short" });
-      let year = when.getFullYear();
-      let td = `
-            <tr>
-              <td>${day} ${month} ${year}</td>
-              <td>${record.type.toUpperCase()}</td>
-              <td>${record.amount}</td>
-            </tr>
-            `;
+    let table = "";
+    if (fund.records !== undefined) {
+      fund.records.forEach(function (record) {
+        let when = record.when.toDate();
+        let day = when.getDate();
+        let month = when.toLocaleString("default", { month: "short" });
+        let year = when.getFullYear();
+        let td = `
+              <tr>
+                <td>${record.type}</td>
+                <td>${record.amount}</td>
+                <td>${day} ${month} ${year}</td>
+              </tr>
+              `;
 
-      tableData += td;
-    });
+        tableData += td;
+      });
 
-    let div = `
-      <div class="eachFund">
-        <span class="total">${currency} ${fund.total}</span>
-        <div class="details">
-          <span class="name">${fund.name}</span>
-          <span class="phone">${fund.phone}</span>
-          <span class="${lockClass}">${lockMessage}</span>
-        </div>
-        <div class="date">
-          <span>Created, ${startDay} ${startMonth} ${startYear}</span>
-          <span>Ending, ${endDay} ${endMonth} ${endYear}</span>
-          <span class="${lockClass}">${lockMessage}</span>
-        </div>
-        <p>${fund.description}</p>
-        ${recordState}
-        
-        <table class="margin-top-500" id="${doc.id}records">
+      let recordsTable = `
+        <a href="#${doc.id}records" class="text-400" data-id="${doc.id}">Activities</a>
+
+        <table class="margin-top-500 disabled" id="${doc.id}records">
           <thead>
             <tr>
-              <th>Date</th>
               <th>Type</th>
-              <th>Amount</th>
+              <th>Amount (${currency})</th>
+              <th>Date</th>
             </tr>
           </thead>
           <tbody>
             ${tableData}
           </tbody>
         </table>
-      </div>
       `;
-    html += div;
-  });
 
-  fundsInfo.innerHTML = html;
+      table = recordsTable;
+    }
+
+    let div = `
+      <div class="eachFund">
+        <span>${currency} ${fund.total}</span>
+
+        <div class="description">
+          <span class="name">${fund.name}</span>
+          <p class="text-300">${fund.description}</p>
+        </div>
+
+        <div class="details text-300">
+          <span>${fund.phone}</span>
+          <span>Created, ${startDay} ${startMonth} ${startYear}</span>
+          <span>Ending, ${endDay} ${endMonth} ${endYear}</span>
+          <span class="${lockClass}">${lockMessage}</span>
+        </div>
+        
+        <div class="table">${table}</div>
+      `;
+    fundsInfo.innerHTML += div;
+  });
 }
+
+// shows/hides the records table
+fundsInfo.addEventListener("click", function (event) {
+  console.log(event);
+  let id = event.target.getAttribute("data-id");
+
+  let table = document.getElementById(`${id}records`);
+
+  if (event.target.tagName === "A") {
+    table.classList.toggle("disabled");
+  }
+
+  if (event.target.innerText === "Activities") {
+    event.target.innerText = "Hide activities";
+  } else {
+    event.target.innerText = "Activities";
+  }
+});
 
 let depositFund = document.getElementById("depositFund");
 let depositPhone = document.getElementById("depositPhone");
@@ -365,9 +387,12 @@ pickPhoneNumber(cashoutFund, cashoutPhone);
 function pickPhoneNumber(inputElement, outputElement) {
   inputElement.addEventListener("input", function () {
     let name = inputElement.value.replace(/\s+/g, "").trim().toLowerCase();
-    let phone = window.localStorage.getItem(name);
+    let ref = store.collection("users").doc(userId);
 
-    outputElement.value = phone;
+    let fundRef = ref.collection("funds").doc(name);
+    fundRef.get().then(function (doc) {
+      outputElement.value = doc.data().phone;
+    });
   });
 }
 

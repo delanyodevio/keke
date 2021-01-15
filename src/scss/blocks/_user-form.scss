@@ -1,7 +1,7 @@
 .user-form {
   margin-top: get-size("500");
   padding: get-size("400");
-  border: 0.2rem solid get-color("primary-glare");
+  border: 2px solid #ddd;
   border-radius: 0.25rem;
 
   input {
@@ -28,7 +28,7 @@
 
   .button {
     cursor: pointer;
-    margin-right: get-size("500");
+    margin-right: get-size("300");
     margin-top: get-size("500");
   }
 }

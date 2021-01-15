@@ -158,7 +158,7 @@ let lockYearsInput = document.getElementById("lockYears");
 lockYearsInput.addEventListener("input", function () {
   let today = new Date(Date.now());
   let year = today.getFullYear();
-  let month = today.toLocalString("default", { month: "short" });
+  let month = today.toLocaleString("default", { month: "short" });
   let day = today.getDate();
   let lockYears = lockYearsInput.value;
   let endYear = parseInt(lockYears) + parseInt(year);
@@ -187,5 +187,5 @@ window.addEventListener("DOMContentLoaded", function () {
     loadingPage.classList.add("disabled");
 
     userPage.classList.remove("disabled");
-  }, 10000);
+  }, 7000);
 });

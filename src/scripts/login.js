@@ -13,6 +13,9 @@ var project = firebase.initializeApp(config);
 // reference firebase services
 const auth = project.auth();
 
+let loginModal = document.getElementById("loginModal");
+let loggedModal = document.getElementById("loggedModal");
+
 const login = document.getElementById("loginForm");
 const successMessage = document.getElementById("successMessage");
 const errorMessage = document.getElementById("errorMessage");
@@ -22,6 +25,21 @@ const actionCodeSettings = {
   url: "http://localhost:8080/login/onboard/",
   handleCodeInApp: true,
 };
+
+auth.onAuthStateChanged(function (user) {
+  if (user) {
+    loginModal.classList.add("disabled");
+    loggedModal.classList.remove("disabled");
+
+    loggedModal.addEventListener("click", function (event) {
+      event.preventDefault();
+      window.location.assign(`/users/${user.uid}`);
+    });
+  } else {
+    loggedModal.classList.add("disabled");
+    loginModal.classList.remove("disabled");
+  }
+});
 
 login.addEventListener("submit", function (event) {
   event.preventDefault();

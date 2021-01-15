@@ -1,8 +1,132 @@
-.funds-info > div,
-.account-info {
+.fundModal {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
-  align-content: space-between;
+
+  @include media-query("lg") {
+    > *:last-child {
+      max-width: 29%;
+    }
+  }
+}
+
+.account-info {
+  padding: get-size("400");
+  border: 2px solid #ddd;
+  border-radius: 0.25rem;
+
+  .personalInfo {
+    margin-bottom: get-size("700");
+  }
+
+  span {
+    display: block;
+  }
+}
+
+.all-funds {
+  .eachFund {
+    padding: get-size("400");
+    border: 2px solid #ddd;
+    border-radius: 0.25rem;
+
+    span {
+      display: block;
+    }
+
+    .details {
+      margin-top: get-size("300");
+      margin-bottom: get-size("300");
+    }
+
+    .name {
+      color: get-color("quaternary");
+    }
+  }
+
+  .eachFund + .eachFund {
+    margin-top: get-size("500");
+  }
+
+  .table {
+    i {
+      color: get-color("quaternary");
+      margin-left: get-size("600");
+      cursor: pointer;
+    }
+  }
+}
+
+.section {
+  margin-top: get-size("500");
+
+  p,
+  h2 {
+    margin: 0;
+    max-width: 30ch;
+  }
+
+  h2 {
+    margin-bottom: get-size("300");
+  }
+}
+
+.setting-modal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  justify-content: space-between;
+
+  p {
+    max-width: 30ch;
+  }
+}
+
+.payment-method {
+  border: 0.1rem dashed get-color("primary");
+  padding: 0.4rem;
+  border-radius: 0.25rem;
+
+  p {
+    margin: 0;
+  }
+
+  label {
+    display: flex;
+    margin-top: get-size("300");
+    font-size: 2.25rem;
+    align-items: center;
+    cursor: pointer;
+
+    img {
+      width: 10rem;
+      height: 3rem;
+      object-fit: contain;
+      border-radius: 0.25rem;
+    }
+
+    .radio__input {
+      display: flex;
+      align-items: center;
+
+      input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+
+        &:checked + .radio__control {
+          background-color: get-color("quaternary-shade");
+        }
+      }
+    }
+
+    .radio__control {
+      display: block;
+      width: 0.65em;
+      height: 0.65em;
+      border-radius: 50%;
+      border: 0.1rem solid get-color("quaternary-shade");
+    }
+  }
 }

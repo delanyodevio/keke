@@ -6,6 +6,11 @@ table {
   td {
     border: 0.1rem solid get-color("dark-glare");
     padding: get-size("300");
+    font-size: get-size("300");
     text-align: center;
+  }
+
+  td {
+    font-weight: normal;
   }
 }
