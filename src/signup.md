@@ -1,7 +1,6 @@
 ---
 layout: "layouts/signup.html"
 title: "Signup"
-permalink: "/signup/"
 scripts:
   - "https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"
   - "https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"

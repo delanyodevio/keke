@@ -6,13 +6,13 @@ pageHeaderSummary = content %} {% set pageCriticalStyles = ['css/account.css']
     <div class="[ errorMessage ] [ disabled ]" id="errorMessage"></div>
   </article>
 
-  <article class="account" id="signupPage">
+  <article class="account">
     <div id="pageHeader">{% include "partials/page-header.html" %}</div>
 
     <div class="[ errorMessage ] [ disabled ]" id="errorMessage"></div>
 
     <!-- // signup form -->
-    <form class="[ account-form ] [ disabled ]" id="onboardForm">
+    <form class="account-form" id="onboardForm">
       <label for="fullname">Your full name</label>
       <input
         type="text"
@@ -68,15 +68,6 @@ pageHeaderSummary = content %} {% set pageCriticalStyles = ['css/account.css']
 
       <button type="submit" id="signupButton">create account</button>
     </form>
-
-    <div class="disabled" id="loginReturnMessage" aria-hidden="true">
-      <p>
-        The email address already exist
-        <a class="button" id="loginReturnButton" href="/login">please login</a>
-      </p>
-    </div>
   </article>
-
-  {% include "partials/success_signup.html" %}
 </div>
 {% endblock %}

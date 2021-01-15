@@ -24,7 +24,7 @@ auth.onAuthStateChanged(function (user) {
     let ref = store.collection("users").doc(user.uid);
     let fundsCollection = ref.collection("funds");
 
-    // fetches and listens to a user.uid document in the users collection
+    //listens and fetches to a user.uid document in the users collection
     ref.onSnapshot(function (doc) {
       renderPersonalInfo(doc);
 
@@ -232,7 +232,7 @@ auth.onAuthStateChanged(function (user) {
     loginUrl.classList.remove("disabled");
     logoutUrl.classList.add("disabled");
 
-    window.location.assign("/login");
+    window.location.assign("/");
   }
 });
 

@@ -13,31 +13,18 @@ var project = firebase.initializeApp(config);
 // reference firebase services
 const auth = project.auth();
 
-let loginModal = document.getElementById("loginModal");
-let loggedModal = document.getElementById("loggedModal");
-
 const login = document.getElementById("loginForm");
-const successMessage = document.getElementById("successMessage");
 const errorMessage = document.getElementById("errorMessage");
 const loginButton = document.getElementById("loginButton");
 
 const actionCodeSettings = {
-  url: "http://localhost:8080/login/onboard/",
+  url: `${window.location.origin}/onboard`,
   handleCodeInApp: true,
 };
 
 auth.onAuthStateChanged(function (user) {
   if (user) {
-    loginModal.classList.add("disabled");
-    loggedModal.classList.remove("disabled");
-
-    loggedModal.addEventListener("click", function (event) {
-      event.preventDefault();
-      window.location.assign(`/users/${user.uid}`);
-    });
-  } else {
-    loggedModal.classList.add("disabled");
-    loginModal.classList.remove("disabled");
+    window.location.assign(`/users/${user.uid}`);
   }
 });
 
@@ -53,10 +40,7 @@ login.addEventListener("submit", function (event) {
     .then(function () {
       window.localStorage.setItem("emailForSignIn", email);
 
-      successMessage.classList.remove("disabled");
-
-      login.classList.add("disabled");
-      login.setAttribute("aria-hidden", "true");
+      window.location.assign("/pages/success");
     })
     .catch(function () {
       loginButton.innerHTML = "try again";

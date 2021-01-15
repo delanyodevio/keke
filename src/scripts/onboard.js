@@ -1,10 +1,7 @@
 const onboardForm = document.getElementById("onboardForm");
-const successModal = document.getElementById("successPage");
-const signupModal = document.getElementById("signupPage");
 const errorMessage = document.getElementById("errorMessage");
 const phoneNumberInput = document.getElementById("phone");
 const signupButton = document.getElementById("signupButton");
-const loginReturnButton = document.getElementById("loginReturnButton");
 
 // Confirm the link is a sign-in with email link.
 if (auth.isSignInWithEmailLink(window.location.href)) {
@@ -12,34 +9,67 @@ if (auth.isSignInWithEmailLink(window.location.href)) {
   if (!email) {
     // User opened the link on a different device. To prevent session fixation
     // attacks, ask the user to provide the associated email again. For example:
-    email = window.prompt(
-      "Email not verified, please provide your email for confirmation"
-    );
+    email = window.prompt("Please provide your email for verification.");
   }
 
   auth
     .signInWithEmailLink(email, window.location.href)
     .then(function (result) {
       if (result.additionalUserInfo.isNewUser) {
-        window.localStorage.setItem("userId", result.user.uid);
-        window.localStorage.setItem("userEmail", result.user.email);
-
-        onboardForm.classList.remove("disabled");
-
         let emailInput = document.getElementById("email");
         emailInput.value = result.user.email;
+
+        onboardForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          signupButton.innerHTML = "working...";
+
+          let fullname = makeSafeText(onboardForm.fullname.value);
+          let username = result.user.uid;
+          let email = result.user.email;
+          let phone = window.sessionStorage.getItem("phoneStored");
+          let country = window.sessionStorage.getItem("countryStored");
+
+          let data = {
+            name: fullname,
+            email: email,
+            country: country,
+            phone: phone,
+          };
+
+          let ref = store.collection("users").doc(username);
+
+          ref
+            .set(data)
+            .then(function () {
+              let ref = db.ref("usernames/" + "items");
+
+              let listRef = ref.push();
+
+              listRef.set(username).then(function () {
+                onboardForm.reset();
+                window.localStorage.removeItem("emailForSignIn");
+
+                window.location.assign("/pages/waiting/");
+              });
+            })
+            .catch(function () {
+              signupButton.innerHTML = "try again";
+              errorMessage.classList.remove("disabled");
+              errorMessage.innerHTML = `<p>Error processing your form. Please try again.</p>`;
+
+              setTimeout(() => {
+                errorMessage.classList.add("disabled");
+              }, 5000);
+            });
+        });
       } else {
-        let loginReturnMessage = document.getElementById("loginReturnMessage");
-        loginReturnMessage.classList.remove("disabled");
-
-        window.localStorage.setItem("userId", result.user.uid);
-
-        onboardForm.classList.add("disabled");
+        window.location.assign(`/users/${result.user.uid}/`);
       }
     })
-    .catch(function (error) {
+    .catch(function () {
       errorMessage.classList.remove("disabled");
-      errorMessage.innerHTML = `<p>${error.message}</p>`;
+      errorMessage.innerHTML = `<p>Error handling authentication. Please try again.</p>`;
     });
 }
 
@@ -60,67 +90,6 @@ phoneNumberInput.addEventListener("input", function () {
 
   window.sessionStorage.setItem("countryStored", country);
   window.sessionStorage.setItem("phoneStored", phone);
-});
-
-onboardForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-
-  signupButton.innerHTML = "working...";
-
-  let fullname = makeSafeText(onboardForm.fullname.value);
-  let username = window.localStorage.getItem("userId");
-  let email = window.localStorage.getItem("userEmail");
-  let phone = window.sessionStorage.getItem("phoneStored");
-  let country = window.sessionStorage.getItem("countryStored");
-
-  let data = {
-    name: fullname,
-    email: email,
-    country: country,
-    phone: phone,
-  };
-
-  let ref = store.collection("users").doc(username);
-
-  ref
-    .set(data)
-    .then(function () {
-      let ref = db.ref("usernames/" + "items");
-
-      let listRef = ref.push();
-
-      listRef.set(username).then(function () {
-        onboardForm.reset();
-        signupModal.classList.add("disabled");
-        successModal.classList.remove("disabled");
-
-        window.localStorage.removeItem("userId");
-        window.localStorage.removeItem("userEmail");
-        window.localStorage.removeItem("emailForSignIn");
-      });
-    })
-    .catch(function () {
-      signupButton.innerHTML = "try again";
-      errorMessage.classList.remove("disabled");
-      errorMessage.innerHTML = `<p>Error processing your form. Please try again.</p>`;
-
-      setTimeout(() => {
-        errorMessage.classList.add("disabled");
-      }, 5000);
-    });
-});
-
-loginReturnButton.addEventListener("click", function (event) {
-  event.preventDefault();
-
-  let userId = window.localStorage.getItem("userId");
-  let loginUrl = `/users/${userId}`;
-
-  window.localStorage.removeItem("userId");
-  window.localStorage.removeItem("userEmail");
-  window.localStorage.removeItem("emailForSignIn");
-
-  window.location.assign(loginUrl);
 });
 
 // make a safe text

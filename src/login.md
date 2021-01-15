@@ -1,7 +1,6 @@
 ---
 layout: "layouts/login.html"
 title: "Login"
-permalink: "/login/"
 scripts:
   - "https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"
   - "https://www.gstatic.com/firebasejs/8.2.0/firebase-auth.js"

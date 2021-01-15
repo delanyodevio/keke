@@ -1,0 +1,9 @@
+{% extends 'layouts/base.html' %} {% set pageHeaderTitle = title %} {% if sub %}
+{% set pageHeaderSummary = sub %} {% endif %} {% block content %}
+<div class="wrapper">
+  <article>
+    <div>{% include "partials/page-header.html" %}</div>
+    {{ content | safe }}
+  </article>
+</div>
+{% endblock %}

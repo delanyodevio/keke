@@ -14,14 +14,19 @@ var project = firebase.initializeApp(config);
 const auth = project.auth();
 
 const signup = document.getElementById("signupForm");
-const successMessage = document.getElementById("successMessage");
 const errorMessage = document.getElementById("errorMessage");
 const signupButton = document.getElementById("signupButton");
 
 const actionCodeSettings = {
-  url: "http://localhost:8080/onboard/",
+  url: `${window.location.origin}/onboard`,
   handleCodeInApp: true,
 };
+
+auth.onAuthStateChanged(function (user) {
+  if (user) {
+    window.location.assign(`/users/${user.uid}`);
+  }
+});
 
 signup.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -35,9 +40,7 @@ signup.addEventListener("submit", function (event) {
     .then(function () {
       window.localStorage.setItem("emailForSignIn", email);
 
-      successMessage.classList.remove("disabled");
-
-      signup.classList.add("disabled");
+      window.location.assign("/pages/success");
     })
     .catch(function () {
       signupButton.innerHTML = "try again";

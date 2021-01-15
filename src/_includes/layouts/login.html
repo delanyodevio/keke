@@ -5,34 +5,28 @@ pageHeaderSummary = content %} {% set pageCriticalStyles = ['css/account.css']
   <article class="account">
     {% include "partials/page-header.html" %}
 
-    <div id="loginModal">
-      <div class="[ successMessage ] [ disabled ]" id="successMessage">
-        <p>
-          Success. A message was sent to your email account with a link, click
-          on the link and open it in this browser to continue.
-        </p>
-      </div>
+    <form
+      class="account-form"
+      id="loginForm"
+      name="users"
+      method="POST"
+      data-netlify="true"
+      action="/pages/success"
+    >
+      <div class="[ errorMessage ] [ disabled ]" id="errorMessage"></div>
 
-      <form class="login-form" id="loginForm">
-        <div class="[ errorMessage ] [ disabled ]" id="errorMessage"></div>
+      <label for="email">Enter your email address for a secure link.</label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Email address here"
+        required
+        aria-required="true"
+      />
 
-        <label for="email">Enter your email address for a secure link.</label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          placeholder="Email address here"
-          required
-          aria-required="true"
-        />
-
-        <button type="submit" id="loginButton">Send me secure link.</button>
-      </form>
-    </div>
-
-    <div id="loggedModal" class="disabled">
-      <a href="/" class="button" id="toDashboard">Go to dashboard</a>
-    </div>
+      <button type="submit" id="loginButton">Send me secure link.</button>
+    </form>
   </article>
 </div>
 {% endblock %}
