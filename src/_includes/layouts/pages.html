@@ -1,7 +1,8 @@
-{% extends 'layouts/base.html' %} {% set pageHeaderTitle = title %} {% if sub %}
-{% set pageHeaderSummary = sub %} {% endif %} {% block content %}
-<div class="wrapper">
-  <article>
+{% extends 'layouts/base.html' %} {% set pageCriticalStyles = ['css/pages.css']
+%} {% set pageHeaderTitle = title %} {% if sub %} {% set pageHeaderSummary = sub
+%} {% endif %} {% block content %}
+<div class="page-wrapper">
+  <article class="pages">
     <div>{% include "partials/page-header.html" %}</div>
     {{ content | safe }}
   </article>

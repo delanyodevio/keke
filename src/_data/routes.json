@@ -36,7 +36,10 @@
       "text": "About",
       "url": "/about"
     },
-
+    {
+      "text": "Blog",
+      "url": "https://keke.blog"
+    },
     {
       "text": "How it works",
       "url": "/#how-it-works"
@@ -52,6 +55,10 @@
     {
       "text": "Privacy Policy",
       "url": "/policy/privacy"
+    },
+    {
+      "text": "Transparency Note",
+      "url": "/pages/transparency"
     }
   ],
   "user": [

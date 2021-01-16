@@ -14,6 +14,7 @@ const criticalStyles = [
   "home.scss",
   "account.scss",
   "user.scss",
+  "pages.scss",
 ];
 
 // Takes the arguments passed by `dest` and determines where the output file goes
