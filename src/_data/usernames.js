@@ -16,7 +16,7 @@ module.exports = async () => {
     const { items } = await Cache(
       `https://keke-money-default-rtdb.firebaseio.com/usernames.json?auth=${CREDENTIAL}`,
       {
-        duration: "100d",
+        duration: "15h",
         type: "json",
       }
     );
