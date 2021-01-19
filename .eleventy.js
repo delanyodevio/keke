@@ -6,6 +6,16 @@ module.exports = (config) => {
   config.addPassthroughCopy("./src/manifest.json");
   config.addPassthroughCopy("./src/sw.js");
 
+  // Transforms
+  const htmlMinTransform = require("./src/transforms/html-min-transforms.js");
+
+  // Create a helpful production flag
+  const isProduction = process.env.NODE_ENV == "production";
+
+  if (isProduction) {
+    config.addTransform("htmlmin", htmlMinTransform);
+  }
+
   // Tell 11ty to use the .eleventyignore and ignore our .gitignore files
   config.setUseGitIgnore(false);
 

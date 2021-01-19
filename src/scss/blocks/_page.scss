@@ -5,14 +5,9 @@
 
   h2 {
     margin-top: get-size("800");
-    margin-bottom: get-size("300");
   }
 
   ul {
-    list-style-type: none;
-    padding-left: 0;
-    font-style: italic;
-
     li + li {
       margin-top: get-size("600");
     }
