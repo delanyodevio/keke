@@ -1,15 +1,18 @@
-window.onscroll = function () {
-  makeHeaderSticky();
+/**
+ * window.onscroll = function () {
+  makeStickyHeader();
 };
 
-const header = document.querySelector("#stickyHeader");
+const header = document.getElementById("stickyHeader");
 
 let sticky = header.offSetTop;
 
-function makeHeaderSticky() {
+function makeStickyHeader() {
   if (window.pageYOffset >= sticky) {
     header.classList.add("sticky");
   } else {
     header.classList.remove("sticky");
   }
 }
+
+ */

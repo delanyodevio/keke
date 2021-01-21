@@ -1,8 +1,11 @@
-.sticky {
-  position: fixed;
+.stickyHeader {
+  position: sticky;
   top: 0;
+  width: 100%;
+  background-color: get-color("light");
+  z-index: 10;
 }
 
-.sticky + * {
-  padding-top: 3.75rem;
+.sticky + .content {
+  padding-top: 102px;
 }

@@ -1,8 +1,25 @@
-{% set pageTitle = title + " - " + site.name %} {% if site.name === title %} {%
-set pageTitle = title %} {% endif %} {% set siteTitle = site.name %} {% set
-currentUrl = site.url + page.url %} {% set siteLogo = site.logo %} {% set
-siteLogoAlt = site.caption %} {% if metaTitle %} {% set pageTitle = metaTitle %}
-{% endif %} {% if not metaDesc %} {% set metaDesc = content %} {% endif %}
+{% set pageTitle = title + " - " + site.name %}
+
+<!-- 1 -->
+{% if site.name === title %} {% set pageTitle = title %} {% endif %}
+
+<!-- 2 -->
+{% set siteTitle = site.name %}
+
+<!-- 3 -->
+{% set currentUrl = site.url + page.url %}
+
+<!-- 4 -->
+{% set logo = site.logo %}
+
+<!-- 5 -->
+{% set logoAlt = site.logoCaption %}
+
+<!-- 6 -->
+{% if metaTitle %} {% set pageTitle = metaTitle %} {% endif %}
+
+<!-- 7 -->
+{% if not metaDesc %} {% set metaDesc = content %} {% endif %}
 
 <title>{{ pageTitle }}</title>
 <link rel="canonical" href="{{ currentUrl }}" />
@@ -13,13 +30,15 @@ siteLogoAlt = site.caption %} {% if metaTitle %} {% set pageTitle = metaTitle %}
 <meta property="og:url" content="{{ currentUrl }}" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta property="og:image" content="{{ siteLogo }}" />
-<meta name="og:twitter:image" content="{{ siteLogo }}" />
-<meta property="og:image:alt" content="{{ siteLogoAlt }}" />
-<meta name="twitter:image:alt" content="{{ siteLogoAlt }}" />
+<meta property="og:image" content="{{ logo }}" />
+<meta name="og:twitter:image" content="{{ logo }}" />
+<meta property="og:image:alt" content="{{ logoAlt }}" />
+<meta name="twitter:image:alt" content="{{ logoAlt }}" />
 
 {% if metaDesc %}
 <meta name="description" content="{{ metaDesc }}" />
 <meta name="twitter:description" content="{{ metaDesc }}" />
 <meta property="og:description" content="{{ metaDesc }}" />
 {% endif %}
+
+<link rel="icon" href="/images/icons/favicon.svg" type="image/svg+xml" />

@@ -1,5 +1,10 @@
-{% set assetHash = global.random() %} {% set css = styles %} {% set js = scripts
-%}
+{% set assetHash = global.random() %}
+
+<!-- style variable -->
+{% set css = styles %}
+
+<!-- script injection -->
+{% set js = scripts %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,8 +14,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     {% include "partials/meta.html" %}
 
-    <link rel="manifest" href="/manifest.json" />
-    {% include "partials/icon.html" %}
+    <!-- pwa -->
+    {% include "partials/pwa.html" %}
 
     <style>
       {% include "css/critical.css" %}

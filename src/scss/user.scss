@@ -8,7 +8,7 @@ $outputTokenCSS: false;
 @import "../../node_modules/gorko/gorko.scss";
 
 // Pull in blocks
-@import "blocks/user-header.scss";
+@import "blocks/user-header";
 @import "blocks/user-form";
 @import "blocks/funds";
 @import "blocks/install-app";

@@ -2,6 +2,7 @@
 layout: "layouts/pages.html"
 title: "About us."
 sub: "wanna check who we are and what we do?"
+metaDesc: "Create multiple saving funds in minutes and manage them seamlessly all under one account."
 ---
 
 ## The suitable way to start
@@ -15,16 +16,13 @@ all under one account.
 
 Keke Labs Limited is the company behind <span class="site-name">Keke.Money</span> platform. We are registered and located in Ghana with registration Number xxxxxxxx. We are authorized and in partnership with [XYZ Bank](/) to conduct financial activities ([see our full partnership disclosure](/)). As we offer financial service, we are also regulated by the Bank of Ghana.
 
-## Our principles
+## Our philosophy
 
-Here is our direction and values.
+We believe in pointing the needle towards the things that really matter in life. We believe in education, value creation, privacy, openness and inclusion. We're always learning from our users in order to contribute to the open society and to create more values. Likewise we want to assist and protect our users in whatever matters to them whether be it privacy or inclusion.
 
-- We believe in creating more values than capturing.
-- We believe in pointing the needle towards the things that
-  really matter in life.
-- We believe in education, freedom and privacy. We want to learn
-  from our users in order to contribute to the open society.
-  Likewise we want to assist and protect our users.
+Just as we're always open to new streams of ideas, it's also important to us to create more values than capturing any at all. We knew when we started Keke that we wanted to be intentional about value creation. Keke should a place where opinions are heard, decisions are respected, ideas are tested and value creation is a A-listed.
+
+We have lots of ideas about how to build a superb place to work, and we're exited to find the right people who are willing to contribute their ideas, enthusiasm and expertise.
 
 ## Reach us
 

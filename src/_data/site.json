@@ -8,11 +8,11 @@
     },
     {
       "text": "Contact",
-      "url": "contact@keke.money"
+      "url": "hello@keke.money"
     }
   ],
   "phone": "233240489424",
-  "logo": "/images/bg/favicon.svg",
-  "caption": "Logo of Keke.Money",
+  "logo": "/images/bg/brand.svg",
+  "logoCaption": "Keke.Money",
   "social": { "twitter": "keke.money" }
 }

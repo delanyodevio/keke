@@ -21,7 +21,9 @@ function visuallyShowElement(element) {
   element.classList.remove("disabled");
 }
 
-fundUrl.addEventListener("click", function () {
+fundUrl.addEventListener("click", function (event) {
+  event.preventDefault();
+
   visuallyShowElement(fundId);
   visuallyShowElement(fundHeadline);
 
@@ -34,7 +36,9 @@ fundUrl.addEventListener("click", function () {
   visuallyHideElement(settingHeadline);
 });
 
-paymentUrl.addEventListener("click", function () {
+paymentUrl.addEventListener("click", function (event) {
+  event.preventDefault();
+
   visuallyShowElement(paymentId);
   visuallyShowElement(paymentHeadline);
 
@@ -47,7 +51,9 @@ paymentUrl.addEventListener("click", function () {
   visuallyHideElement(settingHeadline);
 });
 
-suggestionUrl.addEventListener("click", function () {
+suggestionUrl.addEventListener("click", function (event) {
+  event.preventDefault();
+
   visuallyShowElement(suggestionId);
   visuallyShowElement(supportHeadline);
 
@@ -60,7 +66,9 @@ suggestionUrl.addEventListener("click", function () {
   visuallyHideElement(settingHeadline);
 });
 
-settingUrl.addEventListener("click", function () {
+settingUrl.addEventListener("click", function (event) {
+  event.preventDefault();
+
   visuallyShowElement(settingId);
   visuallyShowElement(settingHeadline);
 

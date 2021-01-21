@@ -3,12 +3,6 @@
   border-bottom: 0.4rem solid get-color("primary");
   z-index: 9;
   background-color: get-color("light");
-  position: relative;
-
-  nav {
-    position: sticky;
-    top: 0;
-  }
 
   &__list {
     display: flex;
