@@ -3,9 +3,10 @@
   "short_name": "Keke.Money",
   "description": "More happiness tomorrow.",
   "start_url": "/index.html",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#35b729",
-  "theme_color": "#263147",
+  "background_color": "#263147",
+  "theme_color": "#35b729",
   "orientation": "portrait-primary",
   "icons": [
     {
@@ -110,5 +111,6 @@
       "sizes": "512x512",
       "purpose": "maskable"
     }
-  ]
+  ],
+  "splash_pages": null
 }

@@ -2,6 +2,9 @@ const Cache = require("@11ty/eleventy-cache-assets");
 require("dotenv").config();
 
 const CREDENTIAL = process.env.FIREBASE_CREDENTIAL;
+const isProduction = process.env.NODE_ENV == "production";
+
+const duration = isProduction ? "10h" : "200d";
 
 /**
  * Grabs the remote data form firebase and returns back
@@ -16,7 +19,7 @@ module.exports = async () => {
     const { items } = await Cache(
       `https://keke-money-default-rtdb.firebaseio.com/usernames.json?auth=${CREDENTIAL}`,
       {
-        duration: "100d",
+        duration: duration,
         type: "json",
       }
     );

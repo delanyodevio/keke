@@ -10,7 +10,6 @@ lerna-debug.log*
 .DS_Store
 Thumbs.db
 .sass-cache
-.cache
 
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
