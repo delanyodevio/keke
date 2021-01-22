@@ -5,14 +5,7 @@ pageHeaderSummary = content %} {% set pageCriticalStyles = ['css/account.css']
   <article class="account">
     {% include "partials/page-header.html" %}
 
-    <form
-      class="account-form"
-      id="loginForm"
-      name="users"
-      method="POST"
-      data-netlify="true"
-      action="/pages/success"
-    >
+    <form class="account-form" id="loginForm" action="/pages/success">
       <div class="[ errorMessage ] [ disabled ]" id="errorMessage"></div>
 
       <label for="email">Enter your email address for a secure link.</label>
