@@ -1,100 +1,37 @@
-const fundUrl = document.querySelector("#fundsUrl");
-const paymentUrl = document.querySelector("#paymentsUrl");
-const settingUrl = document.querySelector("#settingsUrl");
-const suggestionUrl = document.querySelector("#suggestionsUrl");
+// Toggles between the loading... interface and the content
+// rendering interface.
+let loadingPage = document.getElementById("loadingPage");
+let userPage = document.getElementById("userPage");
+window.addEventListener("DOMContentLoaded", function () {
+  setTimeout(function () {
+    loadingPage.classList.add("disabled");
 
-const fundId = document.querySelector("#fund");
-const paymentId = document.querySelector("#payment");
-const settingId = document.querySelector("#setting");
-const suggestionId = document.querySelector("#suggestions");
-
-const fundHeadline = document.querySelector("#fundHeadline");
-const paymentHeadline = document.querySelector("#paymentHeadline");
-const supportHeadline = document.querySelector("#supportHeadline");
-const settingHeadline = document.querySelector("#settingHeadline");
-
-function visuallyHideElement(element) {
-  element.classList.add("disabled");
-}
-
-function visuallyShowElement(element) {
-  element.classList.remove("disabled");
-}
-
-fundUrl.addEventListener("click", function (event) {
-  event.preventDefault();
-
-  visuallyShowElement(fundId);
-  visuallyShowElement(fundHeadline);
-
-  visuallyHideElement(settingId);
-  visuallyHideElement(paymentId);
-  visuallyHideElement(suggestionId);
-
-  visuallyHideElement(paymentHeadline);
-  visuallyHideElement(supportHeadline);
-  visuallyHideElement(settingHeadline);
-});
-
-paymentUrl.addEventListener("click", function (event) {
-  event.preventDefault();
-
-  visuallyShowElement(paymentId);
-  visuallyShowElement(paymentHeadline);
-
-  visuallyHideElement(fundId);
-  visuallyHideElement(settingId);
-  visuallyHideElement(suggestionId);
-
-  visuallyHideElement(fundHeadline);
-  visuallyHideElement(supportHeadline);
-  visuallyHideElement(settingHeadline);
-});
-
-suggestionUrl.addEventListener("click", function (event) {
-  event.preventDefault();
-
-  visuallyShowElement(suggestionId);
-  visuallyShowElement(supportHeadline);
-
-  visuallyHideElement(settingId);
-  visuallyHideElement(fundId);
-  visuallyHideElement(paymentId);
-
-  visuallyHideElement(fundHeadline);
-  visuallyHideElement(paymentHeadline);
-  visuallyHideElement(settingHeadline);
-});
-
-settingUrl.addEventListener("click", function (event) {
-  event.preventDefault();
-
-  visuallyShowElement(settingId);
-  visuallyShowElement(settingHeadline);
-
-  visuallyHideElement(fundId);
-  visuallyHideElement(paymentId);
-  visuallyHideElement(suggestionId);
-
-  visuallyHideElement(fundHeadline);
-  visuallyHideElement(paymentHeadline);
-  visuallyHideElement(supportHeadline);
+    userPage.classList.remove("disabled");
+  }, 7000);
 });
 
 // Opens the fund form
 let cancelFundButton = document.getElementById("cancelFundButton");
 let addFundLink = document.getElementById("addFundLink");
 
-addFundLink.addEventListener("click", function () {
+addFundLink.addEventListener("click", function (event) {
+  event.preventDefault();
+
+  createFundButton.innerHTML = "create";
   cancelFundButton.innerHTML = "cancel";
-  let addFundSuccess = document.getElementById("addFundSuccess");
   addFundSuccess.classList.add("disabled");
-  createFundForm.classList.remove("disabled");
+
+  let addFundError = document.getElementById("addFundError");
+  addFundError.classList.add("disabled");
+
+  createFundForm.classList.toggle("disabled");
 });
 
 // Cancels the add fun operation
 cancelFundButton.addEventListener("click", function (event) {
   event.stopPropagation();
+
+  createFundButton.innerHTML = "create";
 
   cancelFundButton.innerHTML = "working...";
   createFundForm.reset();
@@ -108,11 +45,13 @@ cancelFundButton.addEventListener("click", function (event) {
 const depositLink = document.getElementById("depositLink");
 let cancelDeposit = document.getElementById("cancelDeposit");
 
-depositLink.addEventListener("click", function () {
+depositLink.addEventListener("click", function (event) {
+  event.preventDefault();
+
   cancelDeposit.innerHTML = "cancel";
   let depositSuccess = document.getElementById("depositSuccess");
   depositSuccess.classList.add("disabled");
-  depositForm.classList.remove("disabled");
+  depositForm.classList.toggle("disabled");
 });
 
 cancelDeposit.addEventListener("click", function (event) {
@@ -129,7 +68,9 @@ cancelDeposit.addEventListener("click", function (event) {
 let cashoutLink = document.getElementById("cashoutLink");
 let cancelCashout = document.getElementById("cancelCashout");
 
-cashoutLink.addEventListener("click", function () {
+cashoutLink.addEventListener("click", function (event) {
+  event.preventDefault();
+
   cancelCashout.innerHTML = "cancel";
   let cashoutSuccess = document.getElementById("cashoutSuccess");
   let cashoutError = document.getElementById("cashoutError");
@@ -139,7 +80,7 @@ cashoutLink.addEventListener("click", function () {
   cashoutBtn.innerHTML = "cashout";
   cashoutSuccess.classList.add("disabled");
   cashoutError.classList.add("disabled");
-  cashoutForm.classList.remove("disabled");
+  cashoutForm.classList.toggle("disabled");
 });
 
 cancelCashout.addEventListener("click", function (event) {
@@ -184,16 +125,4 @@ lockYearsInput.addEventListener("input", function () {
   } else {
     endsAtInput.value = `Toady, ${day} ${month} ${year}`;
   }
-});
-
-// Toggles between the loading... interface and the content
-// rendering interface.
-let loadingPage = document.getElementById("loadingPage");
-let userPage = document.getElementById("userPage");
-window.addEventListener("DOMContentLoaded", function () {
-  setTimeout(function () {
-    loadingPage.classList.add("disabled");
-
-    userPage.classList.remove("disabled");
-  }, 7000);
 });

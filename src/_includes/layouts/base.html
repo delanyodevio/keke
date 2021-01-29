@@ -58,6 +58,7 @@
     {% if js %} {% for item in js %}
     <script defer src="{{ item }}"></script>
     {% endfor %} {% endif %}
+    <script defer src="/scripts/cookie.js"></script>
     <!-- scripts -->
   </head>
   {% set class = classify %}
@@ -80,5 +81,7 @@
     </main>
 
     {% include "partials/footer.html" %}
+    <!-- cookie notice -->
+    {% include "partials/cookie.html" %}
   </body>
 </html>

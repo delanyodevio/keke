@@ -1,6 +1,6 @@
 ---
 layout: "layouts/user.html"
-title: "Keke.Money | convenient and consistent."
+title: "More happiness tomorrow."
 pagination:
   data: usernames
   size: 1

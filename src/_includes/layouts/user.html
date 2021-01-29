@@ -4,15 +4,15 @@
 <!-- f -->
 {% block content %}
 <div class="wrapper" id="loadingPage">
-  <article class="[ centered ] [ text-800 weight-bold ]">
+  <div class="[ centered ] [ text-800 weight-bold ]">
     <p>WORKING...</p>
-  </article>
+  </div>
 </div>
 
 <div class="user disabled" id="userPage" data-user="{{ user }}">
   <div class="stickyHeader">{% include "partials/user-header.html" %}</div>
 
-  <div class="wrapper content margin-top-500">
+  <div class="user-wrapper content margin-top-500">
     <!-- Installing app flow -->
     <!-- 
       <div class="installAppFlow" id="installAppFlow">
@@ -31,422 +31,385 @@
     </div>
      -->
 
-    <!-- Headings -->
-    <div>
-      <h1 id="fundHeadline" class="text-600">Welcome.</h1>
+    <!-- Fund Modal -->
+    <article id="funds">
+      <div class="fundModal">
+        <div>
+          <!-- Action Buttons -->
+          <div class="fundBtnContainer">
+            <a href="#createFundForm" id="addFundLink" class="button text-300">
+              New fund
+            </a>
 
-      <h1 id="paymentHeadline" class="disabled text-600">Payment panel</h1>
-
-      <h1 id="supportHeadline" class="disabled text-600">Get supports</h1>
-
-      <h1 id="settingHeadline" class="disabled text-600">
-        Configure your account
-      </h1>
-    </div>
-
-    <!-- User content -->
-    <div>
-      <!-- Fund Modal -->
-      <article id="fund">
-        <div class="fundModal">
-          <div>
-            <!-- Action Buttons -->
-            <div class="fundBtnContainer">
-              <a
-                href="#createFundForm"
-                id="addFundLink"
-                class="button text-300"
-              >
-                New fund
-              </a>
-
-              <a href="#depositForm" id="depositLink" class="button text-300">
-                Deposit
-              </a>
-              <a href="#cashoutForm" class="button text-300" id="cashoutLink">
-                cashout
-              </a>
-            </div>
-
-            <!-- rendered funds  -->
-            <div class="funds-info section">
-              <h2 class="text-500">Funds</h2>
-              <div id="fundsInfo" class="all-funds"></div>
-            </div>
+            <a href="#depositForm" id="depositLink" class="button text-300">
+              Deposit
+            </a>
+            <a href="#cashoutForm" class="button text-300" id="cashoutLink">
+              cashout
+            </a>
           </div>
 
-          <div>
-            <!-- User account info -->
-            <div class="[ account-info section ][ margin-top-600 ]">
-              <!-- Personal -->
-              <div id="personalInfo" class="personalInfo"></div>
+          <!-- Create Fund form -->
+          <form id="createFundForm" class="[ user-form ][ disabled ]">
+            <h3>Fund Form</h3>
 
-              <!-- successor -->
-              <h2 class="text-500">Successor</h2>
-              <div class="successorInfo" id="successorInfo">
-                <div class="[ message ][ disabled ]" id="successorNotice">
-                  <p>
-                    You have not designated a successor yet. Please go to
-                    settings an add a successor.
-                  </p>
-                </div>
+            <label for="fundName">Fund name</label>
+            <input
+              type="text"
+              name="fundName"
+              id="fundName"
+              required
+              pattern="[a-zA-Z ]+"
+              placeholder="Fund name here."
+              title="The name should not contain a number or a special character."
+              aria-required="true"
+            />
+
+            <label id="lockYearsMessage" for="lockYears">
+              Lock Year(s).
+              <span class="tip weight-normal text-400">
+                Number of year(s) to lock your fund. Minimum of one year 20
+                years max.
+              </span>
+            </label>
+            <input
+              type="number"
+              name="lockYears"
+              id="lockYears"
+              required
+              min="1"
+              max="20"
+              title="Number of year(s) to lock your fund. Minimum of one year, 20 years max."
+              pattern="[1-9]"
+              aria-required="true"
+            />
+
+            <label for="fundPhone">
+              Deposit phone number
+              <span class="tip weight-normal text-400">
+                Example, 024XXXXXXX
+              </span>
+            </label>
+            <input
+              type="tel"
+              name="fundPhone"
+              id="fundPhone"
+              pattern="0[0-9]{9}"
+              maxlength="10"
+              minlength="10"
+              placeholder="phone number here."
+              required
+              aria-required="true"
+              title="Ten digit local phone number beginning with zero(0)"
+            />
+
+            <label for="createdAt">Date created</label>
+            <input
+              type="text"
+              name="createdAt"
+              id="createdAt"
+              disabled
+              aria-disabled="true"
+            />
+
+            <label for="endsAt">Ending Date</label>
+            <input
+              type="text"
+              name="endsAt"
+              id="endsAt"
+              disabled
+              value=""
+              aria-disabled="true"
+            />
+
+            <label for="description">
+              Description
+              <span class="tip weight-normal text-400">
+                A short description to help keep track of what the fund is meant
+                for
+              </span>
+            </label>
+            <textarea
+              name="description"
+              id="description"
+              cols="30"
+              rows="6"
+              required
+              aria-required="true"
+              maxlength="200"
+            ></textarea>
+
+            <div class="buttonContainer">
+              <div class="button text-400" id="cancelFundButton" role="button">
+                Cancel
               </div>
+              <button id="createFundButton" class="text-400">Create</button>
             </div>
 
-            <!-- Create Fund form -->
-            <form id="createFundForm" class="[ disabled ][ user-form ]">
-              <label for="fundName">Fund name</label>
-              <input
-                type="text"
-                name="fundName"
-                id="fundName"
-                required
-                pattern="[a-zA-Z ]+"
-                placeholder="Fund name here."
-                title="The name should not contain a number or a special character."
-                aria-required="true"
-              />
+            <div class="message margin-top-400 disabled" id="addFundSuccess">
+              Fund successfully created. Please click
+              <a href="/" id="addFundDone">Finish</a>
+              to continue. Take the deposit button to start depositing.
+            </div>
 
-              <label id="lockYearsMessage" for="lockYears">
-                Lock Year(s).
-                <span class="tip weight-normal text-400">
-                  Number of year(s) to lock your fund. Minimum of one year 20
-                  years max.
-                </span>
-              </label>
-              <input
-                type="number"
-                name="lockYears"
-                id="lockYears"
-                min="1"
-                max="20"
-                title="Number of year(s) to lock your fund. Minimum of one year, 20 years max."
-                pattern="[0-9]"
-              />
+            <div class="errorMessage disabled" id="addFundError">
+              Error creating fund. Please cancel and try again.
+            </div>
+          </form>
 
-              <label for="fundPhone">
-                Deposit phone number
-                <span class="tip weight-normal text-400">
-                  Example, 024XXXXXXX
-                </span>
-              </label>
-              <input
-                type="tel"
-                name="fundPhone"
-                id="fundPhone"
-                pattern="0[0-9]{9}"
-                maxlength="10"
-                minlength="10"
-                placeholder="phone number here."
-                required
-                title="Ten digit local phone number beginning with zero(0)"
-              />
+          <!-- cashout form -->
+          <form id="cashoutForm" class="[ user-form ][ disabled ]">
+            <h3>Cashout Form</h3>
 
-              <label for="createdAt">Date created</label>
-              <input
-                type="text"
-                name="createdAt"
-                id="createdAt"
-                disabled
-                aria-disabled="true"
-              />
+            <label for="cashoutMethods">Pick a payment method:</label>
+            <select
+              name="cashoutMethods"
+              id="cashoutMethods"
+              required
+              aria-required="true"
+            >
+              <option value="mtn">MTN</option>
+              <option value="vodafone">Vodafone</option>
+              <option value="airteltigo">Airteltigo</option>
+            </select>
 
-              <label for="endsAt">Ending Date</label>
-              <input
-                type="text"
-                name="endsAt"
-                id="endsAt"
-                disabled
-                value=""
-                aria-disabled="true"
-              />
+            <label for="cashoutFund">Enter the fund name</label>
+            <input
+              type="text"
+              name="cashoutFund"
+              id="cashoutFund"
+              required
+              aria-required="true"
+            />
 
-              <label for="description">
-                Description
-                <span class="tip weight-normal text-400">
-                  A short description to help keep track of what the fund is
-                  meant for
-                </span>
-              </label>
-              <textarea
-                name="description"
-                id="description"
-                cols="30"
-                rows="6"
-                maxlength="200"
-              ></textarea>
+            <label for="cashoutAmount">Enter amount</label>
+            <input
+              type="number"
+              name="cashoutAmount"
+              id="cashoutAmount"
+              required
+              aria-required="true"
+            />
 
-              <div class="buttonContainer">
-                <div
-                  class="button text-400"
-                  id="cancelFundButton"
-                  role="button"
-                >
-                  Cancel
-                </div>
-                <button id="createFundButton" class="text-400">Create</button>
+            <label for="cashoutPhone">Phone number</label>
+            <input
+              type="text"
+              name="cashoutPhone"
+              id="cashoutPhone"
+              disabled
+              aria-disabled="true"
+            />
+
+            <div class="buttonContainer">
+              <div class="button text-400" id="cancelCashout" role="button">
+                cancel
               </div>
+              <button id="cashoutBtn" class="text-400">Deposit</button>
+            </div>
 
-              <div class="message margin-top-400 disabled" id="addFundSuccess">
-                Fund successfully created. Please click
-                <a href="/" id="addFundDone">Finish</a>
-                to continue. Take the deposit button to start depositing.
+            <div class="message margin-top-500" id="cashoutSuccess">
+              Successfully done. Please click
+              <a href="/" id="cashoutDone">Finish</a>
+              to continue.
+            </div>
+
+            <div
+              class="errorMessage margin-top-500 margin-bottom-0"
+              id="cashoutError"
+            >
+              Error doing cashout. Amount specified is greater than the total
+              amount in the found, or the locking year is still active. Please
+              make sure you specified the right amount and the locking year is
+              due.
+            </div>
+          </form>
+
+          <!-- Deposit form -->
+          <form id="depositForm" class="[ user-form ][ disabled ]">
+            <h3>Deposit Form</h3>
+
+            <label for="depositMethods">Pick a payment method:</label>
+            <select
+              name="depositMethods"
+              id="depositMethods"
+              required
+              aria-required="true"
+            >
+              <option value="mtn">MTN</option>
+
+              <option value="vodafone">Vodafone</option>
+
+              <option value="airteltigo">Airteltigo</option>
+            </select>
+
+            <label for="depositFund">Enter the fund name</label>
+            <input
+              type="text"
+              name="depositFund"
+              id="depositFund"
+              required
+              aria-required="true"
+            />
+
+            <label for="depositAmount">Enter amount</label>
+            <input
+              type="number"
+              name="depositAmount"
+              id="depositAmount"
+              required
+              aria-required="true"
+            />
+
+            <label for="depositPhone">Phone number</label>
+            <input
+              type="text"
+              name="depositPhone"
+              id="depositPhone"
+              disabled
+              aria-disabled="true"
+            />
+
+            <div class="buttonContainer">
+              <div class="button text-400" id="cancelDeposit" role="button">
+                cancel
               </div>
-            </form>
+              <button id="depositBtn" class="text-400">Deposit</button>
+            </div>
 
-            <!-- cashout form -->
-            <form id="cashoutForm" class="[ user-form ][ disabled ]">
-              <h3 class="margin-bottom-400">Cashout Form</h3>
-              <div class="[ payment-method ] [ margin-bottom-400 ]">
-                <p>Pick a payment method.</p>
+            <div class="message margin-top-400" id="depositSuccess">
+              Successfully done. Please click
+              <a href="/" id="depositDone">Finish</a>
+              to continue.
+            </div>
+          </form>
 
-                <label for="cashoutMTN">
-                  <img src="/images/platforms/mtngh.webp" />
-                  <span class="radio__input">
-                    <input type="radio" name="cashoutMethod" id="cashoutMTN" />
-                    <span class="radio__control"></span>
-                  </span>
-                </label>
+          <!-- User account info -->
+          <div class="account-info section">
+            <!-- Personal -->
+            <div id="personalInfo" class="personalInfo"></div>
 
-                <label for="cashoutVodafone">
-                  <img src="/images/platforms/vodafonegh.webp" />
-                  <span class="radio__input">
-                    <input
-                      type="radio"
-                      name="cashoutMethod"
-                      id="cashoutVodafone"
-                    />
-                    <span class="radio__control"></span>
-                  </span>
-                </label>
-
-                <label for="cashoutTigo">
-                  <img src="/images/platforms/airteltigo.webp" />
-                  <span class="radio__input">
-                    <input type="radio" name="cashoutMethod" id="cashoutTigo" />
-                    <span class="radio__control"></span>
-                  </span>
-                </label>
+            <!-- successor -->
+            <h2 class="text-500">Successor</h2>
+            <div class="successorInfo" id="successorInfo">
+              <div class="[ message ][ disabled ]" id="successorNotice">
+                <p>
+                  You have not designated a successor yet. Please go to settings
+                  an add a successor.
+                </p>
               </div>
-
-              <label for="cashoutFund">Enter the fund name</label>
-              <input type="text" name="cashoutFund" id="cashoutFund" required />
-
-              <label for="cashoutAmount">Enter amount</label>
-              <input
-                type="text"
-                name="cashoutAmount"
-                id="cashoutAmount"
-                required
-              />
-
-              <label for="cashoutPhone">Phone number</label>
-              <input
-                type="text"
-                name="cashoutPhone"
-                id="cashoutPhone"
-                disabled
-                aria-disabled="true"
-              />
-
-              <div class="buttonContainer">
-                <div class="button text-400" id="cancelCashout" role="button">
-                  cancel
-                </div>
-                <button id="cashoutBtn" class="text-400">Deposit</button>
-              </div>
-
-              <div class="message margin-top-500" id="cashoutSuccess">
-                Successfully done. Please click
-                <a href="/" id="cashoutDone">Finish</a>
-                to continue.
-              </div>
-
-              <div
-                class="errorMessage margin-top-500 margin-bottom-0"
-                id="cashoutError"
-              >
-                Error doing cashout. Amount specified is greater than the total
-                amount in the found, or the locking year is still active. Please
-                make sure you specified the right amount and the locking year is
-                due.
-              </div>
-            </form>
-
-            <!-- Deposit form -->
-            <form id="depositForm" class="[ user-form ][ disabled ]">
-              <h3 class="margin-bottom-400">Deposit Form</h3>
-              <div class="[ payment-method ] [ margin-bottom-400 ]">
-                <p>Pick a payment method.</p>
-
-                <label for="depositMTN">
-                  <img src="/images/platforms/mtngh.webp" />
-                  <span class="radio__input">
-                    <input type="radio" name="depositMethod" id="depositMTN" />
-                    <span class="radio__control"></span>
-                  </span>
-                </label>
-
-                <label for="depositVodafone">
-                  <img src="/images/platforms/vodafonegh.webp" />
-                  <span class="radio__input">
-                    <input
-                      type="radio"
-                      name="depositMethod"
-                      id="depositVodafone"
-                    />
-                    <span class="radio__control"></span>
-                  </span>
-                </label>
-
-                <label for="depositTigo">
-                  <img src="/images/platforms/airteltigo.webp" />
-                  <span class="radio__input">
-                    <input type="radio" name="depositMethod" id="depositTigo" />
-                    <span class="radio__control"></span>
-                  </span>
-                </label>
-              </div>
-
-              <label for="depositFund">Enter the fund name</label>
-              <input type="text" name="depositFund" id="depositFund" required />
-
-              <label for="depositAmount">Enter amount</label>
-              <input
-                type="text"
-                name="depositAmount"
-                id="depositAmount"
-                required
-              />
-
-              <label for="depositPhone">Phone number</label>
-              <input
-                type="text"
-                name="depositPhone"
-                id="depositPhone"
-                disabled
-                aria-disabled="true"
-              />
-
-              <div class="buttonContainer">
-                <div class="button text-400" id="cancelDeposit" role="button">
-                  cancel
-                </div>
-                <button id="depositBtn" class="text-400">Deposit</button>
-              </div>
-
-              <div class="message margin-top-400" id="depositSuccess">
-                Successfully done. Please click
-                <a href="/" id="depositDone">Finish</a>
-                to continue.
-              </div>
-            </form>
+            </div>
           </div>
         </div>
-      </article>
 
-      <!-- Payment Modal -->
-      <article id="payment" class="disabled">
-        <p>Payment PAGE</p>
-      </article>
-
-      <!-- Setting Modal -->
-      <article id="setting" class="disabled margin-top-600">
-        <div class="setting-modal">
-          <div>
-            <h3>Personal settings</h3>
-            <form id="personalForm" class="user-form">
-              <label for="personalName">Full name</label>
-              <input type="text" name="personalName" id="personalName" />
-
-              <label for="personalPhone">Phone number</label>
-              <input type="text" name="personalPhone" id="personalPhone" />
-
-              <label for="personalEmail">Email address</label>
-              <input type="email" name="personalEmail" id="personalEmail" />
-
-              <label for="personalCountry">Email address</label>
-              <input
-                type="email"
-                name="personalCountry"
-                id="personalCountry"
-                disabled
-                aria-disabled="true"
-              />
-
-              <button id="personalFormBtn">Update</button>
-
-              <div
-                class="[ message ][ disabled margin-top-400 ]"
-                id="personalUpdate"
-              >
-                <p>Successfully updated</p>
-              </div>
-            </form>
-          </div>
-
-          <div class="margin-top-600">
-            <h3>Successor settings</h3>
-            <div class="message margin-top-300">
-              <p>
-                By clicking "Update" bellow, I acknowledge that am authorizing
-                <span class="site-name">Keke<span>.</span>Money</span> to
-                contact the said successor in the event of death. I understand
-                that this appointment of a successor does not override legally
-                binding next-of-kin rules or estate laws of any relevant
-                jurisdiction, and does not create a binding will.
-              </p>
-            </div>
-
-            <form id="successorForm" class="user-form">
-              <label for="successorName">Successor name</label>
-              <input
-                type="text"
-                name="successorName"
-                id="successorName"
-                pattern="[a-zA-Z ]+"
-              />
-
-              <label for="successorPhone">Phone number</label>
-              <input
-                type="text"
-                name="successorPhone"
-                id="successorPhone"
-                pattern="0[0-9]{9}"
-              />
-
-              <label for="successorEmail">Email address</label>
-              <input type="email" name="successorEmail" id="successorEmail" />
-
-              <label for="successorRelation">
-                Relation
-                <span class="tip">Eg: Sister, Wife, etc</span>
-              </label>
-              <input
-                type="text"
-                name="successorRelation"
-                id="successorRelation"
-                pattern="[a-zA-Z ]+"
-              />
-
-              <button id="successorFormBtn">Update</button>
-
-              <div
-                class="[ message ][ disabled margin-top-400 ]"
-                id="successorUpdate"
-              >
-                <p>Successfully updated</p>
-              </div>
-            </form>
-          </div>
+        <!-- rendered funds  -->
+        <div class="funds-info section">
+          <h2 class="text-500">Funds</h2>
+          <div id="fundsInfo" class="all-funds"></div>
         </div>
-      </article>
+      </div>
+    </article>
 
-      <!-- Support modal -->
-      <article id="suggestions" class="disabled">
-        <p>support PAGE</p>
-      </article>
-    </div>
+    <!-- Payment Modal -->
+    <article id="payments">
+      <p>Payment PAGE</p>
+    </article>
+
+    <!-- Setting Modal -->
+    <article id="settings">
+      <div class="setting-modal">
+        <div>
+          <h3>Personal settings</h3>
+          <form id="personalForm" class="user-form">
+            <label for="personalName">Full name</label>
+            <input type="text" name="personalName" id="personalName" />
+
+            <label for="personalPhone">Phone number</label>
+            <input type="text" name="personalPhone" id="personalPhone" />
+
+            <label for="personalEmail">Email address</label>
+            <input type="email" name="personalEmail" id="personalEmail" />
+
+            <label for="personalCountry">Country</label>
+            <input
+              type="email"
+              name="personalCountry"
+              id="personalCountry"
+              disabled
+              aria-disabled="true"
+            />
+
+            <button id="personalFormBtn">Update</button>
+
+            <div
+              class="[ message ][ disabled margin-top-400 ]"
+              id="personalUpdate"
+            >
+              <p>Successfully updated</p>
+            </div>
+          </form>
+        </div>
+
+        <div class="margin-top-600">
+          <h3>Successor settings</h3>
+          <div class="message margin-top-300">
+            <p>
+              By clicking "Update" bellow, I acknowledge that am authorizing
+              <span class="site-name">Keke<span>.</span>Money</span> to contact
+              the said successor in the event of death. I understand that this
+              appointment of a successor does not override legally binding
+              next-of-kin rules or estate laws of any relevant jurisdiction, and
+              does not create a binding will.
+            </p>
+          </div>
+
+          <form id="successorForm" class="user-form">
+            <label for="successorName">Successor name</label>
+            <input
+              type="text"
+              name="successorName"
+              id="successorName"
+              pattern="[a-zA-Z ]+"
+            />
+
+            <label for="successorPhone">Phone number</label>
+            <input
+              type="text"
+              name="successorPhone"
+              id="successorPhone"
+              pattern="0[0-9]{9}"
+            />
+
+            <label for="successorEmail">Email address</label>
+            <input type="email" name="successorEmail" id="successorEmail" />
+
+            <label for="successorRelation">
+              Relation
+              <span class="tip">Eg: Sister, Wife, etc</span>
+            </label>
+            <input
+              type="text"
+              name="successorRelation"
+              id="successorRelation"
+              pattern="[a-zA-Z ]+"
+            />
+
+            <button id="successorFormBtn">Update</button>
+
+            <div
+              class="[ message ][ disabled margin-top-400 ]"
+              id="successorUpdate"
+            >
+              <p>Successfully updated</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </article>
+
+    <!-- Support modal -->
+    <article id="supports">
+      <p>support PAGE</p>
+    </article>
   </div>
 </div>
 {% endblock %}

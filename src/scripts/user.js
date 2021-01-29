@@ -12,6 +12,9 @@ const successorForm = document.getElementById("successorForm");
 let userModal = document.getElementById("userPage");
 let userId = userModal.dataset.user;
 
+let createFundButton = document.getElementById("createFundButton");
+let addFundSuccess = document.getElementById("addFundSuccess");
+
 auth.onAuthStateChanged(function (user) {
   if (user) {
     signupUrl.classList.add("disabled");
@@ -48,11 +51,10 @@ auth.onAuthStateChanged(function (user) {
       }
     });
 
-    // creates a funds sub-collection
+    // creates a funds collection
     createFundForm.addEventListener("submit", function (event) {
       event.preventDefault();
 
-      let createFundButton = document.getElementById("createFundButton");
       createFundButton.innerHTML = "working...";
 
       let name = createFundForm.fundName.value.trim().toUpperCase();
@@ -74,15 +76,21 @@ auth.onAuthStateChanged(function (user) {
         ends: firebase.firestore.Timestamp.fromDate(new Date(endingDate)),
       };
 
-      fundRef.set(fund, { merge: true }).then(function () {
-        createFundButton.innerHTML = "create";
+      fundRef
+        .set(fund, { merge: true })
+        .then(function () {
+          createFundButton.innerHTML = "create";
 
-        let addFundSuccess = document.getElementById("addFundSuccess");
-        addFundSuccess.classList.remove("disabled");
+          addFundSuccess.classList.remove("disabled");
 
-        window.localStorage.removeItem("endingDate");
-        createFundForm.reset();
-      });
+          window.localStorage.removeItem("endingDate");
+          createFundForm.reset();
+        })
+        .catch(function () {
+          let addFundError = document.getElementById("addFundError");
+          addFundError.classList.remove("disabled");
+          createFundButton.innerHTML = "create";
+        });
     });
 
     // Updates a user document
@@ -144,12 +152,12 @@ auth.onAuthStateChanged(function (user) {
       let depositBtn = document.getElementById("depositBtn");
       depositBtn.innerHTML = "working...";
 
-      let method = depositForm.depositMethod.value;
+      let method = depositForm.depositMethods.value;
       let unique = depositForm.depositFund.value
         .replace(/\s+/g, "")
         .trim()
         .toLowerCase();
-      let phone = window.localStorage.getItem(unique);
+      let phone = window.sessionStorage.getItem(unique);
       let amount = parseInt(depositForm.depositAmount.value);
 
       let data = {
@@ -157,6 +165,15 @@ auth.onAuthStateChanged(function (user) {
         when: firebase.firestore.Timestamp.fromDate(new Date(Date.now())),
         amount: amount,
       };
+
+      let depositData = {
+        method: method,
+        unique: unique,
+        phone: phone,
+        amount: amount,
+      };
+
+      console.log("deposit data", depositData);
 
       let depositRef = ref.collection("funds").doc(unique);
 
@@ -168,6 +185,8 @@ auth.onAuthStateChanged(function (user) {
         .then(function () {
           depositForm.reset();
           depositBtn.innerHTML = "deposit";
+
+          window.sessionStorage.removeItem(unique);
 
           let depositSuccess = document.getElementById("depositSuccess");
           depositSuccess.classList.remove("disabled");
@@ -186,7 +205,7 @@ auth.onAuthStateChanged(function (user) {
         .replace(/\s+/g, "")
         .trim()
         .toLowerCase();
-      let phone = window.localStorage.getItem(unique);
+      let phone = window.sessionStorage.getItem(unique);
       let amount = parseInt(cashoutForm.cashoutAmount.value);
       let decrement = -amount;
 
@@ -195,6 +214,15 @@ auth.onAuthStateChanged(function (user) {
         when: firebase.firestore.Timestamp.fromDate(new Date(Date.now())),
         amount: amount,
       };
+
+      let cashoutData = {
+        method: method,
+        unique: unique,
+        phone: phone,
+        amount: amount,
+      };
+
+      console.log("cashout data", cashoutData);
 
       let cashoutRef = ref.collection("funds").doc(unique);
 
@@ -220,6 +248,8 @@ auth.onAuthStateChanged(function (user) {
             .then(function () {
               cashoutForm.reset();
               cashoutBtn.innerHTML = "cashout";
+
+              window.sessionStorage.removeItem(unique);
 
               let cashoutSuccess = document.getElementById("cashoutSuccess");
               cashoutSuccess.classList.remove("disabled");
@@ -359,19 +389,20 @@ function renderFundInfo(snapshot) {
 
 // shows/hides the records table
 fundsInfo.addEventListener("click", function (event) {
-  console.log(event);
+  event.preventDefault();
+
   let id = event.target.getAttribute("data-id");
 
   let table = document.getElementById(`${id}records`);
 
   if (event.target.tagName === "A") {
     table.classList.toggle("disabled");
-  }
 
-  if (event.target.innerText === "Activities") {
-    event.target.innerText = "Hide activities";
-  } else {
-    event.target.innerText = "Activities";
+    if (event.target.innerText === "Activities") {
+      event.target.innerText = "Hide activities";
+    } else {
+      event.target.innerText = "Activities";
+    }
   }
 });
 
@@ -392,6 +423,7 @@ function pickPhoneNumber(inputElement, outputElement) {
     let fundRef = ref.collection("funds").doc(name);
     fundRef.get().then(function (doc) {
       outputElement.value = doc.data().phone;
+      window.sessionStorage.setItem(name, doc.data().phone);
     });
   });
 }

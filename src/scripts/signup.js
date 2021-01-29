@@ -24,7 +24,7 @@ const actionCodeSettings = {
 
 auth.onAuthStateChanged(function (user) {
   if (user) {
-    window.location.assign(`/users/${user.uid}`);
+    window.location.assign(`/users/${user.uid}#funds`);
   }
 });
 

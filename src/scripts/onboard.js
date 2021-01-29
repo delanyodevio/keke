@@ -64,7 +64,7 @@ if (auth.isSignInWithEmailLink(window.location.href)) {
             });
         });
       } else {
-        window.location.assign(`/users/${result.user.uid}/`);
+        window.location.assign(`/users/${result.user.uid}#funds`);
       }
     })
     .catch(function () {

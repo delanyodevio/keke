@@ -1,0 +1,15 @@
+article:target {
+  display: block;
+}
+
+article:not(:target) {
+  display: none;
+}
+
+article#funds {
+  display: block;
+}
+
+article#funds:not(:target) {
+  display: none;
+}

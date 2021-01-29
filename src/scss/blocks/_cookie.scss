@@ -1,0 +1,20 @@
+.cookie-notice {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 12;
+  background-color: get-color("dark");
+  padding: 1.5rem;
+  color: get-color("light");
+
+  div {
+    border: 0.1rem solid get-color("light");
+    padding: 1rem;
+    border-radius: 0.2rem;
+  }
+
+  p {
+    margin: 0 0 1rem 0;
+  }
+}

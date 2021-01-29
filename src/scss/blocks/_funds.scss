@@ -5,8 +5,8 @@
   justify-content: space-between;
 
   @include media-query("lg") {
-    > *:last-child {
-      max-width: 29%;
+    > *:first-child {
+      max-width: 27%;
     }
   }
 }
@@ -30,6 +30,7 @@
     padding: get-size("400");
     border: 2px solid #ddd;
     border-radius: 0.25rem;
+    width: 18rem;
 
     span {
       display: block;
@@ -49,6 +50,11 @@
     margin-top: get-size("500");
   }
 
+  a {
+    text-decoration: none;
+    color: get-color("tertiary");
+  }
+
   .table {
     i {
       color: get-color("quaternary");
@@ -56,10 +62,22 @@
       cursor: pointer;
     }
   }
+
+  @include media-query("lg") {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: get-size("700");
+    align-items: start;
+    justify-items: start;
+
+    .eachFund + .eachFund {
+      margin-top: 0;
+    }
+  }
 }
 
 .section {
-  margin-top: get-size("500");
+  margin-top: get-size("700");
 
   p,
   h2 {
@@ -80,53 +98,5 @@
 
   p {
     max-width: 30ch;
-  }
-}
-
-.payment-method {
-  border: 0.1rem dashed get-color("primary");
-  padding: 0.4rem;
-  border-radius: 0.25rem;
-
-  p {
-    margin: 0;
-  }
-
-  label {
-    display: flex;
-    margin-top: get-size("300");
-    font-size: 2.25rem;
-    align-items: center;
-    cursor: pointer;
-
-    img {
-      width: 10rem;
-      height: 3rem;
-      object-fit: contain;
-      border-radius: 0.25rem;
-    }
-
-    .radio__input {
-      display: flex;
-      align-items: center;
-
-      input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-
-        &:checked + .radio__control {
-          background-color: get-color("quaternary-shade");
-        }
-      }
-    }
-
-    .radio__control {
-      display: block;
-      width: 0.65em;
-      height: 0.65em;
-      border-radius: 50%;
-      border: 0.1rem solid get-color("quaternary-shade");
-    }
   }
 }

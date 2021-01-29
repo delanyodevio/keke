@@ -1,6 +1,7 @@
 form {
   input,
-  textarea {
+  textarea,
+  select {
     width: 100%;
     padding: 0.5rem;
     border: 0.15rem solid get-color("dark");
@@ -10,6 +11,19 @@ form {
     display: block;
     margin-bottom: get-size("700");
     background-color: get-color("light");
+  }
+
+  select {
+    text-align: center;
+  }
+
+  h3 + label {
+    margin-top: get-size("500");
+    display: block;
+  }
+
+  h3 {
+    margin-top: 0;
   }
 
   input[type="file"] {

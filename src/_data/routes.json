@@ -64,24 +64,20 @@
   "user": [
     {
       "text": "Funds",
-      "url": "#funds",
-      "unique": "fundsUrl"
+      "url": "funds"
     },
     {
       "text": "Payments",
-      "url": "#payments",
-      "unique": "paymentsUrl",
+      "url": "payments",
       "classify": "disabled"
     },
     {
       "text": "Supports",
-      "url": "#supports",
-      "unique": "suggestionsUrl"
+      "url": "supports"
     },
     {
       "text": "Settings",
-      "url": "#settings",
-      "unique": "settingsUrl"
+      "url": "settings"
     }
   ]
 }
