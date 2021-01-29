@@ -1,5 +1,4 @@
-/**
- * const staticCacheName = "static-assets-v1";
+const staticCacheName = "static-assets-v1";
 const dynamicCacheName = "dynamic-assets-v1";
 
 const assets = [
@@ -73,5 +72,3 @@ self.addEventListener("fetch", (event) => {
     );
   }
 });
-
- */
