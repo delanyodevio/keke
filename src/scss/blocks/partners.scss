@@ -1,0 +1,52 @@
+.partners {
+  h2 {
+    margin-bottom: get-size("500");
+    margin-right: get-size("700");
+
+    span {
+      max-width: 20ch;
+      display: block;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    figure {
+      width: 18rem;
+    }
+
+    figure + figure {
+      margin-top: get-size("700");
+    }
+
+    img {
+      width: 100%;
+      border-top-left-radius: 0.25rem;
+      border-top-right-radius: 0.25rem;
+    }
+
+    figcaption {
+      padding: 0.3rem;
+      text-align: center;
+      background-color: get-color("dark-shade");
+      color: get-color("light-glare");
+      border-bottom-left-radius: 0.25rem;
+      border-bottom-right-radius: 0.25rem;
+    }
+  }
+
+  @include media-query("lg") {
+    &__content {
+      figure + figure {
+        margin-top: 0;
+      }
+
+      figure {
+        width: 25rem;
+      }
+    }
+  }
+}

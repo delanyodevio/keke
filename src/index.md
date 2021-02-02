@@ -1,6 +1,6 @@
 ---
 layout: "layouts/home.html"
-title: "More happiness tomorrow."
+title: "More happiness."
 intro:
   buttonText: "start for free."
   buttonUrl: "/signup"

@@ -7,7 +7,7 @@ metaDesc: "Create multiple saving funds in minutes and manage them seamlessly al
 
 ## The suitable way to start
 
-<span class="site-name">Keke.Money</span> is the suitable way to create and manage your saving funds.
+<span class="site-name">Keke.Money</span> is the suitable way to create saving funds and manage your money.
 
 Create multiple saving funds in minutes and manage them seamlessly
 all under one account.
@@ -18,11 +18,13 @@ Keke Labs Limited is the company behind <span class="site-name">Keke.Money</span
 
 ## Our philosophy
 
-We believe in pointing the needle towards the things that really matter in life. We believe in education, value creation, privacy, openness and inclusion. We're always learning from our users in order to contribute to the open society and to create more values. Likewise we want to assist and protect our users in whatever matters to them whether be it privacy or inclusion.
+We believe in pointing the needle towards the things that really matter in life. We believe in value creation, privacy, openness and inclusion. We're always learning from our users in order to contribute to the open society and to create more values.
 
-Just as we're always open to new streams of ideas, it's also important to us to create more values than capturing any at all. We knew when we started Keke that we wanted to be intentional about value creation. Keke should a place where opinions are heard, decisions are respected, ideas are tested and value creation is a A-listed.
+Likewise we want to assist and protect our users in whatever matters to them, be it privacy and inclusion.
 
-We have lots of ideas about how to build a superb place to work, and we're exited to find the right people who are willing to contribute their ideas, enthusiasm and expertise.
+Just as we're always open to new streams of ideas, it's also important to us to create more values than capturing any. We knew when we started Keke that we wanted to be intentional about value creation. Keke should a place where opinions are heard, decisions are respected, ideas are tested and value creation is our first and top priority.
+
+We have lots of ideas about how to build a utility useful platform, and we're exited to find the right people who are willing to contribute their ideas, enthusiasm and expertise.
 
 ## Reach us
 

@@ -36,7 +36,15 @@ main {
 
 .wrapper {
   > article + article {
-    margin-top: 3.5rem;
+    margin-top: get-size("900");
+  }
+}
+
+@include media-query("lg") {
+  .wrapper {
+    > article + article {
+      margin-top: get-size("major");
+    }
   }
 }
 

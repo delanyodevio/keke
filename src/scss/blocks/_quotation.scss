@@ -1,8 +1,4 @@
 .quote-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-
   h2 {
     margin-bottom: get-size("500");
     margin-right: get-size("700");
@@ -56,7 +52,10 @@
     .quotations {
       figure + figure {
         margin-top: 0;
-        margin-left: get-size("700");
+      }
+
+      figure {
+        width: 25rem;
       }
     }
   }
