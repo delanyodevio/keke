@@ -14,5 +14,12 @@
   "phone": "233240489424",
   "logo": "/images/bg/brand.svg",
   "logoCaption": "Keke.Money",
-  "social": { "twitter": "keke.money" }
+  "social": [
+    {
+      "text": "Twitter",
+      "url": "https://twitter.com/keke.money",
+      "handle": "@keke.money"
+    }
+  ],
+  "location": "Vule Street Hohoe, VR Ghana WA"
 }
