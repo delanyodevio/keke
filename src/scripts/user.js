@@ -60,10 +60,8 @@ auth.onAuthStateChanged(function (user) {
       let name = createFundForm.fundName.value.trim().toUpperCase();
       let unique = name.replace(/\s+/g, "").toLowerCase();
       let phone = createFundForm.fundPhone.value.trim();
-
-      let fundRef = ref.collection("funds").doc(unique);
-
       let endingDate = window.localStorage.getItem("endingDate");
+      let fundRef = ref.collection("funds").doc(unique);
 
       let fund = {
         name: name,
@@ -165,15 +163,6 @@ auth.onAuthStateChanged(function (user) {
         when: firebase.firestore.Timestamp.fromDate(new Date(Date.now())),
         amount: amount,
       };
-
-      let depositData = {
-        method: method,
-        unique: unique,
-        phone: phone,
-        amount: amount,
-      };
-
-      console.log("deposit data", depositData);
 
       let depositRef = ref.collection("funds").doc(unique);
 
@@ -313,15 +302,29 @@ function renderFundInfo(snapshot) {
   snapshot.forEach(function (doc) {
     let fund = doc.data();
 
-    let dateCreated = fund.created.toDate();
-    let startYear = dateCreated.getFullYear();
-    let startMonth = dateCreated.toLocaleString("default", { month: "short" });
-    let startDay = dateCreated.getDate();
+    let showEndDate = function () {
+      if (fund.ends === null) return;
+      else {
+        let date = fund.ends.toDate();
+        let year = date.getFullYear();
+        let month = date.toLocaleString("default", { month: "short" });
+        let day = date.getDate();
 
-    let dateEnded = fund.ends.toDate();
-    let endYear = dateEnded.getFullYear();
-    let endMonth = dateEnded.toLocaleString("default", { month: "short" });
-    let endDay = dateEnded.getDate();
+        return `<span>Ending, ${day} ${month} ${year}</span>`;
+      }
+    };
+
+    let showStartDate = function () {
+      if (fund.created === null) return;
+      else {
+        let date = fund.created.toDate();
+        let year = date.getFullYear();
+        let month = date.toLocaleString("default", { month: "short" });
+        let day = date.getDate();
+
+        return `<span>Created, ${day} ${month} ${year}</span>`;
+      }
+    };
 
     let lockClass = fund.lock ? "locked" : "unlocked";
     let lockMessage = fund.lock ? "Locked" : "Unlocked";
@@ -376,8 +379,8 @@ function renderFundInfo(snapshot) {
 
         <div class="details text-300">
           <span>${fund.phone}</span>
-          <span>Created, ${startDay} ${startMonth} ${startYear}</span>
-          <span>Ending, ${endDay} ${endMonth} ${endYear}</span>
+          ${showStartDate()}
+          ${showEndDate()}
           <span class="${lockClass}">${lockMessage}</span>
         </div>
         

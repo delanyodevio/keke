@@ -37,7 +37,23 @@ if (auth.isSignInWithEmailLink(window.location.href)) {
             phone: phone,
           };
 
+          let fund = {
+            name: "kekepot",
+            lock: false,
+            description: `
+            Kekepot is a special fund to help you with your spending 
+            activities. You can deposit into 
+            and cashout from this fund at anytime.
+            `,
+            phone: phone,
+            total: 0,
+            created: null,
+            ends: null,
+            years: null,
+          };
+
           let ref = store.collection("users").doc(username);
+          let kekepotRef = ref.collection("funds").doc("kekepot");
 
           ref
             .set(data)
@@ -46,12 +62,15 @@ if (auth.isSignInWithEmailLink(window.location.href)) {
 
               let listRef = ref.push();
 
-              listRef.set(username).then(function () {
-                onboardForm.reset();
-                window.localStorage.removeItem("emailForSignIn");
+              listRef
+                .set(username)
+                .then(kekepotRef.set(fund, { merge: true }))
+                .then(function () {
+                  onboardForm.reset();
+                  window.localStorage.removeItem("emailForSignIn");
 
-                window.location.assign("/pages/waiting/");
-              });
+                  window.location.assign("/pages/waiting/");
+                });
             })
             .catch(function () {
               signupButton.innerHTML = "try again";

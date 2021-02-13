@@ -14,5 +14,6 @@ scripts:
   - "/scripts/firebase.js"
   - "/scripts/user.js"
   - "/scripts/ui.js"
+  - "/scripts/installer.js"
 classify: "r-pdt"
 ---
