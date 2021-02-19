@@ -1,7 +1,7 @@
 {
-  "name": "Keke.Money",
-  "short_name": "Keke",
-  "description": "More happiness tomorrow.",
+  "name": "Keke.Money | more financial happiness.",
+  "short_name": "Keke.Money",
+  "description": "More financial happiness.",
   "start_url": "/index.html",
   "scope": "/",
   "display": "standalone",

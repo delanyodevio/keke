@@ -4,7 +4,7 @@ let dismissBtn = document.getElementById("dismissBtn");
 let installBtnPrime = document.getElementById("installBtnPrime");
 
 installBtn.addEventListener("click", function () {
-  installAppFlow.classList.remove("disabled");
+  installAppFlow.classList.toggle("disabled");
 });
 
 dismissBtn.addEventListener("click", function (event) {

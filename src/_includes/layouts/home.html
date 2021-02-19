@@ -6,7 +6,7 @@
       <h1 class="text-800 weight-bold">
         Save in a way that <br />
         suits you with,
-        <span class="weight-normal text-600">more happiness.</span>
+        <span class="weight-normal text-600">more financial happiness.</span>
       </h1>
       <ul class="intro__list">
         <li>
@@ -23,8 +23,12 @@
               d="M5 13l4 4L19 7"
             />
           </svg>
-          <span>Create multiple saving funds in minutes.</span>
+          <span>
+            Create multiple saving funds in minutes and enjoy our full
+            transparency support.
+          </span>
         </li>
+
         <li>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -40,25 +44,11 @@
             />
           </svg>
           <span>
-            Save for the things that matter with custom defined funds.
+            Grow your savings, enjoy higher returns on your money with zero
+            transaction fees and no hidden cost.
           </span>
         </li>
-        <li>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
-          <span>Stay in control and easily manage your funds.</span>
-        </li>
+
         <li>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -74,10 +64,11 @@
             />
           </svg>
           <span>
-            Grow your savings with ({{ site_data.interest }} + 1)% annual
-            equivalent interest.
+            Stay in control and easily manage your contributions, earnings and
+            cashouts in realtime.
           </span>
         </li>
+
         <li>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -93,9 +84,11 @@
             />
           </svg>
           <span>
-            Stay consistent on your savings with self defined locking.
+            Get access to safe personal financial products to help you stay
+            convenient and save towards your goals.
           </span>
         </li>
+
         <li>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -110,9 +103,34 @@
               d="M5 13l4 4L19 7"
             />
           </svg>
-          <span>Get free financial insights and do more with your money.</span>
+          <span>
+            Save for the things that matter with custom defined funds to stay
+            consistent and let your money work in your favour.
+          </span>
+        </li>
+
+        <li>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+          <span>
+            Get insights on financial matters to set you on the good track.
+          </span>
         </li>
       </ul>
+
+      {% include "partials/open-account.html" %}
+
       <a href="{{ intro.buttonUrl }}" class="button">
         {{ intro.buttonText }}
       </a>
@@ -125,7 +143,7 @@
           alt=" Saving is hard, so we made it simpler."
         />
         <figcaption class="text-400 weight-normal">
-          Saving is hard, so we made it simpler.
+          Savings made simpler.
         </figcaption>
       </figure>
 
@@ -135,7 +153,7 @@
           alt="Your biggest personal goal made easy."
         />
         <figcaption class="text-400 weight-normal">
-          Your saving can still do compounding magics for you.
+          Your saving is your future.
         </figcaption>
       </figure>
     </div>
@@ -163,6 +181,8 @@
         <li>Cashout anytime when the fund is unlocked.</li>
       </ol>
 
+      {% include "partials/open-account.html" %}
+
       <a href="{{ intro.buttonUrl }}" class="button">
         {{ intro.buttonText }}
       </a>
@@ -171,16 +191,7 @@
 
   <article class="partners">
     <div class="partners__header">
-      <h2 class="text-800 weight-bold">
-        Trusted by
-        <span class="weight-normal text-600">our partners</span>
-      </h2>
-      <!-- 
-        <p>
-        <span class="site-name">Keke.Money</span> is the suitable way to create
-        saving funds and manage your money.
-      </p>
-       -->
+      <h2 class="text-800 weight-bold">Trusted by</h2>
     </div>
 
     <div class="partners__content">
@@ -217,6 +228,8 @@
       </figure>
       {% endfor %}
     </div>
+
+    {% include "partials/open-account.html" %}
   </article>
 </div>
 {% endblock %}

@@ -94,6 +94,24 @@ h4 {
   color: get-color("primary");
 }
 
+.open-account {
+  color: get-color("dark-shade");
+  max-width: 40ch;
+  margin: get-size("600") 0;
+
+  .svg {
+    text-decoration: none;
+    display: block;
+
+    svg {
+      width: 1.5em;
+      height: 1.5em;
+      color: get-color("tertiary");
+      flex-shrink: 0;
+    }
+  }
+}
+
 // Import blocks
 @import "blocks/site-head";
 @import "blocks/site-foot";

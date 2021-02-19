@@ -4,7 +4,8 @@
 <div class="page-wrapper">
   <article class="pages">
     <div>{% include "partials/page-header.html" %}</div>
-    {{ content | safe }}
+    {{ content | safe }} {% if openAccount %} {% include
+    "partials/open-account.html" %} {% endif %}
   </article>
 </div>
 {% endblock %}

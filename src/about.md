@@ -3,6 +3,7 @@ layout: "layouts/pages.html"
 title: "About us."
 sub: "wanna check who we are and what we do?"
 metaDesc: "Create multiple saving funds in minutes and manage them seamlessly all under one account."
+openAccount: true
 ---
 
 ## The suitable way to start
@@ -36,5 +37,3 @@ We're always available for talk, chat and welcoming.
 - Twitter: [@kekemoney](https://twitter.com/kekmoney)
 - Signal: [+233240489424](tel:+233240489424)
 - Address: XYZ city, Ghana, W/A
-
-Save in a way that suit you, [start for free](/signup).

@@ -303,7 +303,7 @@ function renderFundInfo(snapshot) {
     let fund = doc.data();
 
     let showEndDate = function () {
-      if (fund.ends === null) return;
+      if (fund.ends === null) return `<span>Ending, not specified.</span>`;
       else {
         let date = fund.ends.toDate();
         let year = date.getFullYear();
@@ -315,7 +315,7 @@ function renderFundInfo(snapshot) {
     };
 
     let showStartDate = function () {
-      if (fund.created === null) return;
+      if (fund.created === null) return `<span>Created, not specified.</span>`;
       else {
         let date = fund.created.toDate();
         let year = date.getFullYear();

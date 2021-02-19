@@ -4,6 +4,7 @@ title: "Customer Privacy and Cookie Notice"
 sub: "Updated on 4 Jan 2021"
 permalink: "/policy/privacy/"
 metaDesc: "Welcome to Keke.Money. This page tells you how we collect and   process data received from you on our site"
+openAccount: true
 ---
 
 ## Introduction

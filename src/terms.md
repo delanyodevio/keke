@@ -4,6 +4,7 @@ title: "Terms & Conditions"
 sub: "Updated on 4 Jan 2021"
 permalink: "/policy/terms/"
 metaDesc: "Welcome to Keke.Money. This page tells you the terms on which you may use our website and platform www.keke.money, whether as a signed up user or guest."
+openAccount: true
 ---
 
 ## Introduction

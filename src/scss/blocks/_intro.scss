@@ -7,6 +7,10 @@
   &__images {
     margin-top: get-size("700");
 
+    figure {
+      width: 18rem;
+    }
+
     figure + figure {
       margin-top: get-size("700");
     }
@@ -64,6 +68,10 @@
   @include media-query("lg") {
     &__images {
       margin-top: 0;
+
+      figure {
+        width: unset;
+      }
     }
   }
 }

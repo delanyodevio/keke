@@ -38,14 +38,14 @@ if (auth.isSignInWithEmailLink(window.location.href)) {
           };
 
           let fund = {
-            name: "kekepot",
+            name: "kekepot Fund",
             lock: false,
             description: `
             Kekepot is a special fund to help you with your spending 
             activities. You can deposit into 
             and cashout from this fund at anytime.
             `,
-            phone: phone,
+            phone: makeSafeText(onboardForm.phone.value),
             total: 0,
             created: null,
             ends: null,
